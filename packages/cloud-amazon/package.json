@@ -1,0 +1,41 @@
+{
+  "name": "@speech/cloud-amazon",
+  "version": "0.6.0",
+  "description": "Amazon Cloud Service for Speech-Framework",
+  "author": "Stefan <stefan@lingualogic.de>",
+  "homepage": "https://lingualogic.de",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/**/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://lingualogic/web/monorepo",
+    "directory": "packages/cloud-amazon"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "rollup": "rollup",
+    "build": "npm run compile && gulp build",
+    "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
+    "compile": "tsc -b tsconfig.build.json",
+    "bundle": "npx rollup -c ./rollup.config.js && cp speech-cloud-amazon.js ./lib/index.js && cp speech-cloud-amazon.js ./../../dist/deploy",
+    "bundle:module": "npx rollup -c ./rollup.config.module.js && cp cloud-amazon.js ./../../dist/module",
+    "pack": "npm pack && cp speech-cloud-amazon-0.6.0.tgz ./../../dist",
+    "link": "npm link && cd ../.. && npm link @speech/cloud-amazon",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "peerDependencies": {
+    "@speech/core": "0.6.0",
+    "@speech/common": "0.6.0"
+  }
+}

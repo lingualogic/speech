@@ -1,0 +1,19 @@
+# Amazon-AWS SDK Dateien
+
+Um mit AWS arbeiten zu koennen, wird ein individueller Build fuer das Speech-Framework erstellt.
+
+Link: [https://sdk.amazonaws.com/builder/js/](https://sdk.amazonaws.com/builder/js/)
+
+## Zusammenstellung des individuellen Amazon-AWS SDKs für JavaSript:
+
+AWS.ConfigService
+AWS.STS
+AWS.CognitoIdentity
+AWS.Polly
+AWS.TranscribeService
+
+
+## Name der resultierenden speziellen AWS-SDK Dateien für das Speech-Framework:
+
+aws-sdk-speech.js
+aws-sdk-speech.min.js

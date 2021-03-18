@@ -1,0 +1,77 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+.rpt2_cache/
+.scannerwork/
+build/
+dist/
+/deploy/
+tmp/
+out-tsc/
+
+# dependencies
+node_modules/
+**/cordova/app/
+**/electron/www/
+**/electron/app/
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+.nyc_output/
+.sass-cache/
+connect.lock/
+coverage/
+libpeerconnection.log/
+npm-debug.log
+testem.log
+typings/
+documentation/
+docs/api
+docs/html
+old/
+jest/
+credentials/
+
+# e2e
+e2e/*.js
+e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+docs.json
+package-lock.json
+.angulardoc.json
+.esdoc.json
+.jsdoc.json
+tsconfig.build.tsbuildinfo
+*.tgz
+
+# Konfigdateien
+
+nuance-credentials*
+amazon-credentials*
+google-credentials*
+dialogflow-credentials*
+microsoft-credentials*
+rasa-credentials*
+
+lerna-debug.log
+npm-debug.log
+packages/*/lib
+.idea

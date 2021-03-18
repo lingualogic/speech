@@ -1,0 +1,39 @@
+{
+  "name": "@speech/file",
+  "version": "0.6.0",
+  "description": "File Library for Speech-Framework",
+  "author": "Stefan <stefan@lingualogic.de>",
+  "homepage": "https://lingualogic.de",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/**/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://lingualogic/web/monorepo",
+    "directory": "packages/file"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "npm run compile",
+    "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
+    "compile": "tsc -b tsconfig.build.json",
+    "bundle": "rollup -c ./rollup.config.js && cp speech-file.js ./lib/index.js && cp speech-file.js ./../../dist/deploy",
+    "pack": "npm pack && cp speech-file-0.6.0.tgz ./../../dist",
+    "link": "npm link && cd ../.. && npm link @speech/file",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "peerDependencies": {
+    "@speech/core": "0.6.0",
+    "@speech/common": "0.6.0"
+  }
+}

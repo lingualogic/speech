@@ -1,0 +1,25 @@
+/** @packageDocumentation
+ * Action Version und Build Konstanten
+ *
+ * Letzte Aenderung: 15.06.2020
+ * Status: gelb
+ *
+ * @module action
+ * @author SB
+ */
+
+
+// core
+
+import { SPEECH_VERSION_NUMBER, SPEECH_VERSION_BUILD, SPEECH_VERSION_TYPE, SPEECH_VERSION_DATE } from '@speech/core';
+
+
+// Versions-Konstanten
+
+export const ACTION_VERSION_NUMBER = SPEECH_VERSION_NUMBER;
+export const ACTION_VERSION_BUILD = SPEECH_VERSION_BUILD;
+export const ACTION_VERSION_TYPE = SPEECH_VERSION_TYPE;
+export const ACTION_VERSION_DATE = SPEECH_VERSION_DATE;
+export const ACTION_VERSION_STRING = ACTION_VERSION_NUMBER + '.' + ACTION_VERSION_BUILD + ' vom ' + ACTION_VERSION_DATE + ' (' + ACTION_VERSION_TYPE + ')';
+
+export const ACTION_API_VERSION = '1.2';

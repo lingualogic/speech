@@ -1,0 +1,33 @@
+{
+  "name": "@speech/core",
+  "version": "0.6.0",
+  "description": "Core Library of Speech-Framework",
+  "author": "Lingualogic Team <stefan@lingualogic.de>",
+  "homepage": "https://lingualogic.de",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/**/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://lingualogic/web/monorepo",
+    "directory": "packages/core"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "npm run compile",
+    "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
+    "compile": "tsc -b tsconfig.build.json",
+    "bundle": "rollup -c ./rollup.config.js && cp speech-core.js ./lib/index.js && cp speech-core.js ./../../dist/deploy",
+    "pack": "npm pack && cp speech-core-0.6.0.tgz ./../../dist",
+    "link": "npm link && cd ../.. && npm link @speech/core",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
