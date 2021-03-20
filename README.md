@@ -1,6 +1,6 @@
 # Speech Monorepo
 
-Das Speech Monorepo ist eine Typescript Browser-Bibliothek zur Integration von Sprachdiensten, wie Sprachausgabe (TTS), Spracherkennung (ASR), Sprachverstehen (NLU), Dialogverarbeitung (NLP) und Aktionsausführung in eine Web-Seite oder Web-App. Kern von Speech ist ein **Bot**, der Dialoge eines Dialogskripts ausführen kann.
+Das Speech Monorepo ist eine Typescript Browser-Bibliothek zur Integration von Sprachdiensten, wie Sprachausgabe (TTS), Spracherkennung (ASR), Sprachverstehen (NLU), Dialogverarbeitung (NLP) und Aktionsausführung in eine Web-Site oder WebApp. Kern von Speech ist ein **Bot**, der Dialoge eines Dialogskripts ausführen kann.
 
 Daneben git es einzeln verwendbare Dienste:
 
@@ -21,7 +21,7 @@ Für die Google Cloud-Dienste wird zusätzlich der Speech-Tokenserver benötigt.
 
 ## Voraussetzungen
 
-Wir haben Speech auf Mac OS X 10.14, Win 10 und Ubuntu 18.04 getestet. Als Plattformen können eingesetzt werden:
+Wir haben Speech auf Mac OS X 10.14, Win 10 und Ubuntu 20.04 getestet. Als Plattformen können eingesetzt werden:
 
 * Mac OS X >= 10.14
 * Windows 10
@@ -37,7 +37,8 @@ Grundsätzlich ist Speech in Chrome, Firefox, Opera, Safari und Edge nutzbar, al
 
 NodeJS muss installiert sein.
 
-* NodeJS >= 12.X und <= 14.x
+* NodeJS >= 12.x und <= 14.x
+* NPM 6.x       Zwingend notwendig, NPM 7.x erzeugt Fehler wegen automatische Peer Dependecies Installation
 
 Als weitere Plattformen können Android und iOS mit Cordova verwendet werden:
 
@@ -85,11 +86,11 @@ Die API-Dokumentation kann mit folgenden Befehl in docs/api erzeugt werden:
 Die im dist Ordner erzeugten npm-Pakete können in den eigenen Web-Projektordner kopiert werden.
 Die Installation der Speech npm-Pakete erfolgt im eigenen Web-Projektordner mit folgendem Befehl:
 
-    $ npm install xxx-0.6.0.tgz
+    $ npm install speech-*-0.6.0.tgz
 
 Danach können die installierten NPM-Pakete in Web-Projekt mit Javascript oder Typescript verwendet werden. Es sind keine weiteren Bibliotheken einzubinden.
 
-Alternativ können die6 Speech NPM-Pakete auch über das offizielle globale NPM-Repository installiert werden:
+Alternativ können die Speech NPM-Pakete auch über das offizielle globale NPM-Repository installiert werden:
 
     $ npm install @speech/<Komponentenname>
 
@@ -104,43 +105,20 @@ Die Speech NPM-Pakete können mit folgendem Befehl wieder deinstalliert werden:
 ## Dokumentation
 
 
-[**Architektur**](./docs/design/Design.md)
+[**Architektur**](./docs/design/service/ServiceDesign.md)
 
-[**Framework**](./docs/framework/Framework.md)
+[**Services**](./docs/packages/ServiceList.md)
 
-[**Cloud-Dienste**](./docs/cloud/Cloud.md)
+[**Cloud-Dienste**](./docs/packages/CloudList.md)
 
-[**Plattformen**](./docs/platform/README.md)
-
-[**API-Referenz**](https://lingualogic.de/speech-framework/docs/latest/api)
-
-[**Roadmap**](./docs/roadmap/README.md)
+[**Roadmap**](./docs/roadmap/Roardmap-2021.md)
 
 [**Release Notizen**](./CHANGELOG.md)
-
-
-## Beispiel-Apps
-
-Im examples Ordner sind mehrere kleine Beispiel-Apps in Javascript für die einzelnen Komponenten von Speech-Framework zu finden.
-Zum Ausführen der Beispiele muss nicht in den Beispielordner gewechselt werden.
-
-Folgender Befehl ist für das Speak-Beispiel einzugeben:
-
-    $ npm run speak
-
-Für das Listen-Beispiel ist folgender Befehl einzugeben:
-
-    $ npm run listen
-
-Für das Intent-Beispiel ist folgender Befehl einzugeben:
-
-    $ npm run intent
 
 
 ## Bekannte Probleme
 
 * die verschiedenen Browser verhalten sich unterschiedlich, so dass nicht in jedem Browser alle Komponenten von Speech wie erwartet funktionieren.
-* unter iOS funktioniert die Cordova-Version von Listen mit Amazon Cloud-Dienst nicht, da die Apple WebView die getUserMedia-API nicht unterstützt.
 
 
 ## Projektverantwortliche (LinguaLogic Team)
