@@ -111,7 +111,7 @@ Die Speech NPM-Pakete können mit folgendem Befehl wieder deinstalliert werden:
 
 [**Cloud-Dienste**](./docs/packages/CloudList.md)
 
-[**Roadmap**](./docs/roadmap/Roardmap-2021.md)
+[**Roadmap**](./docs/roadmap/Roadmap-2021.md)
 
 [**Release Notizen**](./CHANGELOG.md)
 
