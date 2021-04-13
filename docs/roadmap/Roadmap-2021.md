@@ -10,7 +10,7 @@ Die Roadmap zeigt die Reihenfolge der Veröffentlichung von Speech Versionen und
 
 beinhaltet:
 
-* Umstellung auf ein Komponente-Monorepo
+* Umstellung auf ein Komponenten-Monorepo
 
 
 ## Veröffentlichte Versionen

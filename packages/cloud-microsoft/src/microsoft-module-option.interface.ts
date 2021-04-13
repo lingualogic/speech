@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * MicrosoftModuleOption Schnittstelle
  *
  * API-Version: 1.1
@@ -7,7 +7,7 @@
  * Letzte Aenderung: 28.08.2019
  * Status: rot
  *
- * @module cloud-microsoft-service
+ * @module cloud-microsoft
  * @author SB
  */
 

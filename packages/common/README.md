@@ -5,7 +5,7 @@ Die Speech-Common Komponente definiert Basisfunktionen für Audio und HTML5-APIs
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 18.03.2021
+* 0.6.0.0001 alpha vom 13.04.2021
 
 
 ## Installation

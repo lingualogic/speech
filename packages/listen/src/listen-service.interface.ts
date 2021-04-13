@@ -7,7 +7,7 @@
  * Letzte Aenderung: 24.10.2020
  * Status: gruen
  *
- * @module intent
+ * @module listen
  * @author SB
  */
 

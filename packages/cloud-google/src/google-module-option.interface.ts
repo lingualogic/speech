@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * GoogleModuleOption Schnittstelle
  *
  * API-Version: 1.3
@@ -7,7 +7,7 @@
  * Letzte Aenderung: 20.06.2020
  * Status: rot
  *
- * @module cloud-google-service
+ * @module cloud-google
  * @author SB
  */
 

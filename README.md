@@ -16,7 +16,7 @@ Für die Google Cloud-Dienste wird zusätzlich der Speech-Tokenserver benötigt.
 
 ## Letzte Version
 
-* 0.6.0.0001 Alpha vom 18.03.2021 [Release Notizen](./CHANGELOG.md)
+* 0.6.0.0001 Alpha vom 13.04.2021 [Release Notizen](./CHANGELOG.md)
 
 
 ## Voraussetzungen
@@ -110,6 +110,8 @@ Die Speech NPM-Pakete können mit folgendem Befehl wieder deinstalliert werden:
 [**Services**](./docs/packages/ServiceList.md)
 
 [**Cloud-Dienste**](./docs/packages/CloudList.md)
+
+[**Referenz**](https://lingualogic.github.io/speech/api)
 
 [**Roadmap**](./docs/roadmap/Roadmap-2021.md)
 

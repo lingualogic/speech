@@ -5,7 +5,7 @@
  * API-Version: 1.0
  * Datum:       24.10.2020
  *
- * @module speak-service
+ * @module speak
  * @author SB
  */
 

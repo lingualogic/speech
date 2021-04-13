@@ -5,7 +5,7 @@ Die Speech-Intent Komponente dient zur Analyse von Sätzen und zur Bestimmung vo
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 18.03.2021
+* 0.6.0.0001 alpha vom 13.04.2021
 
 
 ## Installation

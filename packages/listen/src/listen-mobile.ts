@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * Listen API fuer Listen-Cordova Komponente (Wrapper)
  *
  * Letzte Aenderung: 23.01.2021

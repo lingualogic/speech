@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * Speak API fuer Speak-Cordova Komponente (Wrapper)
  *
  * Letzte Aenderung: 23.01.2021

@@ -5,7 +5,7 @@ Die Speech-Speak Komponente dient zur Umwandlung von Text in eine Sprachausgabe.
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 14.12.2020
+* 0.6.0.0001 alpha vom 13.04.2021
 
 
 ## Installation

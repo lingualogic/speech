@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * ListenBaseService fuer die Integration von Listen in alle UI-Frameworks
  *
  * API-Version: 1.4

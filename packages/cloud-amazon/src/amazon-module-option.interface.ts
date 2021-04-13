@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * AmazonModuleOption Schnittstelle
  *
  * API-Version: 1.0
@@ -7,7 +7,7 @@
  * Letzte Aenderung: 03.04.2019
  * Status: rot
  *
- * @module gloud-amazon-service
+ * @module cloud-amazon
  * @author SB
  */
 

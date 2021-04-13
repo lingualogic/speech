@@ -5,7 +5,7 @@ Die Speech-Bot Komponente dient zur Implementierung von Sprachbots, die an einen
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 18.03.2021
+* 0.6.0.0001 alpha vom 13.04.2021
 
 
 ## Installation

@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * ActionService zur Anbindung der Action-Komponente
  *
  * API-Version: 1.0
@@ -7,7 +7,7 @@
  * Letzte Aenderung: 28.10.2020
  * Status: rot
  *
- * @module action-service
+ * @module action
  * @author SB
  */
 

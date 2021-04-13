@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * RasaModuleOption Schnittstelle
  *
  * API-Version: 1.1
@@ -7,7 +7,7 @@
  * Letzte Aenderung: 22.07.2019
  * Status: rot
  *
- * @module cloud-rasa-service
+ * @module cloud-rasa
  * @author SB
  */
 

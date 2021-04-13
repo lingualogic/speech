@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * Service als abstrakte Basisklasse aller Services zur Anbindung an UI-Frameworks
  *
  * API-Version: 1.0

@@ -4,7 +4,7 @@
  * Letzte Aenderung: 25.10.2020
  * Status: gruen
  *
- * @module core/event
+ * @module service
  * @author SB
  */
 

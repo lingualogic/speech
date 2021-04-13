@@ -1,4 +1,4 @@
-/**
+/** @packageDocumentation
  * AmazonService zur Aenderung der Credentials
  *
  * API-Version: 1.1
@@ -7,7 +7,7 @@
  * Letzte Aenderung: 01.09.2020
  * Status: rot
  *
- * @module cloud-amazon-service
+ * @module cloud-amazon
  * @author SB
  */
 
