@@ -41,8 +41,6 @@ npm-debug.log
 testem.log
 typings/
 documentation/
-docs/api
-docs/html
 old/
 jest/
 credentials/
