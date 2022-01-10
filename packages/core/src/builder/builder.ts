@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Builder fuer die Erzeugung von Komponenten
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/builder
@@ -21,21 +21,21 @@ import { FactoryManager } from '../factory/factory-manager';
 
 // plugin
 
-import { PluginFactoryInterface } from '../plugin/plugin-factory.interface';
+import { IPluginFactory } from '../plugin/plugin-factory.interface';
 import { PluginFactory } from '../plugin/plugin-factory';
 import { PluginManager } from '../plugin/plugin-manager';
-import { PluginInterface } from '../plugin/plugin.interface';
+import { IPlugin } from '../plugin/plugin.interface';
 
 
 // component
 
-import { ComponentInterface } from '../component/component.interface';
+import { IComponent } from '../component/component.interface';
 
 
 // builder
 
-import { BuilderConfigInterface } from './builder-config.interface';
-import { BuilderInterface } from './builder.interface';
+import { IBuilderConfig } from './builder-config.interface';
+import { IBuilder } from './builder.interface';
 import { BuilderManager } from './builder-manager';
 
 
@@ -43,7 +43,7 @@ import { BuilderManager } from './builder-manager';
  * Klasse Builder
  */
 
-export class Builder extends ErrorBase implements BuilderInterface {
+export class Builder extends ErrorBase implements IBuilder {
 
     private mBuilderName = 'Builder';
 
@@ -109,7 +109,7 @@ export class Builder extends ErrorBase implements BuilderInterface {
      * @return Rueckgabe der erzeugten Komponente oder null
      */
 
-    build( aConfig?: BuilderConfigInterface ): ComponentInterface {
+    build( aConfig?: IBuilderConfig ): IComponent {
         return null;
     }
 
@@ -117,7 +117,7 @@ export class Builder extends ErrorBase implements BuilderInterface {
     // Hilfsfunktionen
 
 
-    protected _getComponentName( aConfig: BuilderConfigInterface ): string {
+    protected _getComponentName( aConfig: IBuilderConfig ): string {
         if ( aConfig && typeof aConfig.componentName === 'string' ) {
             return aConfig.componentName;
         }
@@ -125,7 +125,7 @@ export class Builder extends ErrorBase implements BuilderInterface {
     }
 
 
-    protected _getComponentClass( aConfig: BuilderConfigInterface ): string {
+    protected _getComponentClass( aConfig: IBuilderConfig ): string {
         if ( aConfig && typeof aConfig.componentClass === 'string' ) {
             return aConfig.componentClass;
         }
@@ -133,7 +133,7 @@ export class Builder extends ErrorBase implements BuilderInterface {
     }
 
 
-    protected _getRegisterFlag( aConfig: BuilderConfigInterface ): boolean {
+    protected _getRegisterFlag( aConfig: IBuilderConfig ): boolean {
         if ( aConfig && aConfig.componentRegisterFlag ) {
             return aConfig.componentRegisterFlag;
         }
@@ -141,17 +141,17 @@ export class Builder extends ErrorBase implements BuilderInterface {
     }
 
 
-    protected _getBuilder( aBuilderName: string, aBuilderClass?: typeof Builder ): BuilderInterface {
+    protected _getBuilder( aBuilderName: string, aBuilderClass?: typeof Builder ): IBuilder {
         return BuilderManager.get( aBuilderName, aBuilderClass );
     }
 
 
-    protected _getFactory( aFactoryName: string, aFactoryClass?: typeof PluginFactory ): PluginFactoryInterface {
+    protected _getFactory( aFactoryName: string, aFactoryClass?: typeof PluginFactory ): IPluginFactory {
         return FactoryManager.get( aFactoryName, aFactoryClass );
     }
 
 
-    protected _findComponent( aComponentName ): PluginInterface {
+    protected _findComponent( aComponentName ): IPlugin {
         // console.log('Builder._findComponent: name = ', aComponentName);
         // Komponente aus Plugin-Manager holen
         if ( !aComponentName ) {
@@ -161,7 +161,7 @@ export class Builder extends ErrorBase implements BuilderInterface {
     }
 
 
-    protected _getComponent( aConfig?: any, aComponentType?: string, aComponentBuilderClass?: typeof Builder ): PluginInterface {
+    protected _getComponent( aConfig?: any, aComponentType?: string, aComponentBuilderClass?: typeof Builder ): IPlugin {
         // console.log('Builder._getComponent: config = ', aConfig);
         // Komponente erzeugen
         if ( aComponentType ) {
@@ -178,7 +178,7 @@ export class Builder extends ErrorBase implements BuilderInterface {
     }
 
 
-    protected _getPlugin( aPluginName: string, aPluginClass?: string, aPluginFactoryName?: string, aPluginFactoryClass?: typeof PluginFactory ): PluginInterface {
+    protected _getPlugin( aPluginName: string, aPluginClass?: string, aPluginFactoryName?: string, aPluginFactoryClass?: typeof PluginFactory ): IPlugin {
         if ( aPluginFactoryName && aPluginFactoryClass ) {
             const factory = this._getFactory( aPluginFactoryName, aPluginFactoryClass );
             // console.log('Builder._getPlugin: factory=', factory.getName(), factory);
@@ -190,7 +190,7 @@ export class Builder extends ErrorBase implements BuilderInterface {
     }
 
 
-    protected _findPlugin( aPluginName: string ): PluginInterface {
+    protected _findPlugin( aPluginName: string ): IPlugin {
         return PluginManager.find( aPluginName );
     }
 

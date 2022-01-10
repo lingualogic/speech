@@ -6,10 +6,10 @@
  */
 
 
-export type SpeechSendMessageFunc = ( aMessage: SpeechMessageInterface ) => number;
+export type SpeechSendMessageFunc = ( aMessage: ISpeechMessage ) => number;
 
 
-export interface SpeechMessageInterface {
+export interface ISpeechMessage {
     event: string;
     features?: any;
     version?: string;

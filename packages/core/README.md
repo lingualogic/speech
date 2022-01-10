@@ -5,7 +5,7 @@ Die Speech-Core Komponente definiert die Basisklassen für alle Komponenten.
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 13.04.2021
+* 0.6.1.0002 alpha vom 08.01.2022
 
 
 ## Installation
@@ -46,7 +46,7 @@ Das öffentliche Speech-Core NPM-Paket kann über folgenden Befehl zusammen mit 
 
 Das Speech-Core NPM-Paket kann mit folgendem Befehl wieder deinstalliert werden:
 
-    $ npm uninstall speech-core
+    $ npm uninstall @speech/core
 
 
 ## Bekannte Probleme

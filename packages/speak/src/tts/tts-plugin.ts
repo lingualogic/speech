@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * TTSPlugin definiert die Basisklasse aller TTS
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module speak/tts
@@ -24,7 +24,7 @@ import {
     TTS_EN_LANGUAGE
 } from './tts-const';
 import {
-    TTSInterface,
+    ITTS,
     TTSStartSpeakFunc,
     TTSStopSpeakFunc,
     OnTTSSpeakStartFunc,
@@ -36,7 +36,7 @@ import {
  * Diese Klasse ist die Basisklasse aller ASRs
  */
 
-export class TTSPlugin extends Plugin implements TTSInterface {
+export class TTSPlugin extends Plugin implements ITTS {
 
     /**
      * Flag fuer laufende Sprachausgabe

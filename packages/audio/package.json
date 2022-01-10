@@ -1,22 +1,25 @@
 {
   "name": "@speech/audio",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Audio Component for Speech-Framework",
-  "author": "Stefan <stefan@lingualogic.de>",
+  "author": "LinguaLogic Team",
   "homepage": "https://lingualogic.de",
   "license": "MIT",
+  "private": false,
   "main": "lib/index.js",
+  "module": "lib/speech-audio-module.js",
   "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib"
   },
   "files": [
     "lib/index.js",
+    "lib/speech-audio-module.js",
     "lib/**/*.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "git://lingualogic/web/monorepo",
+    "url": "https://github.com/lingualogic/speech",
     "directory": "packages/audio"
   },
   "publishConfig": {
@@ -25,15 +28,18 @@
   "scripts": {
     "tsc": "tsc",
     "build": "npm run compile",
-    "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
+    "clean": "gulp clean",
     "compile": "tsc -b tsconfig.build.json",
-    "bundle": "rollup -c ./rollup.config.js && cp speech-audio.js ./lib/index.js && cp speech-audio.js ./../../dist/deploy",
-    "pack": "npm pack && cp speech-audio-0.6.0.tgz ./../../dist",
-    "link": "npm link && cd ../.. && npm link @speech/audio",
+    "bundle": "npx rollup -c ./rollup.config.js && cp speech-audio.js ./lib/index.js && cp speech-audio.js ./../../dist/deploy",
+    "bundle:module": "cp speech-audio-module.js ./lib && cp speech-audio-module.js ./../../dist/module",
+    "pack": "npm pack && cp speech-audio-0.6.1.tgz ./../../dist",
+    "link": "npm link",
+    "linkGlobal": "cd ../.. && npm link @speech/audio --legacy-peer-deps",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "peerDdependencies": {
-    "@speech/core": "0.6.0",
-    "@speech/common": "0.6.0"
+    "@speech/core": "0.6.1",
+    "@speech/net": "0.6.1",
+    "@speech/file": "0.6.1"
   }
 }

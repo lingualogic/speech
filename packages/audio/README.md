@@ -5,7 +5,7 @@ Die Speech-Audio Komponente dient dem Aufnehmen und Abspielen von Audiodaten.
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 13.04.2021
+* 0.6.1.0002 alpha vom 08.01.2022
 
 
 ## Installation
@@ -33,25 +33,24 @@ Das Speech-Audio NPM-Paket ist zusammen mit allen anderen NP-Paketen von Speech 
 Speech-Audio ist von folgenden anderen Speech NPM-Paketen abhängig:
 
     * Speech-Core
-    * Speech-Common
 
 Diese NPM-Pakete müssen zusammen mit Speech-Audio im eigenen Projekt installiert werden, wenn sie nicht vorher schon installiert worden sind. Das kann mit Hilfe folgenden Befehls durchgeführt werden, wenn alle abhängigen NPM-Pakete zusammen ins eigene Projektverzeichnis kopiert worden sind:
 
-    $ npm install speech-core-0.6.x.tgz speech-common-0.6.x.tgz speech-audio-0.6.x.tgz
+    $ npm install speech-core-0.6.x.tgz speech-audio-0.6.x.tgz
 
 
 ### Über globales NPM-Repository
 
 Das öffentliche Speech-Audio NPM-Paket kann über folgenden Befehl zusammen mit seinen abhängigen NPM-Paketen aus dem globalen NPM-Repository installiert werden:
 
-    $ npm install @speech/core @speech/common @speech/audio
+    $ npm install @speech/core @speech/audio
 
 
 ## Deinstallation
 
 Das Speech-Audio NPM-Paket kann mit folgendem Befehl wieder deinstalliert werden:
 
-    $ npm uninstall speech-audio
+    $ npm uninstall @speech/audio
 
 
 ## Bekannte Probleme

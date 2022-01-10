@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung einer ASR
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 31.10.2021
  * Status: rot
  *
  * @module listen/asr
@@ -21,16 +21,16 @@ import {
     ASR_TYPE_NAME,
     ASR_DEFAULT_NAME,
     ASR_PLUGIN_NAME,
+    ASR_PORT_NAME,
     ASR_HTML5_NAME,
-    ASR_NUANCE_NAME,
     ASR_GOOGLE_NAME,
     ASR_MICROSOFT_NAME,
     ASR_MOCK_NAME,
     ASR_GROUP_NAME } from './asr-const';
-import { ASRInterface } from './asr.interface';
+import { IASR } from './asr.interface';
 import { ASRMock } from './asr-mock';
 import { ASRHtml5 } from './asr-html5';
-import { ASRNuance } from './asr-nuance';
+import { ASRPort } from './asr-port';
 import { ASRGoogle } from './asr-google';
 import { ASRMicrosoft } from './asr-microsoft';
 import { ASRGroup } from './asr-group';
@@ -81,8 +81,8 @@ export class ASRFactory extends PluginFactory {
      * @return gibt ASR Instanz oder null zurueck
      */
 
-    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): ASRInterface {
-        let asr: ASRInterface = null;
+    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): IASR {
+        let asr: IASR = null;
         switch ( aPluginClass ) {
             case ASR_GROUP_NAME:
                 asr = new ASRGroup( this, aPluginName, aRegisterFlag );
@@ -91,12 +91,13 @@ export class ASRFactory extends PluginFactory {
             case ASR_PLUGIN_NAME:
                 // durchfallen ist beabsichtigt, da ASRHtml5 als Default-Plugin
                 // verwendet wird
+                /* typescript-eslint-disable no-fallthrough */
             case ASR_HTML5_NAME:
                 asr = new ASRHtml5( aPluginName, aRegisterFlag );
                 break;
-            // Nuance-ASR
-            case ASR_NUANCE_NAME:
-                asr = new ASRNuance( aPluginName, aRegisterFlag );
+            // Port-ASR
+            case ASR_PORT_NAME:
+                asr = new ASRPort( aPluginName, aRegisterFlag );
                 break;
             // Google-ASR
             case ASR_GOOGLE_NAME:
@@ -127,10 +128,10 @@ export class ASRFactory extends PluginFactory {
      * @param [aPluginClass] - Klassen-Name der zu erzeugenden ASR
      * @param [aRegisterFlag] - wenn true, dann wird Plugin in PluginManager eingetragen
      *
-     * @return {ASRInterface} gibt eine ASR Instanz oder null zurueck
+     * @return {IASR} gibt eine ASR Instanz oder null zurueck
      */
 
-    create( aPluginName = '', aPluginClass = '', aRegisterFlag = true ): ASRInterface {
+    create( aPluginName = '', aPluginClass = '', aRegisterFlag = true ): IASR {
         const pluginName = aPluginName || ASR_DEFAULT_NAME;
         const pluginClass = aPluginClass || ASR_DEFAULT_NAME;
 

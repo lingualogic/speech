@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * ASR Schnittstelle
  *
- * Version: 1.4
- * Datum:   09.04.2020
+ * Version: 2.0
+ * Datum:   31.10.2021
  *
- * Letzte Aenderung: 07.10.2020
+ * Letzte Aenderung: 31.10.2021
  * Status: rot
  *
  * @module listen/asr
@@ -14,7 +14,12 @@
 
 // core
 
-import { PluginInterface } from '@speech/core';
+import { IPlugin } from '@speech/core';
+
+
+// asr
+
+import { IASROption } from './asr-option.interface';
 
 
 // Funktionen
@@ -35,10 +40,10 @@ export type OnASRListenAudioStopFunc = () => number;
 
 
 /**
- * ASRInterface Interface
+ * IASR Interface
  */
 
-export interface ASRInterface extends PluginInterface {
+export interface IASR extends IPlugin {
 
     // Listen-Events
 
@@ -61,6 +66,13 @@ export interface ASRInterface extends PluginInterface {
     onListenSpeechStop: OnASRListenStopFunc;
 
 
+    // Uebergabe-Funktionen
+
+
+    setCloudPortName( acloudPortName: string ): void;
+    getCloudPortName(): string;
+
+
     // ASR-Funktionen
 
 
@@ -72,6 +84,26 @@ export interface ASRInterface extends PluginInterface {
 
     isASR(): boolean;
 
+
+    /**
+     * Einfuegen einer ASR
+     *
+     * @param aASRName - individueller ASR-Name
+     * @param aASRClass - Klassenname der ASR
+     * @param aOption - optionale Parameter zur Initialisierung der ASR
+     */
+
+    insertASR( aASRName: string, aASRClass: string, aOption: IASROption ): number;
+
+
+     /**
+      * Entfernen einer ASR
+      *
+      * @param aNLUName - individueller NLU-Name
+      */
+ 
+    removeASR( aASRName: string ): number;
+ 
 
     /**
      * Setzen der aktuellen ASR ueber ihren Namen

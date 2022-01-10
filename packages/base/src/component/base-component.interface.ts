@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * BaseComponent Schnittstelle
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module base/component
@@ -11,22 +11,22 @@
 
 // core
 
-import { ComponentInterface } from '@speech/core';
+import { IComponent } from '@speech/core';
 
 
 // base
 
 import { BaseStartFunc, BaseStopFunc, OnBaseStartFunc, OnBaseStopFunc } from '../base-function.type';
-import { BaseInterface } from '../base.interface';
+import { IBase } from '../base.interface';
 
 
 /** @export
  * BaseComponent Schnittstelle
  *
- * @extends {ComponentInterface, BaseInterface}
+ * @extends {IComponent, IBase}
  */
 
-export interface BaseComponentInterface extends ComponentInterface, BaseInterface {
+export interface IBaseComponent extends IComponent, IBase {
 
 
     // Event-Funktionen

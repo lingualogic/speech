@@ -4,7 +4,7 @@ import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 // SpeechFramework
 
@@ -23,7 +23,7 @@ console.log('');
 
 // Parameter fuer die Erzeugung der SpeechDialog..bundle.js Datei
 
-let readableSourceCode = true; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
+let readableSourceCode = false; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
 let preambleText =
 `/**
  * Speech-Listen Bundle
@@ -55,25 +55,35 @@ export default {
     input: './src/index.ts',
     external: [ 
         '@speech/core',
-        '@speech/common',
-        '@speech/cloud',
         '@speech/base',
         '@speech/service'
     ],
-    output: {
-        file: './speech-listen.js',
-        format: 'umd',
-        name: 'speechListen',
-        sourcemap: false,
-        globals: {
-            "@speech/core": "speechCore",
-            "@speech/common": "speechCommon",
-            "@speech/cloud": "speechCloud",
-            "@speech/base": "speechBase",
-            "@speech/service": "speechService"
-        }
+    output: [
+        {
+            file: './speech-listen.js',
+            format: 'umd',
+            name: 'speechListen',
+            sourcemap: false,
+            globals: {
+                "@speech/core": "speechCore",
+                "@speech/base": "speechBase",
+                "@speech/service": "speechService"
+            }
 
-    },
+        },
+        {
+            file: './speech-listen-module.js',
+            format: 'es',
+            name: 'speechListen',
+            sourcemap: false,
+            globals: {
+                "@speech/core": "speechCore",
+                "@speech/base": "speechBase",
+                "@speech/service": "speechService"
+            }
+
+        }
+    ],    
     preserveSymlinks: true,
     plugins: [
         typescript({
@@ -84,7 +94,7 @@ export default {
 
         json(),
 
-        uglify({
+        terser({
             output: {
                 beautify: readableSourceCode,
                 preamble: preambleText,

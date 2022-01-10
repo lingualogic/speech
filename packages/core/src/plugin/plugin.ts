@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Plugin Basiskomponente, von der alle Plungins abgeleitet sind
  *
- * Letzte Aenderung: 14.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/plugin
@@ -21,7 +21,7 @@ import { ErrorBase } from '../error/error-base';
 
 // plugin
 
-import { PluginInterface } from './plugin.interface';
+import { IPlugin } from './plugin.interface';
 import { PluginManager } from './plugin-manager';
 
 
@@ -30,10 +30,10 @@ import { PluginManager } from './plugin-manager';
  *
  * @export
  * @class AudioPlugin
- * @implements {PluginInterface}
+ * @implements {IPlugin}
  */
 
-export class Plugin extends ErrorBase implements PluginInterface {
+export class Plugin extends ErrorBase implements IPlugin {
 
     private mPluginName = '';
 
@@ -86,7 +86,7 @@ export class Plugin extends ErrorBase implements PluginInterface {
      * Rueckgabe eines logischen Plugin-Typs
      *
      * @return {string} pluginType - logischer Typ des Plugins fuer unterschiedliche Anwendungsschnittstellen
-     * @memberof PluginInterface
+     * @memberof IPlugin
      */
 
     getType(): string {
@@ -117,6 +117,18 @@ export class Plugin extends ErrorBase implements PluginInterface {
 
 
     /**
+     * Optionen eintragen
+     * 
+     * @param aOption - Parameter
+     * @returns Fehlercode 0 oder -1 
+     */
+    protected _setOption( aOption: any ): number {
+        // kann von erbenden Klassen ueberschrieben werden
+        return 0;
+    }
+
+
+    /**
      * initialisert das Plugin
      *
      * erlaubte optionale Parameter:
@@ -132,6 +144,7 @@ export class Plugin extends ErrorBase implements PluginInterface {
 
     init( aOption?: any ): number {
         this.mActiveFlag = true;
+        // feste Optionen eintragen
         if ( aOption ) {
             // traegt das activeFlag ein
             if ( typeof aOption.activeFlag === 'boolean' ) {
@@ -143,6 +156,10 @@ export class Plugin extends ErrorBase implements PluginInterface {
                 // console.log('Plugin.init: errorOutputFlag =', aOption.errorOutputFlag, this.getName());
                 this.setErrorOutput( aOption.errorOutputFlag );
             }
+            // weitere Optionen setzen
+            if ( this._setOption( aOption ) !== 0 ) {
+                return -1;
+            }
         }
         this.mInitFlag = true;
         return 0;
@@ -153,7 +170,7 @@ export class Plugin extends ErrorBase implements PluginInterface {
      * gibt das Plugin frei
      *
      * @return {number} errorCode (0,-1) - Fehlercode
-     * @memberof PluginInterface
+     * @memberof IPlugin
      */
 
     done(): number {
@@ -186,7 +203,7 @@ export class Plugin extends ErrorBase implements PluginInterface {
      * pruefen auf initialisertes Plugin
      *
      * @return {boolean} initFlag - true, Plugin ist initialisiert, false sonst
-     * @memberof PluginInterface
+     * @memberof IPlugin
      */
 
     isInit(): boolean {

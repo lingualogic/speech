@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * ListenService fuer die Integration von Listen in alle UI-Frameworks
  *
- * API-Version: 1.4
- * Datum:       19.01.2021
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 19.01.2021
+ * Letzte Aenderung: 21.12.2021
  * Status: gelb
  *
  * @module listen
@@ -16,7 +16,7 @@
 // listen
 
 import { ListenFactory } from './listen-factory';
-import { ListenOptionInterface } from './listen-option.interface';
+import { IListenOption } from './listen-option.interface';
 import { ListenBaseService } from './listen-base-service';
 
 
@@ -52,7 +52,7 @@ export class ListenService extends ListenBaseService {
      * @return {*} Rueckgabe der Listen-Instanz
      */
 
-    protected _createComponent( aComponentName: string, aOption: ListenOptionInterface ): any {
+    protected _createComponent( aComponentName: string, aOption: IListenOption ): any {
         // console.log('ListenService._createComponent:', aComponentName, aOption);
         this.mListen = ListenFactory.create( aComponentName, aOption );
         // console.log('ListenService._createComponent:', typeof this.mListen);

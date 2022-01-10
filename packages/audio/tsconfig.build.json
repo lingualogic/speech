@@ -11,7 +11,10 @@
         "path": "../core/tsconfig.build.json"
       },
       {
-        "path": "../common/tsconfig.build.json"
+        "path": "../net/tsconfig.build.json"
+      },
+      {
+        "path": "../file/tsconfig.build.json"
       }
     ],
     "include": [

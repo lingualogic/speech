@@ -4,7 +4,7 @@ import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 // SpeechFramework
 
@@ -23,7 +23,7 @@ console.log('');
 
 // Parameter fuer die Erzeugung der SpeechDialog..bundle.js Datei
 
-let readableSourceCode = true; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
+let readableSourceCode = false; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
 let preambleText =
 `/**
  * Speech-Speak Bundle
@@ -55,27 +55,38 @@ export default {
     input: './src/index.ts',
     external: [ 
         '@speech/core',
-        '@speech/common',
-        '@speech/cloud',
         '@speech/audio',
         '@speech/base',
         '@speech/service'
     ],
-    output: {
-        file: './speech-speak.js',
-        format: 'umd',
-        name: 'speechSpeak',
-        sourcemap: false,
-        globals: {
-            "@speech/core": "speechCore",
-            "@speech/common": "speechCommon",
-            "@speech/cloud": "speechCloud",
-            "@speech/audio": "speechAudio",
-            "@speech/base": "speechBase",
-            "@speech/service": "speechService"
-        }
+    output: [
+        {
+            file: './speech-speak.js',
+            format: 'umd',
+            name: 'speechSpeak',
+            sourcemap: false,
+            globals: {
+                "@speech/core": "speechCore",
+                "@speech/audio": "speechAudio",
+                "@speech/base": "speechBase",
+                "@speech/service": "speechService"
+            }
 
-    },
+        },
+        {
+            file: './speech-speak-module.js',
+            format: 'es',
+            name: 'speechSpeak',
+            sourcemap: false,
+            globals: {
+                "@speech/core": "speechCore",
+                "@speech/audio": "speechAudio",
+                "@speech/base": "speechBase",
+                "@speech/service": "speechService"
+            }
+
+        }
+    ],
     preserveSymlinks: true,
     plugins: [
         typescript({
@@ -86,7 +97,7 @@ export default {
 
         json(),
 
-        uglify({
+        terser({
             output: {
                 beautify: readableSourceCode,
                 preamble: preambleText,

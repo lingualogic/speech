@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Base Komponente als abstrakte Basiskomponente aller Komponenten
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module base/component
@@ -21,7 +21,7 @@ import {
     EventFunctionList,
     EventFunc,
     Component,
-    SessionInterface
+    ISession
 } from '@speech/core';
 
 
@@ -30,15 +30,15 @@ import {
 import { BASE_VERSION_STRING, BASE_API_VERSION } from '../base-version';
 import { BASE_TYPE_NAME, BASE_COMPONENT_NAME } from '../base-const';
 import { BaseStartFunc, BaseStopFunc, OnBaseStartFunc, OnBaseStopFunc } from '../base-function.type';
-import { BaseOptionInterface } from '../base-option.interface';
-import { BaseComponentInterface } from './base-component.interface';
+import { IBaseOption } from '../base-option.interface';
+import { IBaseComponent } from './base-component.interface';
 
 
 /** @export
  * BaseComponent Klasse
  */
 
-export class BaseComponent extends Component implements BaseComponentInterface {
+export class BaseComponent extends Component implements IBaseComponent {
 
 
     // Events
@@ -96,10 +96,10 @@ export class BaseComponent extends Component implements BaseComponentInterface {
      * Eintragen der lokalen Optionen
      *
      * @protected
-     * @param {BaseOptionInterface} aOption - optionale Parameter
+     * @param {IBaseOption} aOption - optionale Parameter
      */
 
-    protected _setOption( aOption: BaseOptionInterface ): number {
+    protected _setOption( aOption: IBaseOption ): number {
         // muss von erbenden Klassen ueberschrieben werden
         return 0;
     }
@@ -112,7 +112,7 @@ export class BaseComponent extends Component implements BaseComponentInterface {
      * @returns {number} Fehlercode 0 oder -1
      */
 
-    protected _initAllPlugin( aOption?: BaseOptionInterface ): number {
+    protected _initAllPlugin( aOption?: IBaseOption ): number {
         // muss von erbenden Klassen ueberschrieben werden
         return 0;
     }
@@ -126,7 +126,7 @@ export class BaseComponent extends Component implements BaseComponentInterface {
      * @return {number} errorcode (0,-1)
      */
 
-    init( aOption?: BaseOptionInterface ): number {
+    init( aOption?: IBaseOption ): number {
         // console.log('BaseComponent.init:', aOption);
 
         // pruefen auf bereits initialisiert
@@ -475,7 +475,7 @@ export class BaseComponent extends Component implements BaseComponentInterface {
      * @return {number} Fehlercode 0 oder -1
      */
 
-    start( aSession?: SessionInterface ): number {
+    start( aSession?: ISession ): number {
         // muss von erbenden Klassen ueberschrieben werden
         return 0;
     }

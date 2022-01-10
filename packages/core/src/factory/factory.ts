@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Factory zur Erzeugung von Objekten
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 05.07.2021
  * Status: gruen
  *
  * @module core/factory
@@ -17,7 +17,7 @@ import { ErrorBase } from '../error/error-base';
 // factory
 
 import { FactoryManager } from './factory-manager';
-import { FactoryInterface } from './factory.interface';
+import { IFactory } from './factory.interface';
 
 
 /**
@@ -25,10 +25,14 @@ import { FactoryInterface } from './factory.interface';
  *
  * @export
  * @class Factory
- * @implements {FactoryInterface}
+ * @implements {IFactory}
  */
 
-export class Factory extends ErrorBase implements FactoryInterface {
+export class Factory extends ErrorBase implements IFactory {
+
+
+    protected mFactoryName = 'Factory';
+
 
     /**
      * Creates an instance of Factory.
@@ -38,6 +42,7 @@ export class Factory extends ErrorBase implements FactoryInterface {
 
     constructor( aFactoryName?: string, aRegisterFlag = true ) {
         super( aFactoryName || 'Factory' );
+        this.mFactoryName = aFactoryName || 'Factory';
         if ( aRegisterFlag ) {
             if ( FactoryManager.insert( this.getName(), this ) !== 0 ) {
                 throw new Error('Factory ' + this.getName() + ' existiert bereits im FactoryManager');
@@ -62,12 +67,12 @@ export class Factory extends ErrorBase implements FactoryInterface {
      */
 
     getName(): string {
-        return 'Factory';
+        return this.mFactoryName;
     }
 
 
     /**
-     * Erzeugt ein neues Objket
+     * Erzeugt ein neues Objket (synchron)
      *
      * @param [aObjectName] - Instanzen-Name des Objektes
      * @param [aObjectClass] - Klassen-Name des Objektes
@@ -77,6 +82,21 @@ export class Factory extends ErrorBase implements FactoryInterface {
      */
 
     create( aObjectName = '', aObjectClass = '', aRegisterFlag = true ): any {
+        return null;
+    }
+
+
+    /**
+     * Erzeugt ein neues Objket (asynchron)
+     *
+     * @param [aObjectName] - Instanzen-Name des Objektes
+     * @param [aObjectClass] - Klassen-Name des Objektes
+     * @param [aRegisterFlag] - bestimmt, ob Objekt in einen Manager eingetragen wird
+     *
+     * @return {any} Instanz des Objektes
+     */
+
+    async createAsync( aObjectName = '', aObjectClass = '', aRegisterFlag = true ): Promise<any> {
         return null;
     }
 

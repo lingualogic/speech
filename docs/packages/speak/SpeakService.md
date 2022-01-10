@@ -11,10 +11,7 @@ In der folgenden Grafik werden die einzelnen Schichten, angefangen von der WebAp
 ![SpeakService-Architektur](SpeakService-1.gif)
 
 
-Ganz oben sind die für den SpeakService notwendigen Credentials dargestellt, die der WebApp übergeben werden müssen, wenn ein Cloud-Dienst als TTS zum Einsatz kommen soll. Eine Anleitung für die Erstellung der Credentials und die Einbindung des jeweiligen Cloud-Module in die WebApp zur Aktivierung des Cloud-Service findet man unter [docs/packages/CloudList.md](./../CloudList.md)
-
-Die nächste Grafik zeigt die konkrete Vererbungsbeziehung zu Service, sowie die Einbindung von SpeakFactory und SpeakInterface aus Speech. SpeakFactory ist eine statische Klasse und erzeugt das Speak-Objekt zum SpeakInterface. Auf der linken Seite sind die Cloud-Module dargestellt, welche als statische Klassen implementiert sind und das jeweilige Cloud-Singleton (Amazon, Google oder Microsoft) aus dem Speech-Framework einbindet.
-Damit ein Cloud-Service funktioniert, müssen seine Credentials vom jeweiligen Cloud-Module an das Cloud-Singleton weitergereicht werden.
+Die nächste Grafik zeigt die konkrete Vererbungsbeziehung zu Service, sowie die Einbindung von SpeakFactory und SpeakInterface aus Speech. SpeakFactory ist eine statische Klasse und erzeugt das Speak-Objekt zum SpeakInterface. Auf der linken Seite sind die Cloud-Module dargestellt, welche als statische Klassen implementiert sind und das jeweilige Cloud-Singleton (Amazon, Google oder Microsoft) aus dem Speech-Framework einbindet. Damit ein Cloud-Service funktioniert, müssen seine Credentials vom jeweiligen Cloud-Module an das Cloud-Singleton weitergereicht werden.
 
 
 ![SpeakService-Struktur](SpeakService-2.gif)
@@ -45,12 +42,12 @@ Alternativ kann man Speech aus dem globalen NPM-Repository installieren.
 
 ## Konfiguration
 
-Dier erste Aufgabe vor Nutzung des SpeakService besteht in der Festlegung der Konfiguration vor der Erzeugung des Services. In der Defaulteinstellung wird die init()-Funktion im Konstruktor aufgerufen und die voreingestellte Konfiguration übernommen. Will man die Defaultkonfiguration überschreiben, holt man sie sich mittels der Klassenfunktion SpeakService.getConfig(). Diese Funktion gibt das SpeakConfig-Objekt des SpeakServices zurück. 
+Die erste Aufgabe vor Nutzung des SpeakService besteht in der Festlegung der Konfiguration vor der Erzeugung des Services. In der Defaulteinstellung wird die init()-Funktion im Konstruktor aufgerufen und die voreingestellte Konfiguration übernommen. Will man die Defaultkonfiguration überschreiben, holt man sie sich mittels der Klassenfunktion SpeakService.getConfig(). Diese Funktion gibt das SpeakConfig-Objekt des SpeakServices zurück. 
 
 Auszug aus der Datei: packages/speak/src/speak-service-config.ts:
 
 	// hier sind die Defaultwerte des SpeakService festgelegt	
-	export const SpeakServiceConfig: SpeakServiceOptionInterface = {
+	export const SpeakServiceConfig: ISpeakServiceOption = {
 	    /** ein/ausschalten der Speak-Komponente */
 	    activeFlag: true,
 	    /** setzt die Sprache fuer die Sprachausgabe ( 'de', 'en' )*/
@@ -104,7 +101,7 @@ Angular Beispiel-Komponente für die Integration von Sprache:
 			this.speakService.init();
 			this.speakStartEvent = this.speakService.startEvent.subscribe(() => console.log('Sprachausgabe gestartet'));
 			this.speakStopEvent = this.speakService.stopEvent.subscribe(() => console.log('Sprachausgabe beendet'));
-			this.speakErrorEvent = thuis.speakService.errorEvent.subscribe(aError => console.log('Sprachausgabe Fehler:', aError.message));
+			this.speakErrorEvent = this.speakService.errorEvent.subscribe(aError => console.log('Sprachausgabe Fehler:', aError.message));
 		}
 
 		// Speak-Ereignisse freigeben

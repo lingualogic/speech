@@ -2,7 +2,7 @@
  * Hier wird die HTML5-Sprachausgabe implementiert. Ist Speech-Synthesis nicht vorhanden, wird
  * die Komponente in Active Off versetzt.
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 21.12.2021
  * Status: gelb
  *
  * @module speak/tts
@@ -15,9 +15,9 @@
 import { FactoryManager } from '@speech/core';
 
 
-// common
+// speak
 
-import { SPEECHSYNTHESIS_FACTORY_NAME, SpeechSynthesisFactory } from '@speech/common';
+import { SPEECHSYNTHESIS_FACTORY_NAME, SpeechSynthesisFactory } from './../common/speechsynthesis-factory';
 
 
 // tts
@@ -365,7 +365,7 @@ export class TTSHtml5 extends TTSPlugin {
 
     protected _createSynthesis( aText: string ): number {
         try {
-            console.log('TTSHtml5._createSynthesis: UtteranceClass = ', this.mUtteranceClass);
+            // console.log('TTSHtml5._createSynthesis: UtteranceClass = ', this.mUtteranceClass);
             this.mUtterance = new this.mUtteranceClass( aText );
             // console.log('TTSHtml5._createSynthesis: Utterance = ', this.mUtterance);
             this.mUtterance.lang = this._getTTSLanguage();
@@ -426,12 +426,12 @@ export class TTSHtml5 extends TTSPlugin {
      */
 
     protected _startSynthesis( aText: string ): number {
-        console.log('TTSHtml5._startSynthesis: Synthesis = ', this.mSynthesis, this.mUtterance);
+        // console.log('TTSHtml5._startSynthesis: Synthesis = ', this.mSynthesis, this.mUtterance);
         if ( this.mSynthesis && this.mUtterance ) {
             this._setBreakTimeout();
             try {
                 this.mSynthesis.cancel();
-                console.log('TTSHtml5._startSynthesis: speak');
+                // console.log('TTSHtml5._startSynthesis: speak');
                 this.mSynthesis.speak( this.mUtterance );
             } catch ( aException ) {
                 console.log('TTSHtml5._startSynthesis: Exception ', aException);
@@ -451,7 +451,7 @@ export class TTSHtml5 extends TTSPlugin {
      */
 
     protected _stopSynthesis(): number {
-        console.log('TTSHtml5._stopSynthesis');
+        // console.log('TTSHtml5._stopSynthesis');
         if ( this.mSynthesis ) {
             this._clearBreakTimeout();
             try {
@@ -471,7 +471,7 @@ export class TTSHtml5 extends TTSPlugin {
      */
 
     protected _probeSynthesis(): number {
-        console.log('TTSHtml5._probeSynthesis: start', this.mUtteranceClass, this.mSynthesis);
+        // console.log('TTSHtml5._probeSynthesis: start', this.mUtteranceClass, this.mSynthesis);
         try {
             if ( !this.mUtteranceClass ) {
                 this.error( '_probeSynthesis', 'Kein HTML5 SpeechSynthesisUtterance API vorhanden' );
@@ -500,7 +500,7 @@ export class TTSHtml5 extends TTSPlugin {
             };
 
             utterance.onerror = (aEvent: any) => {
-                console.log('TTSHtml5._probeSynthesis: onerror:', aEvent);
+                // console.log('TTSHtml5._probeSynthesis: onerror:', aEvent);
                 this._clearBreakTimeout();
                 if ( aEvent.error === 'synthesis-failed') {
                     // keine Fehlermeldung, tritt in Chrome auf, wegen leerem String

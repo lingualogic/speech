@@ -2,7 +2,7 @@
  * Globale Fabrik zur Erzeugung einer ListenComponent
  * ListenComponent wird als Singleton verwaltet
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module listen/component
@@ -18,7 +18,7 @@ import { PluginFactory } from '@speech/core';
 // listen
 
 import { LISTEN_TYPE_NAME, LISTEN_COMPONENTFACTORY_NAME, LISTEN_COMPONENT_NAME, LISTEN_MOCK_NAME } from '../listen-const';
-import { ListenComponentInterface } from './listen-component.interface';
+import { IListenComponent } from './listen-component.interface';
 import { ListenComponent } from './listen-component';
 
 
@@ -41,7 +41,7 @@ export class ListenComponentFactory extends PluginFactory {
     }
 
 
-    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): ListenComponentInterface {
+    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): IListenComponent {
         return new ListenComponent( aPluginName, aRegisterFlag );
     }
 
@@ -57,7 +57,7 @@ export class ListenComponentFactory extends PluginFactory {
      * @return Listen-Komponente wird zurueckgegeben
      */
 
-    create( aPluginName = '', aPluginClass = '', aRegisterFlag = true ): ListenComponentInterface {
+    create( aPluginName = '', aPluginClass = '', aRegisterFlag = true ): IListenComponent {
         const pluginName = aPluginName || LISTEN_COMPONENT_NAME;
         const pluginClass = aPluginClass || LISTEN_COMPONENT_NAME;
         // Mock zurueckgeben

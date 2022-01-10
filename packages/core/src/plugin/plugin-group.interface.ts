@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * PluginGroup Schnittstelle
  *
- * Letzte Aenderung: 04.10.2018
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/plugin
@@ -9,31 +9,26 @@
  */
 
 
-// global
-
-import { SpeechMessageInterface, SpeechSendMessageFunc } from '../interface/speech-message.interface';
-
-
 // plugin
 
-import { PluginInterface } from './plugin.interface';
+import { IPlugin } from './plugin.interface';
 
 
 /**
  * Definiert die Schnittstelle fuer eine PluginGroup
  */
 
-export interface PluginGroupInterface extends PluginInterface {
+export interface IPluginGroup extends IPlugin {
 
     // Plugin-Funktionen
 
-    insertPlugin( aPluginName: string, aPlugin: PluginInterface ): number;
+    insertPlugin( aPluginName: string, aPlugin: IPlugin ): number;
     removePlugin( aPluginName: string ): number;
     removeAllPlugin(): number;
 
-    findPlugin( aPluginName: string ): PluginInterface;
-    firstPlugin(): PluginInterface;
-    nextPlugin(): PluginInterface;
+    findPlugin( aPluginName: string ): IPlugin;
+    firstPlugin(): IPlugin;
+    nextPlugin(): IPlugin;
 
     isPlugin( aPluginName: string): boolean;
     getPluginSize(): number;

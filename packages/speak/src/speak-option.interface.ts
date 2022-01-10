@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Speak Option Schnittstelle
  *
- * API-Version: 1.3
- * Datum:       15.10.2020
+ * API-Version: 2.0
+ * Datum:       13.10.2021
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 13.10.2021
  * Status: gruen
  *
  * @module speak
@@ -14,14 +14,14 @@
 
 // base
 
-import { BaseOptionInterface } from '@speech/base';
+import { IBaseOption } from '@speech/base';
 
 
 /** @export
  * SpeakOption Schnittstelle fuer optionale Konfigurationsparameter von Speak bei der Initialisierung
  */
 
-export interface SpeakOptionInterface extends BaseOptionInterface {
+export interface ISpeakOption extends IBaseOption {
     /** setzt die Sprache fuer die Sprachausgabe ( de, en )*/
     speakLanguage?: string;
     /** globaler Audiokontext wird von HTML5 definiert, und der App uebergeben */
@@ -33,3 +33,11 @@ export interface SpeakOptionInterface extends BaseOptionInterface {
     /** True, wenn Audiodateien abgespielt werden sollen */
     audioFlag?: boolean;
 }
+
+
+/**
+ * @deprecated Ersetzen mit ISpeakOption, wird in Version 0.7 entfernt
+ */
+
+/* typescript-eslint-disable no-empty-interface */ 
+export interface SpeakServiceOptionInterface extends ISpeakOption {}

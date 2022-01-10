@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * BaseOption Schnittstelle
  *
- * API-Version: 1.1
- * Datum:       24.10.2018
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 24.10.2018
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module base
@@ -16,7 +16,7 @@
  * BaseOption Schnittstelle fuer optionale Konfigurationsparameter einer Komponente bei der Initialisierung
  */
 
-export interface BaseOptionInterface {
+export interface IBaseOption {
     /** definiert den zu verwendenden Builder fuer die Erzeugung der Komponente */
     builderName?: string;
     /** definiert den zu verwendenden Instanzen-Namen der inneren Komponente */
@@ -28,4 +28,3 @@ export interface BaseOptionInterface {
     /** legt fest, ob die Fehlermeldungen zusaetzlich auf der Konsole ausgegeben werden */
     errorOutputFlag?: boolean;
 }
-

@@ -10,7 +10,7 @@ In der folgenden Grafik wird der Service als abstrakte Klasse dargestellt. Die a
 ![Service-Architektur](Service-1.gif)
 
 
-Service verbindet sich mit dem SpeechMain Singleton und bindet die Schnittstelle der Base-Komponente aus Speech-Framework ein, wie in der nächsten Grafik dargestellt. SpeechMain ist das oberste Objekt zur Initialisierung von Speech-Framework und BaseInterface definiert die abstrakte Basisschnittstelle aller exportierbaren Komponenten von Speech.
+Service verbindet sich mit dem ServiceManager und bindet die Schnittstelle der Base-Komponente aus Speech-Framework ein, wie in der nächsten Grafik dargestellt. ServiceManager ist das oberste Objekt zur Verwaltung von Services und BaseInterface definiert die abstrakte Basisschnittstelle aller exportierbaren Komponenten von Speech.
 
 
 ![Service-Struktur](Service-2.gif)
@@ -56,7 +56,7 @@ Dier erste Aufgabe vor Nutzung eines Services besteht in der Festlegung der Konf
 Grundelemente jeder Service-Konfiguration:
 
 	// hier sind die Defaultwerte des SpeakService festgelegt	
-	export const SpeakServiceConfig: SpeakServiceOptionInterface = {
+	export const SpeakServiceConfig: ISpeakServiceOption = {
 	    /** ein/ausschalten des Service */
 	    activeFlag: true,
 	    

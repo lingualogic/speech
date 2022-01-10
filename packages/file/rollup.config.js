@@ -4,7 +4,7 @@ import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 // SpeechFramework
 
@@ -23,7 +23,7 @@ console.log('');
 
 // Parameter fuer die Erzeugung der SpeechDialog..bundle.js Datei
 
-let readableSourceCode = true; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
+let readableSourceCode = false; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
 let preambleText =
 `/**
  * Speech-File Bundle
@@ -55,19 +55,32 @@ export default {
     input: './src/index.ts',
     external: [ 
         '@speech/core',
-        '@speech/common',
+        '@speech/net'
     ],
-    output: {
-        file: './speech-file.js',
-        format: 'umd',
-        name: 'speechFile',
-        sourcemap: false,
-        globals: {
-            "@speech/core": "speechCore",
-            "@speech/common": "speechCommon"
-        }
+    output: [
+        {
+            file: './speech-file.js',
+            format: 'umd',
+            name: 'speechFile',
+            sourcemap: false,
+            globals: {
+                "@speech/core": "speechCore",
+                "@speech/net": "speechNet"
+            }
 
-    },
+        },
+        {
+            file: './speech-file-module.js',
+            format: 'es',
+            name: 'speechFile',
+            sourcemap: false,
+            globals: {
+                "@speech/core": "speechCore",
+                "@speech/net": "speechNet"
+            }
+
+        },
+    ],
     preserveSymlinks: true,
     plugins: [
         typescript({
@@ -78,7 +91,7 @@ export default {
 
         json(),
 
-        uglify({
+        terser({
             output: {
                 beautify: readableSourceCode,
                 preamble: preambleText,

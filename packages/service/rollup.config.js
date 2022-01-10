@@ -4,7 +4,7 @@ import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 // SpeechFramework
 
@@ -23,7 +23,7 @@ console.log('');
 
 // Parameter fuer die Erzeugung der SpeechService.js Datei
 
-let readableSourceCode = true; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
+let readableSourceCode = false; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
 let preambleText =
 `/**
  * Speech-Service Bundle
@@ -57,17 +57,30 @@ export default {
         '@speech/core',
         '@speech/base'
     ],
-    output: {
-        file: './speech-service.js',
-        format: 'umd',
-        name: 'speechService',
-        sourcemap: false,
-        globals: {
-            "@speech/core": "speechCore",
-            "@speech/base": "speechBase"
-        }
+    output: [
+        {
+            file: './speech-service.js',
+            format: 'umd',
+            name: 'speechService',
+            sourcemap: false,
+            globals: {
+                "@speech/core": "speechCore",
+                "@speech/base": "speechBase"
+            }
 
-    },
+        },
+        {
+            file: './speech-service-module.js',
+            format: 'es',
+            name: 'speechService',
+            sourcemap: false,
+            globals: {
+                "@speech/core": "speechCore",
+                "@speech/base": "speechBase"
+            }
+
+        }
+    ],    
     preserveSymlinks: true,
     plugins: [
         typescript({
@@ -78,7 +91,7 @@ export default {
 
         json(),
 
-        uglify({
+        terser({
             output: {
                 beautify: readableSourceCode,
                 preamble: preambleText,

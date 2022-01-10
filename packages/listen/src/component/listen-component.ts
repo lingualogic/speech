@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * ListenComponent zur Verwaltung von ASR-Plugins. Sie erbt von der BaseComponent.
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 21.12.2021
  * Status: gruen
  *
  * @module listen/component
@@ -37,7 +37,7 @@ import { BaseComponent } from '@speech/base';
 
 import { ASR_DEFAULT_NAME } from './../asr/asr-const';
 import {
-    ASRInterface,
+    IASR,
     OnASRListenStartFunc,
     OnASRListenStopFunc,
     OnASRListenResultFunc,
@@ -50,9 +50,9 @@ import {
 import { LISTEN_API_VERSION, LISTEN_VERSION_STRING } from '../listen-version';
 import { LISTEN_TYPE_NAME, LISTEN_COMPONENT_NAME, LISTEN_DEFAULT_LANGUAGE, LISTEN_UNDEFINE_LANGUAGE, LISTEN_UNDEFINE_MODE } from '../listen-const';
 import { OnListenResultFunc, OnListenNoMatchFunc, OnListenStartFunc, OnListenStopFunc } from '../listen-function.type';
-import { ListenOptionInterface } from '../listen-option.interface';
+import { IListenOption } from '../listen-option.interface';
 import {
-    ListenComponentInterface,
+    IListenComponent,
 } from './listen-component.interface';
 
 
@@ -60,12 +60,12 @@ import {
  * ListenComponent Klasse
  */
 
-export class ListenComponent extends BaseComponent implements ListenComponentInterface {
+export class ListenComponent extends BaseComponent implements IListenComponent {
 
 
     // innere Plugins
 
-    private mASRPlugin: ASRInterface = null;
+    private mASRPlugin: IASR = null;
 
     // TODO: AudioRecorder muss noch eingebaut werden
     // mAudioRecorder: AudioRecorderInterface = null;
@@ -147,10 +147,10 @@ export class ListenComponent extends BaseComponent implements ListenComponentInt
      * Eintragen der lokalen Optionen
      *
      * @protected
-     * @param {ListenOptionInterface} aOption - optionale Parameter
+     * @param {IListenOption} aOption - optionale Parameter
      */
 
-    protected _setOption( aOption: ListenOptionInterface ): number {
+    protected _setOption( aOption: IListenOption ): number {
         // console.log('ListenComponent._setOption:', aOption);
         // pruefen auf vorhandene Options
         if ( !aOption ) {
@@ -189,14 +189,28 @@ export class ListenComponent extends BaseComponent implements ListenComponentInt
      * @returns {number} Fehlercode 0 oder -1
      */
 
-    protected _initAllPlugin(): number {
+    protected _initAllPlugin( aOption?: IListenOption ): number {
         // interne Plugins auslesen
 
         // TODO: AudioRecorder muss noch eingebaut werden
         // this.mAudioRecorder = this.findPlugin( AUDIORECORDER_PLUGIN_NAME ) as AudioRecorderInterface;
 
         // TODO: Hier muss die PluginGroup eingefuegt werden
-        this.mASRPlugin = this.findPlugin( ASR_DEFAULT_NAME ) as ASRInterface;
+        this.mASRPlugin = this.findPlugin( ASR_DEFAULT_NAME ) as IASR;
+
+        // ASR-Plugins dynamisch eintragen
+
+        if ( aOption && aOption.asrList ) {
+            // Schleife fuer alle ASRs in der Listen-ASEListe
+            // console.log('Listen._initAllPlugin:', aOption.asrList);
+            for ( const asrOption of aOption.asrList ) {
+                if ( asrOption.asrName && asrOption.asrClass ) {
+                    if ( this.mASRPlugin.insertASR( asrOption.asrName, asrOption.asrClass, asrOption) !== 0 ) {
+                        this.error( '_initAllPlugin', 'ASR wurd nicht eingetragen ' + asrOption.asrName );
+                    }
+                }
+            }
+        }
 
         // pruefen, ob ASR aktiv ist
 
@@ -204,6 +218,7 @@ export class ListenComponent extends BaseComponent implements ListenComponentInt
             // console.log('ListenComponent.init: ASRActiveFlag = ', this.mASRPlugin.isActive());
             this.mASRActiveFlag = this.mASRPlugin.isActive();
         }
+
         return 0;
     }
 
@@ -211,13 +226,23 @@ export class ListenComponent extends BaseComponent implements ListenComponentInt
     /**
      * Initialisierung der Listen-Komponente
      *
-     * @param {ListenOptionInterface} aOption - optionale Parameter { listenLanguage }
+     * @param {IListenOption} aOption - optionale Parameter { listenLanguage }
      *
      * @return {number} errorcode (0,-1)
      */
 
-    init( aOption?: ListenOptionInterface ): number {
-        return super.init( aOption );
+    init( aOption?: IListenOption ): number {
+        if (super.init( aOption ) !== 0 ) {
+            return -1;
+        }
+
+        // Default-ASR einstellen
+
+        if ( aOption && typeof aOption.asrDefault === 'string' ) {
+            this.setASR( aOption.asrDefault );
+        }
+
+        return 0;
     }
 
 
@@ -285,12 +310,12 @@ export class ListenComponent extends BaseComponent implements ListenComponentInt
     /**
      * Auf Defaultwerte zuruecksetzen
      *
-     * @param {ListenOptionInterface} aOption - optionale Parameter
+     * @param {IListenOption} aOption - optionale Parameter
      */
 
     // TODO: muss als Basisfunktion in Plugin aufgenommen werden
 
-    reset( aOption?: ListenOptionInterface ): number {
+    reset( aOption?: IListenOption ): number {
         return super.reset( aOption );
     }
 
@@ -388,7 +413,7 @@ export class ListenComponent extends BaseComponent implements ListenComponentInt
      */
 
     protected _onListenResult( aText: string, aFinalFlag?: boolean ): number {
-        // console.log('SpeechListen: onListenResult=', aText, aFinalFlag);
+        // console.log('Listen: onListenResult = ', aText, aFinalFlag);
         return this.mListenResultEvent.dispatch( aText );
     }
 
@@ -1115,6 +1140,9 @@ export class ListenComponent extends BaseComponent implements ListenComponentInt
         }
 
         if ( !this.isActive()) {
+            if ( this.isErrorOutput()) {
+                console.log('ListenComponent.start: Komponente ist nicht aktiv');
+            }
             return 0;
         }
 
@@ -1130,12 +1158,16 @@ export class ListenComponent extends BaseComponent implements ListenComponentInt
      */
 
     stop(): number {
-        // console.log('ListenComponent.stop');
+        // console.log('ListenComponent.stop: start');
 
         if ( !this.isActive()) {
+            if ( this.isErrorOutput()) {
+                console.log('ListenComponent.stop: no Active');
+            }
             return 0;
         }
         if ( !this.mASRPlugin ) {
+            // console.log('ListenComponent.stop: no ASRPlugin');
             this.error( 'stop', 'kein ASR vorhanden' );
             return -1;
         }

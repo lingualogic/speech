@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung einer Audio API Instanz.
  *
- * Version: 1.0
- * Datum:   23.08.2018
+ * Version: 2.0
+ * Datum:   28.06.2021
  *
  * @module audio
  * @author SB
@@ -12,7 +12,7 @@
 // audio
 
 import { AUDIO_PLUGIN_NAME, AUDIO_MOCK_NAME } from './audio-const';
-import { AudioInterface } from './audio.interface';
+import { IAudio } from './audio.interface';
 import { Audio } from './audio';
 
 
@@ -30,7 +30,10 @@ export class AudioFactory {
      * Konstruktor ist privat, es kann keine Instanz der Klasse erzeugt werden
      */
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     /**
@@ -38,12 +41,12 @@ export class AudioFactory {
      * zurueckgeben, einschließlich eines Bot-Mocks.
      *
      * @param {string} aName - Name des zu erzeugenden Bots
-     * @param {BotOptionInterface} aOption - optionale Parameter
+     * @param aOption - optionale Parameter
      *
-     * @return {BotInterface} Bot Instanz wird zurueckgegeben
+     * @return {IAudio} Bot Instanz wird zurueckgegeben
      */
 
-    static create( aName?: string, aOption?: any ): AudioInterface {
+    static create( aName?: string, aOption?: any ): IAudio {
         const name = aName || AUDIO_PLUGIN_NAME;
         // Mock zurueckgeben
         if ( name === AUDIO_MOCK_NAME ) {

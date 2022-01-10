@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * AudioPlayer Schnittstelle
  *
- * API-Version: 1.1
- * Datum:       24.03.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 01.06.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module audio/player
@@ -14,7 +14,7 @@
 
 // core
 
-import { PluginInterface } from '@speech/core';
+import { IPlugin } from '@speech/core';
 
 
 // Funktionen
@@ -29,7 +29,7 @@ export type OnAudioStartFunc = () => number;
 export type OnAudioStopFunc = () => number;
 export type OnAudioUnlockFunc = (aState: string) => number;
 
-export interface AudioPlayerInterface extends PluginInterface {
+export interface IAudioPlayer extends IPlugin {
 
     // Events
 

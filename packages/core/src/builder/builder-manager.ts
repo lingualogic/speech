@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Verwaltet alle Builder des Systems. Ist eine statische Klasse.
  *
- * Letzte Aenderung: 24.08.2018
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/builder
@@ -22,7 +22,7 @@ import { ErrorBase } from './../error/error-base';
 // builder
 
 import { BuilderList } from './builder-list';
-import { BuilderInterface } from './builder.interface';
+import { IBuilder } from './builder.interface';
 import { Builder } from './builder';
 
 
@@ -48,7 +48,10 @@ export class BuilderManager {
 
     // statische Klasse, keine Instanz erzeugbar !
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     // Fehler-Funktionen
@@ -98,10 +101,10 @@ export class BuilderManager {
      * @param {string } aBuilderName - Name des Builders
      * @param {BuilderClass} [aBuilderClass] - Klasse des Builders
      *
-     * @return {BuilderInterface} builder - gibt ein Objekt von Builder zurueck oder null
+     * @return {IBuilder} builder - gibt ein Objekt von Builder zurueck oder null
      */
 
-    static get( aBuilderName: string, aBuilderClass?: typeof Builder ): BuilderInterface {
+    static get( aBuilderName: string, aBuilderClass?: typeof Builder ): IBuilder {
         if ( !aBuilderName ) {
             BuilderManager.mErrorBase.error( 'get', 'kein Buildername uebergeben' );
             return null;
@@ -138,10 +141,10 @@ export class BuilderManager {
      *
      * @param {string} aBuilderName - Name des Builders
      *
-     * @return {BuilderInterface} builder - gibt ein Objekt von Builder zurueck oder null
+     * @return {IBuilder} builder - gibt ein Objekt von Builder zurueck oder null
      */
 
-    static find( aBuilderName ): BuilderInterface {
+    static find( aBuilderName ): IBuilder {
         const builder = BuilderManager.mBuilderList.find( aBuilderName );
         if ( !builder ) {
             return null;
@@ -154,12 +157,12 @@ export class BuilderManager {
      * Fuegt einen Builder in den BuilderManager ein
      *
      * @param {string} aBuilderName - Name des Builders
-     * @param {BuilderInterface} aBuilder - Instanz des Builders
+     * @param {IBuilder} aBuilder - Instanz des Builders
      *
      * @return {number} errorCode(0,-1)
      */
 
-    static insert( aBuilderName: string, aBuilder: BuilderInterface ): number {
+    static insert( aBuilderName: string, aBuilder: IBuilder ): number {
         return BuilderManager.mBuilderList.insert( aBuilderName, aBuilder);
     }
 

@@ -2,7 +2,7 @@
  * Port Basiskomponente, von der alle Ports abgeleitet sind.
  * Ports sind Verbindungskomponenten zu externen Cloud-Diensten.
  *
- * Letzte Aenderung: 15.12.2018
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/port
@@ -25,7 +25,7 @@ import { ErrorBase } from '../error/error-base';
 
 import { EventFunc } from './../event/event-function.type';
 import { EventFunctionList } from './../event/event-function-list';
-import { EventDataInterface } from './../event/event-data.interface';
+import { IEventData } from './../event/event-data.interface';
 
 
 // port
@@ -40,7 +40,7 @@ import {
     PORT_ERROR_EVENT
 } from './port-event-const';
 import {
-    PortInterface,
+    IPort,
     PortEventFunc
 } from './port.interface';
 import { PortManager } from './port-manager';
@@ -50,7 +50,7 @@ import { PortManager } from './port-manager';
  * Definiert die Basisklasse aller Ports
  */
 
-export class Port extends ErrorBase implements PortInterface {
+export class Port extends ErrorBase implements IPort {
 
     protected mPortName = '';
     protected mPluginName = '';
@@ -315,7 +315,7 @@ export class Port extends ErrorBase implements PortInterface {
 
     protected _onInit( aResult: number ): number {
         // console.log('Port._onInit:', aResult);
-        const eventData: EventDataInterface = {
+        const eventData: IEventData = {
             event: PORT_INIT_EVENT,
             type: '',
             source: this.getName(),
@@ -336,7 +336,7 @@ export class Port extends ErrorBase implements PortInterface {
 
     protected _onOpen(): number {
         // console.log('Port._onOpen');
-        const eventData: EventDataInterface = {
+        const eventData: IEventData = {
             event: PORT_OPEN_EVENT,
             type: '',
             source: this.getName(),
@@ -357,7 +357,7 @@ export class Port extends ErrorBase implements PortInterface {
 
     protected _onClose(): number {
         // console.log('Port._onClose:');
-        const eventData: EventDataInterface = {
+        const eventData: IEventData = {
             event: PORT_CLOSE_EVENT,
             type: '',
             source: this.getName(),
@@ -381,7 +381,7 @@ export class Port extends ErrorBase implements PortInterface {
 
     protected _onStart( aDest = '', aType = '' ): number {
         // console.log('Port._onStart:', aType);
-        const eventData: EventDataInterface = {
+        const eventData: IEventData = {
             event: PORT_START_EVENT,
             type: aType,
             source: this.getName(),
@@ -408,7 +408,7 @@ export class Port extends ErrorBase implements PortInterface {
 
     protected _onStop( aDest = '', aType = '' ): number {
         // console.log('Port._onStop:', aDest, aType);
-        const eventData: EventDataInterface = {
+        const eventData: IEventData = {
             event: PORT_STOP_EVENT,
             type: aType,
             source: this.getName(),
@@ -436,7 +436,7 @@ export class Port extends ErrorBase implements PortInterface {
 
     protected _onResult( aResultData: any, aDest = '', aType = '' ): number {
         // console.log('Port._onResult:', aType);
-        const eventData: EventDataInterface = {
+        const eventData: IEventData = {
             event: PORT_RESULT_EVENT,
             type: aType,
             source: this.getName(),
@@ -471,7 +471,7 @@ export class Port extends ErrorBase implements PortInterface {
         // TODO: Fehlerbehandlung sollte erst mal kompatibel zu allen anderen sein
         /**** wird erst spaeter eingebaut
         // Fehlerevent erzeugen
-        const eventData: EventDataInterface = {
+        const eventData: IEventData = {
             event: PORT_ERROR_EVENT,
             type: aType,
             source: this.getName(),

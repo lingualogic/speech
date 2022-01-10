@@ -2,8 +2,8 @@
  * SpeakService Konfiguration, wird in SpeakService im Konstruktor verwendet.
  * Werte koennen hier ueberschrieben werden.
  *
- * API-Version: 1.0
- * Datum:       24.10.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
  * @module speak
  * @author SB
@@ -12,14 +12,14 @@
 
 // speak
 
-import { SpeakOptionInterface } from './speak-option.interface';
+import { ISpeakOption } from './speak-option.interface';
 
 
 /** @export
  * SpeakService Konfiguration, um Speak anzupassen
  */
 
-export const SpeakServiceConfig: SpeakOptionInterface = {
+export const SpeakServiceConfig: ISpeakOption = {
     /** ein/ausschalten der Speak-Komponente */
     activeFlag: true,
     /** setzt die Sprache fuer die Sprachausgabe ( 'de', 'en' )*/

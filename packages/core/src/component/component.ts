@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Komponente als semantische Einheit fuer Plugins und Klassen.
  *
- * Letzte Aenderung: 14.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/component
@@ -28,7 +28,7 @@ import { EventFunctionList } from '../event/event-function-list';
 
 // message
 
-import { MessageInterface } from './../message/message.interface';
+import { IMessage } from './../message/message.interface';
 
 
 // plugin
@@ -38,7 +38,7 @@ import { PluginGroup } from '../plugin/plugin-group';
 
 // component
 
-import { ComponentInterface, ComponentSendMessageFunc, ComponentHandleMessageFunc } from './component.interface';
+import { IComponent, ComponentSendMessageFunc, ComponentHandleMessageFunc } from './component.interface';
 import { ComponentManager } from './component-manager';
 
 
@@ -46,7 +46,7 @@ import { ComponentManager } from './component-manager';
  * Definiert die Basisklasse aller Komponenten
  */
 
-export class Component extends PluginGroup implements ComponentInterface {
+export class Component extends PluginGroup implements IComponent {
 
 
     // Nachrichtenfunktion zum Versenden von Nachrichten
@@ -278,11 +278,11 @@ export class Component extends PluginGroup implements ComponentInterface {
     /**
      * Senden einer Nachricht
      *
-     * @param {MessageInterface} aMessage - Nachrichtenobjet
+     * @param {IMessage} aMessage - Nachrichtenobjet
      * @return {number}
      */
 
-    sendMessage( aMessage: MessageInterface ): number {
+    sendMessage( aMessage: IMessage ): number {
         if ( typeof this.mSendMessageFunc !== 'function' ) {
             return -1;
         }
@@ -293,12 +293,12 @@ export class Component extends PluginGroup implements ComponentInterface {
     /**
      * Behandelt alle empfangenen Nachrichten
      *
-     * @param {MessageInterface} aMessage - Nachrichtenpaket
+     * @param {IMessage} aMessage - Nachrichtenpaket
      *
      * @return Rueckgabe, ob Nachricht verarbeitet wurde (true) oder nicht (false)
      */
 
-    handleMessage( aMessage: MessageInterface ): boolean {
+    handleMessage( aMessage: IMessage ): boolean {
         try {
             let result = 0;
             let messageConsumeFlag = true;
@@ -335,7 +335,7 @@ export class Component extends PluginGroup implements ComponentInterface {
      */
 
     getHandleMessageFunc(): ComponentHandleMessageFunc {
-        return (aMessage: MessageInterface) => this.handleMessage( aMessage );
+        return (aMessage: IMessage) => this.handleMessage( aMessage );
     }
 
 

@@ -2,7 +2,7 @@
  * Speak Komponente, dient zur Sprachausgabe von Texten oder Audiodateien
  * ueber ein TTS-Plugin oder ein AudioPlayer-Plugin.
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 21.12.2021
  * Status: gelb
  *
  * @module speak/component
@@ -22,13 +22,13 @@ import { BaseComponent } from '@speech/base';
 
 // audio
 
-import { AUDIOPLAYER_PLUGIN_NAME, AUDIO_DEFAULT_FORMAT, AudioPlayerInterface } from '@speech/audio';
+import { AUDIOPLAYER_PLUGIN_NAME, AUDIO_DEFAULT_FORMAT, IAudioPlayer } from '@speech/audio';
 
 
 // tts
 
 import { TTS_DEFAULT_NAME } from '../tts/tts-const';
-import { TTSInterface } from '../tts/tts.interface';
+import { ITTS } from '../tts/tts.interface';
 
 
 // speak
@@ -45,21 +45,21 @@ import {
 } from '../speak-const';
 import { OnSpeakAudioUnlockFunc, OnAudioUnlockFunc } from '../speak-function.type';
 import { SPEAK_AUDIO_STOPSELECTOR, SPEAK_TTS_STOPSELECTOR } from './speak-component-const';
-import { SpeakOptionInterface } from '../speak-option.interface';
-import { SpeakComponentInterface } from './speak-component.interface';
+import { ISpeakOption } from '../speak-option.interface';
+import { ISpeakComponent } from './speak-component.interface';
 
 
 /**
  * Speak Klasse
  */
 
-export class SpeakComponent extends BaseComponent implements SpeakComponentInterface {
+export class SpeakComponent extends BaseComponent implements ISpeakComponent {
 
 
     // innere Plugins
 
-    private mTTSPlugin: TTSInterface = null;
-    private mAudioPlayer: AudioPlayerInterface = null;
+    private mTTSPlugin: ITTS = null;
+    private mAudioPlayer: IAudioPlayer = null;
 
     // Events
 
@@ -134,10 +134,10 @@ export class SpeakComponent extends BaseComponent implements SpeakComponentInter
      * Eintragen der lokalen Optionen
      *
      * @protected
-     * @param {SpeakOptionInterface} aOption - optionale Parameter
+     * @param {ISpeakOption} aOption - optionale Parameter
      */
 
-    protected _setOption( aOption: SpeakOptionInterface ): number {
+    protected _setOption( aOption: ISpeakOption ): number {
         // pruefen auf vorhandene Options
         if ( !aOption ) {
             return -1;
@@ -176,8 +176,8 @@ export class SpeakComponent extends BaseComponent implements SpeakComponentInter
 
         // interne Plugins auslesen
 
-        this.mTTSPlugin = this.findPlugin( TTS_DEFAULT_NAME ) as TTSInterface;
-        this.mAudioPlayer = this.findPlugin( AUDIOPLAYER_PLUGIN_NAME ) as AudioPlayerInterface;
+        this.mTTSPlugin = this.findPlugin( TTS_DEFAULT_NAME ) as ITTS;
+        this.mAudioPlayer = this.findPlugin( AUDIOPLAYER_PLUGIN_NAME ) as IAudioPlayer;
 
         // pruefen, ob TTS aktiv ist
 
@@ -212,7 +212,7 @@ export class SpeakComponent extends BaseComponent implements SpeakComponentInter
      * @return {number} errorcode (0,-1)
      */
 
-    init( aOption?: SpeakOptionInterface ): number {
+    init( aOption?: ISpeakOption ): number {
         // console.log('SpeakComponent.init:', aOption);
         return super.init( aOption );
     }
@@ -288,10 +288,10 @@ export class SpeakComponent extends BaseComponent implements SpeakComponentInter
     /**
      * Auf Defaultwerte zuruecksetzen
      *
-     * @param {SpeakOptionInterface} aOption - optionale Parameter
+     * @param {ISpeakOption} aOption - optionale Parameter
      */
 
-    reset( aOption?: SpeakOptionInterface ): number {
+    reset( aOption?: ISpeakOption ): number {
         return super.reset( aOption );
     }
 
@@ -833,11 +833,13 @@ export class SpeakComponent extends BaseComponent implements SpeakComponentInter
     // TODO: Problem des unterschiedlichen Verhaltens wenn Lock oder Unlock Audio muss untersucht werden
 
     start(): number {
-        console.log('SpeakComponent.start: TTS = ', this.getTTS(), ' Sprache = ', this.getLanguage(), ' Stimme = ', this.getVoice());
+        // console.log('SpeakComponent.start: TTS = ', this.getTTS(), ' Sprache = ', this.getLanguage(), ' Stimme = ', this.getVoice());
 
         // pruefen auf externe Audiokomponente
         if ( !this.isActive()) {
-            console.log('SpeakComponent.start: Komponente ist nicht aktiv');
+            if ( this.isErrorOutput()) {
+                console.log('SpeakComponent.start: Komponente ist nicht aktiv');
+            }
             return 0;
         }
         // pruefen auf bereits gestarteten Speak
@@ -847,8 +849,9 @@ export class SpeakComponent extends BaseComponent implements SpeakComponentInter
         }
         // pruefen auf Audio oder TTS
         if ( this.mAudioFlag ) {
+            // TODO: unlockAudio kann entfernt werden, AudioPlayer entsperrt sich automatisch!
             // Entsperren von Audio
-            this.unlockAudio();
+            // this.unlockAudio();
             return this._startSpeakAudio();
         }
         // fehlende TTS wird zuerst abgefrage, um Fehler zu erzeugen
@@ -900,7 +903,7 @@ export class SpeakComponent extends BaseComponent implements SpeakComponentInter
      */
 
     protected _startSpeakTTS(): number {
-        console.log('SpeakComponent._startSpeakTTS');
+        // console.log('SpeakComponent._startSpeakTTS');
         this.mSpeakStopSelector = '';
         // pruefen auf Server-Konponente
         if ( this.mTTSFeatureFlag ) {

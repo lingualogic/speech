@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Komponenten Schnittstelle
  *
- * Letzte Aenderung: 14.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/component
@@ -16,25 +16,25 @@ import { EventFunc } from '../event/event-function.type';
 
 // message
 
-import { MessageInterface } from './../message/message.interface';
+import { IMessage } from './../message/message.interface';
 
 
 // plugin
 
-import { PluginGroupInterface } from '../plugin/plugin-group.interface';
+import { IPluginGroup } from '../plugin/plugin-group.interface';
 
 
 // Funktionen
 
-export type ComponentSendMessageFunc = ( aMessage: MessageInterface ) => number;
-export type ComponentHandleMessageFunc = ( aMessage: MessageInterface ) => boolean;
+export type ComponentSendMessageFunc = ( aMessage: IMessage ) => number;
+export type ComponentHandleMessageFunc = ( aMessage: IMessage ) => boolean;
 
 
 /**
  * Definiert die Schnittstelle fuer eine Komponente
  */
 
-export interface ComponentInterface extends PluginGroupInterface {
+export interface IComponent extends IPluginGroup {
 
 
     // Component-Funktionen
@@ -57,18 +57,18 @@ export interface ComponentInterface extends PluginGroupInterface {
     setSendMessageFunc( aSendMessageFunc: ComponentSendMessageFunc ): number;
 
 
-    sendMessage( aMessage: MessageInterface ): number;
+    sendMessage( aMessage: IMessage ): number;
 
 
     /**
      * Nachrichten verarbeiten
      *
-     * @param {MessageInterface} aMessage - zu verarbeitende Nachricht
+     * @param {IMessage} aMessage - zu verarbeitende Nachricht
      *
      * @return Rueckgabe, ob Nachricht verarbeitet wurde (true) oder nicht (false)
      */
 
-    handleMessage( aMessage: MessageInterface ): boolean;
+    handleMessage( aMessage: IMessage ): boolean;
 
 
     /**

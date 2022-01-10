@@ -127,7 +127,7 @@ export class AudioResampler {
             }\
         }\
         else {\
-            throw(new Error(\"Buffer was of incorrect sample length.\"));\
+            throw(new Error("Buffer was of incorrect sample length."));\
         }';
         this.interpolate = Function('buffer', toCompile);
     }

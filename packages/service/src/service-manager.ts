@@ -36,6 +36,15 @@ export class ServiceManager {
 
     private static mServiceList = new ServiceList();
 
+
+    // static Class, no Instance
+
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
+
+    
     /**
      * ServiceManager clear
      */
@@ -91,6 +100,12 @@ export class ServiceManager {
             }
             if ( typeof aServiceOption.listenLanguage === 'string' ) {
                 listenConfig.listenLanguage = aServiceOption.listenLanguage;
+            }
+            if ( aServiceOption.asrList ) {
+                listenConfig.asrList = aServiceOption.asrList;
+            }
+            if ( typeof aServiceOption.asrDefault === 'string' ) {
+                listenConfig.asrDefault = aServiceOption.asrDefault;
             }
             if ( typeof aServiceOption.errorOutputFlag === 'boolean' ) {
                 listenConfig.errorOutputFlag = aServiceOption.errorOutputFlag;
@@ -235,7 +250,7 @@ export class ServiceManager {
      * @return get Service or null
      */
 
-    static get( aServiceName: string, aServiceClass: any, aServiceOption = {}): any {
+    static get( aServiceName: string, aServiceClass?: any, aServiceOption = {}): any {
         // console.log('ServiceManager.get: ', aServiceName, aServiceClass);
         if ( !aServiceName ) {
             console.log( 'ServiceManager.get: kein Servicename uebergeben' );
@@ -309,9 +324,5 @@ export class ServiceManager {
         }
         return ServiceManager.mServiceList.insert( aService.getName(), aService );
     }
-
-    // static Class, no Instance
-
-    private constructor() {}
 
 }

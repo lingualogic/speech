@@ -8,6 +8,4 @@ Die Dokumentation des Speech Service SDK:
 
 ## [Referenz](./api/index.html)
 
-## [Cloud-Dienste](./packages/CloudList.md)
-
-## [Roadmap](./roadmap/Roadmap-2021.md)
+## [Roadmap](./roadmap/Roadmap-2022.md)

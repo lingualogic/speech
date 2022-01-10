@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Oeffentliche Speak Schnittstelle als Teil des Speak-API
  *
- * API-Version: 1.4
- * Datum:       15.10.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module speak
@@ -14,7 +14,7 @@
 
 // service
 
-import { ServiceInterface, EventEmitter } from '@speech/service';
+import { IService, EventEmitter } from '@speech/service';
 
 
 // Global API
@@ -24,7 +24,7 @@ import { ServiceInterface, EventEmitter } from '@speech/service';
  * Speak Schnittstelle
  */
 
-export interface SpeakServiceInterface extends ServiceInterface {
+export interface ISpeakService extends IService {
 
     // Attribute
 

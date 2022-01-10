@@ -2,11 +2,12 @@
  * SystemManager als oberster Manager des gesamten Systems
  * SystemManager ist eine statische Klasse
  *
- * Letzte Aenderung: 15.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/system
  * @author SB
+ * @deprecated
  */
 
 
@@ -18,7 +19,7 @@ import { SpeechErrorFunc } from '../interface/speech-function.type';
 // builder
 
 import { BuilderManager } from '../builder/builder-manager';
-import { BuilderInterface } from '../builder/builder.interface';
+import { IBuilder } from '../builder/builder.interface';
 import { Builder } from '../builder/builder';
 
 
@@ -39,13 +40,18 @@ import { PluginManager } from '../plugin/plugin-manager';
 
 /** @export
  * Statische SystemManager Klasse
+ *
+ * @deprecated
  */
 
 export class SystemManager {
 
     // statische Klasse, keine Instanz erzeugbar !
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     // Fehler-Funktionen
@@ -88,12 +94,12 @@ export class SystemManager {
      * Fuegt einen Builder in den BuilderManager ein
      *
      * @param {string} aBuilderName - Name des Builders
-     * @param {BuilderInterface} aBuilder - Instanz des Builders
+     * @param {IBuilder} aBuilder - Instanz des Builders
      *
      * @return {number} errorCode(0,-1)
      */
 
-    static insertBuilder( aBuilderName: string, aBuilder: BuilderInterface ): number {
+    static insertBuilder( aBuilderName: string, aBuilder: IBuilder ): number {
         return BuilderManager.insert( aBuilderName, aBuilder );
     }
 
@@ -106,10 +112,10 @@ export class SystemManager {
      * @param {string} aBuilderName - Name des Builders
      * @param {typeof Builder} aBuilderClass - Builder Klasse
      *
-     * @return {BuilderInterface} builder - Rueckgabe der Instanz des Builders oder null
+     * @return {IBuilder} builder - Rueckgabe der Instanz des Builders oder null
      */
 
-    static getBuilder( aBuilderName: string, aBuilderClass?: typeof Builder): BuilderInterface {
+    static getBuilder( aBuilderName: string, aBuilderClass?: typeof Builder): IBuilder {
         return BuilderManager.get( aBuilderName, aBuilderClass );
     }
 
@@ -120,10 +126,10 @@ export class SystemManager {
      * @static
      * @param {string} aBuilderName - Name des Builders
      *
-     * @return {BuilderInterface} builder - Rueckgabe der Instanz des Builders oder null
+     * @return {IBuilder} builder - Rueckgabe der Instanz des Builders oder null
      */
 
-    static findBuilder( aBuilderName: string ): BuilderInterface {
+    static findBuilder( aBuilderName: string ): IBuilder {
         return BuilderManager.find( aBuilderName );
     }
 

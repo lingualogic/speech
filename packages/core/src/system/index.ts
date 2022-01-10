@@ -1,12 +1,13 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer System
  *
- * Version: 1.0
- * Datum:   01.12.2018
+ * Version: 2.0
+ * Datum:   24.10.2021
  *
  * Definiert das gesamte System-API:
  *
- *      SystemManager  - Manager fuer BuilderManager, FactoryManager und PluginManager
+ *      SystemManager(deprecated)  - Manager fuer BuilderManager, FactoryManager und PluginManager
+ *      SpeechManager  - Manager fuer alle Subsysteme von Speech
  * 
  * @module core/system
  * @author SB
@@ -17,3 +18,4 @@
 
 
 export { SystemManager } from './system-manager';
+export { SpeechManager } from './speech-manager';

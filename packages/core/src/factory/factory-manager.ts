@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Verwaltet alle Factories des Systems. Ist eine statische Klasse.
  *
- * Letzte Aenderung: 04.10.2018
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/factory
@@ -22,7 +22,7 @@ import { ErrorBase } from '../error/error-base';
 // factory
 
 import { FactoryList } from './factory-list';
-import { FactoryInterface } from './factory.interface';
+import { IFactory } from './factory.interface';
 import { Factory } from './factory';
 
 
@@ -48,7 +48,10 @@ export class FactoryManager {
 
     // statische Klasse, keine Instanz erzeugbar !
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     // Fehler-Funktionen
@@ -97,10 +100,10 @@ export class FactoryManager {
      * @param {string} aFactoryName - Name der Factory
      * @param {FactoryClass} [aFactoryClass] - Klasse der Factory
      *
-     * @return {FactoryInterface} factory - gibt ein Objekt von Factory zurueck oder null
+     * @return {IFactory} factory - gibt ein Objekt von Factory zurueck oder null
      */
 
-    static get( aFactoryName: string, aFactoryClass?: typeof Factory ): FactoryInterface {
+    static get( aFactoryName: string, aFactoryClass?: typeof Factory ): IFactory {
         if ( !aFactoryName ) {
             this.mErrorBase.error( 'get', 'kein FactoryName uebergeben' );
             return null;
@@ -138,10 +141,10 @@ export class FactoryManager {
      * Zurueckgeben einer Factory
      *
      * @param {string} aFactoryName - Name der Factory
-     * @returns {FactoryInterface} - Factory Instanz
+     * @returns {IFactory} - Factory Instanz
      */
 
-    static find( aFactoryName: string ): FactoryInterface {
+    static find( aFactoryName: string ): IFactory {
         const factory = FactoryManager.mFactoryList.find( aFactoryName );
         if ( !factory ) {
             return null;
@@ -154,12 +157,12 @@ export class FactoryManager {
      * Eintragen einer Factory
      *
      * @param {string} aFactoryName - Name der Factory
-     * @param {FactoryInterface} aFactory - Factory Instanz
+     * @param {IFactory} aFactory - Factory Instanz
      *
      * @return {number} Fehlercode 0 oder -1
      */
 
-    static insert( aFactoryName: string, aFactory: FactoryInterface ): number {
+    static insert( aFactoryName: string, aFactory: IFactory ): number {
         // console.log('FactoryManager.insert:', aFactoryName, aFactory);
         return FactoryManager.mFactoryList.insert( aFactoryName, aFactory );
     }

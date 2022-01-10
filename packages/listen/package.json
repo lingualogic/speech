@@ -1,22 +1,24 @@
 {
   "name": "@speech/listen",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Listen Component for Speech-Framework",
-  "author": "Stefan <stefan@lingualogic.de>",
+  "author": "LinguaLogic Team",
   "homepage": "https://lingualogic.de",
   "license": "MIT",
   "main": "lib/index.js",
+  "module": "lib/speech-listen-module.js",
   "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib"
   },
   "files": [
     "lib/index.js",
+    "lib/speech-listen-module.js",
     "lib/**/*.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "git://lingualogic/web/monorepo",
+    "url": "https://github.com/lingualogic/speech",
     "directory": "packages/listen"
   },
   "publishConfig": {
@@ -25,18 +27,18 @@
   "scripts": {
     "tsc": "tsc",
     "build": "npm run compile",
-    "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
+    "clean": "gulp clean",
     "compile": "tsc -b tsconfig.build.json",
-    "bundle": "rollup -c ./rollup.config.js && cp speech-listen.js ./lib/index.js && cp speech-listen.js ./../../dist/deploy",
-    "pack": "npm pack && cp speech-listen-0.6.0.tgz ./../../dist",
-    "link": "npm link && cd ../.. && npm link @speech/listen",
+    "bundle": "npx rollup -c ./rollup.config.js && cp speech-listen.js ./lib/index.js && cp speech-listen.js ./../../dist/deploy",
+    "bundle:module": "cp speech-listen-module.js ./lib && cp speech-listen-module.js ./../../dist/module",
+    "pack": "npm pack && cp speech-listen-0.6.1.tgz ./../../dist",
+    "link": "npm link",
+    "linkGlobal": "cd ../.. && npm link @speech/listen --legacy-peer-deps",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "peerDependencies": {
-    "@speech/core": "0.6.0",
-    "@speech/common": "0.6.0",
-    "@speech/cloud": "0.6.0",
-    "@speech/base": "0.6.0",
-    "@speech/service": "0.6.0"
+    "@speech/core": "0.6.1",
+    "@speech/base": "0.6.1",
+    "@speech/service": "0.6.1"
   }
 }

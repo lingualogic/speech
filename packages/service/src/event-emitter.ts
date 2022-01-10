@@ -47,6 +47,7 @@ export class EventUnsubscribe {
  * Klasse EventEmitter zum Versenden von Events an eingetragene Event-Funktionen
  */
 
+/* typescript-eslint-disable no-unnecessary-type-constraint */
 export class EventEmitter<T extends any> {
 
 

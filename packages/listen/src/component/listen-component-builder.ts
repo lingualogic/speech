@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * ListenComponentBuilder fuer lokale ListenComponent
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module listen/component
@@ -11,20 +11,20 @@
 
 // core
 
-import { Builder, BuilderConfigInterface } from '@speech/core';
+import { Builder, IBuilderConfig } from '@speech/core';
 
 
 // asr
 
 import { ASR_FACTORY_NAME, ASR_DEFAULT_NAME } from '../asr/asr-const';
 import { ASRFactory } from '../asr/asr-factory';
-import { ASRInterface } from '../asr/asr.interface';
+import { IASR } from '../asr/asr.interface';
 
 
 // listen
 
 import { LISTEN_TYPE_NAME, LISTEN_COMPONENTBUILDER_NAME, LISTEN_COMPONENTFACTORY_NAME, LISTEN_COMPONENT_NAME } from '../listen-const';
-import { ListenComponentInterface } from './listen-component.interface';
+import { IListenComponent } from './listen-component.interface';
 import { ListenComponentFactory } from './listen-component-factory';
 
 
@@ -67,18 +67,18 @@ export class ListenComponentBuilder extends Builder {
      * @return Rueckgabe der erzeugten Komponente oder null
      */
 
-    build(  aConfig?: BuilderConfigInterface ): ListenComponentInterface {
+    build(  aConfig?: IBuilderConfig ): IListenComponent {
         // console.log('ListenComponentBuilder.build: start');
         // pruefen, ob Komponente schon vorhanden ist
         const componentName = this._getComponentName( aConfig ) || LISTEN_COMPONENT_NAME;
-        let listen = this._findComponent( componentName ) as ListenComponentInterface;
+        let listen = this._findComponent( componentName ) as IListenComponent;
         if ( listen ) {
             return listen;
         }
         // neue Komponente erzeugen
         try {
             listen = this._buildComponent( aConfig );
-            const asr = this._getPlugin( ASR_DEFAULT_NAME, ASR_DEFAULT_NAME, ASR_FACTORY_NAME, ASRFactory ) as ASRInterface;
+            const asr = this._getPlugin( ASR_DEFAULT_NAME, ASR_DEFAULT_NAME, ASR_FACTORY_NAME, ASRFactory ) as IASR;
             if ( this._binder( listen, asr ) !== 0 ) {
                 this.error( 'build', 'Komponenten nicht verbunden' );
                 return null;
@@ -100,10 +100,10 @@ export class ListenComponentBuilder extends Builder {
      * @return Rueckgabe der Komponente
      */
 
-    protected _buildComponent( aConfig: BuilderConfigInterface ): ListenComponentInterface {
+    protected _buildComponent( aConfig: IBuilderConfig ): IListenComponent {
         const componentName = this._getComponentName( aConfig ) || LISTEN_COMPONENT_NAME;
         const componentClass = this._getComponentClass( aConfig ) || LISTEN_COMPONENT_NAME;
-        return this._getPlugin( componentName, componentClass, LISTEN_COMPONENTFACTORY_NAME, ListenComponentFactory ) as ListenComponentInterface;
+        return this._getPlugin( componentName, componentClass, LISTEN_COMPONENTFACTORY_NAME, ListenComponentFactory ) as IListenComponent;
     }
 
 
@@ -111,13 +111,13 @@ export class ListenComponentBuilder extends Builder {
      * Verbindert die Komponenten und Plugins miteinander
      *
      * @private
-     * @param {ListenInterface} aListen - Listen Komponente
-     * @param {ASRInterface} aASR - ASR Plugin
+     * @param {IListen} aListen - Listen Komponente
+     * @param {IASR} aASR - ASR Plugin
      *
      * @return {number} errorCode(0,-1)
      */
 
-    protected _binder( aListen: ListenComponentInterface, aASR: ASRInterface ): number {
+    protected _binder( aListen: IListenComponent, aASR: IASR ): number {
         // console.log('ListenComponentBuilder._binder');
         if ( !aListen ) {
             this.error( '_binder', 'Keine Listen-Komponente vorhanden' );

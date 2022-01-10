@@ -2,7 +2,7 @@
  * Hier wird die Google-Spracherkennung implementiert. Ist GooglePort nicht vorhanden, wird
  * die Komponente auf deaktiviert versetzt.
  *
- * Letzte Aenderung: 10.07.2020
+ * Letzte Aenderung: 15.10.2021
  * Status: rot
  *
  * @module listen/asr
@@ -10,9 +10,9 @@
  */
 
 
-// cloud
+// core
 
-import { CLOUD_GOOGLE_PORT } from '@speech/cloud';
+import { CLOUD_GOOGLE_PORT } from '@speech/core';
 
 
 // asr
@@ -36,7 +36,8 @@ export class ASRGoogle extends ASRPort {
      */
 
     constructor( aPluginName?: string, aRegisterFlag = true ) {
-        super( CLOUD_GOOGLE_PORT, aPluginName || ASR_GOOGLE_NAME, aRegisterFlag );
+        super( aPluginName || ASR_GOOGLE_NAME, aRegisterFlag );
+        this.setCloudPortName( CLOUD_GOOGLE_PORT );
     }
 
 

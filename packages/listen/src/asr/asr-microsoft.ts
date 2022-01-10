@@ -2,7 +2,7 @@
  * Hier wird die Microsoft-Spracherkennung implementiert. Ist MicrosoftPort nicht vorhanden, wird
  * die Komponente auf deaktiviert versetzt.
  *
- * Letzte Aenderung: 25.07.2020
+ * Letzte Aenderung: 15.10.2021
  * Status: rot
  *
  * @module listen/asr
@@ -10,9 +10,9 @@
  */
 
 
-// cloud
+// core
 
-import { CLOUD_MICROSOFT_PORT } from '@speech/cloud';
+import { CLOUD_MICROSOFT_PORT } from '@speech/core';
 
 
 // asr
@@ -36,7 +36,8 @@ export class ASRMicrosoft extends ASRPort {
      */
 
     constructor( aPluginName?: string, aRegisterFlag = true ) {
-        super( CLOUD_MICROSOFT_PORT, aPluginName || ASR_MICROSOFT_NAME, aRegisterFlag );
+        super( aPluginName || ASR_MICROSOFT_NAME, aRegisterFlag );
+        this.setCloudPortName( CLOUD_MICROSOFT_PORT );
     }
 
 

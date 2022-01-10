@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Plugin Fabrik zur Erzeugung von Plugins
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/plugin
@@ -16,8 +16,8 @@ import { Factory } from './../factory/factory';
 
 // plugin
 
-import { PluginFactoryInterface } from './plugin-factory.interface';
-import { PluginInterface } from './plugin.interface';
+import { IPluginFactory } from './plugin-factory.interface';
+import { IPlugin } from './plugin.interface';
 import { Plugin } from './plugin';
 
 
@@ -26,10 +26,10 @@ import { Plugin } from './plugin';
  *
  * @export
  * @class PluginFactory
- * @implements {PluginFactoryInterface}
+ * @implements {IPluginFactory}
  */
 
-export class PluginFactory extends Factory implements PluginFactoryInterface {
+export class PluginFactory extends Factory implements IPluginFactory {
 
     /**
      * Creates an instance of PluginFactory.
@@ -60,7 +60,7 @@ export class PluginFactory extends Factory implements PluginFactoryInterface {
     // Plugin-Funktionen
 
 
-    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): PluginInterface {
+    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): IPlugin {
         return new Plugin( aPluginName, aRegisterFlag );
     }
 
@@ -72,10 +72,10 @@ export class PluginFactory extends Factory implements PluginFactoryInterface {
      * @param [aPluginClass] - Klassen-Name des Plugins
      * @param [aRegisterFlag] - legt fest, ob Plugin in PluginManager eingetragen wird
      *
-     * @return {PluginInterface} plugin - Instanz des Plugins
+     * @return {IPlugin} plugin - Instanz des Plugins
      */
 
-    create( aPluginName = '', aPluginClass = '', aRegisterFlag = true ): PluginInterface {
+    create( aPluginName = '', aPluginClass = '', aRegisterFlag = true ): IPlugin {
         const pluginName = aPluginName || 'Plugin';
         const pluginClass = aPluginClass || 'Plugin';
         try {

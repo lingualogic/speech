@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Interne SpeakComponent Schnittstelle fuer alle Speak-Komponenten. Wird von der globalen Speak Schnittstelle abgeleitet
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module speak/component
@@ -11,12 +11,12 @@
 
 // base
 
-import { BaseComponentInterface } from '@speech/base';
+import { IBaseComponent } from '@speech/base';
 
 
 // speak
 
-import { SpeakInterface } from '../speak.interface';
+import { ISpeak } from '../speak.interface';
 import { OnAudioUnlockFunc } from '../speak-function.type';
 
 
@@ -24,7 +24,7 @@ import { OnAudioUnlockFunc } from '../speak-function.type';
  * SpeakComponent Schnittstelle fuer alle Speak-Komponenten
  */
 
-export interface SpeakComponentInterface extends BaseComponentInterface, SpeakInterface {
+export interface ISpeakComponent extends IBaseComponent, ISpeak {
 
     // Speak-Events
 

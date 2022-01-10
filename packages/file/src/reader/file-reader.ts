@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente liest eine Datei in den Browser als String
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 12.07.2021
  * Status: rot
  *
  * @module file/reader
@@ -11,33 +11,31 @@
 
 // core
 
-import { Plugin } from '@speech/core';
+import { FactoryManager, Plugin } from '@speech/core';
 
 
-// common
+// net
 
-import { XMLHTTPREQUEST_TEXT_RESPONSETYPE, FileHtml5Reader } from '@speech/common';
+import { XMLHTTPREQUEST_TEXT_RESPONSETYPE } from '@speech/net';
 
 
 // file
 
+import { IFileBaseReader } from '../common/file-base-reader.interface';
+import { FileBaseReaderFactory, FILEBASEREADER_FACTORY_NAME } from '../common/file-base-reader-factory';
 import { FILEREADER_PLUGIN_NAME } from '../const/file-const';
-import { FileReaderInterface, FileReaderReadFunc, OnFileReaderReadFunc } from './file-reader.interface';
-
-
-// TODO: Klasse muss mit FileHtml5Reader umgeschrieben werden, alternativ muss auch FileNodeReader mit eingebaut werden!
-//       Damit wird das Plugin faehig, sowohl im Browser, wie auch in Node zu laufen.
+import { IFileReader, FileReaderReadFunc, OnFileReaderReadFunc } from './file-reader.interface';
 
 
 /**
  * FileReader Klasse zum Laden einer Datei in HTML5 mit XMLHttpRequest
  */
 
-export class FileReader extends Plugin implements FileReaderInterface {
+export class FileReader extends Plugin implements IFileReader {
 
     // interne Implementierungsklasse zum Einlesen von Dateien aus dem Browser
 
-    private mFileHtml5Reader: FileHtml5Reader = null;
+    private mFileBaseReader: IFileBaseReader = null;
 
 
     /**
@@ -48,9 +46,14 @@ export class FileReader extends Plugin implements FileReaderInterface {
 
     constructor( aRegisterFlag = true ) {
         super( FILEREADER_PLUGIN_NAME, aRegisterFlag );
-        this.mFileHtml5Reader = new FileHtml5Reader();
-        // verbinden der Errorfunktion mit dem ErrorEvent
-        this.mFileHtml5Reader.onError = this.onError;
+        const factory = FactoryManager.get( FILEBASEREADER_FACTORY_NAME, FileBaseReaderFactory );
+        if ( factory ) {
+            this.mFileBaseReader = factory.create();
+            if ( this.mFileBaseReader ) {
+                // verbinden der Errorfunktion mit dem ErrorEvent
+                this.mFileBaseReader.onError = this.onError;
+            }
+        }
     }
 
 
@@ -71,6 +74,20 @@ export class FileReader extends Plugin implements FileReaderInterface {
 
 
     /**
+     * Laufzeitumgebung zurueckgeben.
+     * 
+     * @returns browser oder node
+     */
+
+    getRuntimeType(): string {
+        if ( this.mFileBaseReader ) {
+            return this.mFileBaseReader.getRuntimeType();
+        }
+        return 'undefined';
+    }
+
+
+    /**
      * Initialisierung von FileReader
      *
      * @param {any} [aOptions] - optionale Parameter
@@ -85,9 +102,9 @@ export class FileReader extends Plugin implements FileReaderInterface {
             return -1;
         }
 
-        // FileHtml5Reader initialisieren
+        // FileHBrowserReader initialisieren
 
-        if ( this.mFileHtml5Reader.init( aOptions ) !== 0 ) {
+        if ( !this.mFileBaseReader || this.mFileBaseReader.init( aOptions ) !== 0 ) {
             return -1;
         }
 
@@ -100,8 +117,25 @@ export class FileReader extends Plugin implements FileReaderInterface {
      */
 
     done(): number {
-        this.mFileHtml5Reader.done();
+        if ( this.mFileBaseReader ) {
+            this.mFileBaseReader.done();
+        }
         return super.done();
+    }
+
+
+    /**
+     * pruefen, ob Initialisierung fertig ist
+     * 
+     * @returns null oder Promise
+     */
+
+     initWait(): Promise<any> {
+        if ( this.mFileBaseReader ) {
+            return this.mFileBaseReader.initWait();
+        }
+        // Dummy-Promise erzeugen
+        return new Promise<any>((resolve, reject) => resolve( null ));
     }
 
 
@@ -110,7 +144,9 @@ export class FileReader extends Plugin implements FileReaderInterface {
 
     setErrorOutput( aOutputFlag: boolean): void {
         super.setErrorOutput( aOutputFlag );
-        this.mFileHtml5Reader.setErrorOutput( aOutputFlag );
+        if ( this.mFileBaseReader ) {
+            this.mFileBaseReader.setErrorOutput( aOutputFlag );
+        }
     }
 
 
@@ -137,7 +173,10 @@ export class FileReader extends Plugin implements FileReaderInterface {
             this.error( 'read', 'nicht initialisiert' );
             return -1;
         }
-        return this.mFileHtml5Reader.read( aFileUrl, XMLHTTPREQUEST_TEXT_RESPONSETYPE );
+        if ( this.mFileBaseReader ) {
+            return this.mFileBaseReader.read( aFileUrl, XMLHTTPREQUEST_TEXT_RESPONSETYPE );
+        }
+        return -1;
     }
 
 
@@ -162,7 +201,9 @@ export class FileReader extends Plugin implements FileReaderInterface {
      */
 
     set onRead( aReadFunc: OnFileReaderReadFunc ) {
-        this.mFileHtml5Reader.onRead = aReadFunc;
+        if ( this.mFileBaseReader ) {
+            this.mFileBaseReader.onRead = aReadFunc;
+        }
     }
 
 
@@ -174,7 +215,9 @@ export class FileReader extends Plugin implements FileReaderInterface {
      */
 
     set onLoadDialogFile( aReadFunc: OnFileReaderReadFunc ) {
-        this.mFileHtml5Reader.onRead = aReadFunc;
+        if ( this.mFileBaseReader ) {
+            this.mFileBaseReader.onRead = aReadFunc;
+        }
     }
 
 }

@@ -9,9 +9,8 @@
  *      TTSAmazon    - Amazon-Service TTS
  *      TTSGoogle    - Google-Service TTS (kann nur mit Speech-Server verwendet werden)
  *      TTSMicrosoft - Microsoft-Service TTS (sollte nur mit Speech-Server verwendet werden)
- *      TTSNuance    - Nuance-Service TTS (deprecated)
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 15.10.2021
  * Status: gelb
  *
  * @module speak/tts
@@ -32,11 +31,10 @@ import {
     TTS_HTML5_NAME,
     TTS_AMAZON_NAME,
     TTS_GOOGLE_NAME,
-    TTS_MICROSOFT_NAME,
-    TTS_NUANCE_NAME
+    TTS_MICROSOFT_NAME
 } from './tts-const';
 import {
-    TTSInterface,
+    ITTS,
     TTSStartSpeakFunc,
     TTSStopSpeakFunc,
     OnTTSSpeakStartFunc,
@@ -49,7 +47,7 @@ import { TTSFactory } from './tts-factory';
  * Diese Klasse ist die Verwaltungsklasse fuer alle implementierten TTS
  */
 
-export class TTSGroup extends PluginGroup implements TTSInterface {
+export class TTSGroup extends PluginGroup implements ITTS {
 
 
     /**
@@ -62,16 +60,15 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
 
     // alle inneren TTS
 
-    private mTTSHtml5: TTSInterface = null;
-    private mTTSAmazon: TTSInterface = null;
-    private mTTSGoogle: TTSInterface = null;
-    private mTTSMicrosoft: TTSInterface = null;
-    private mTTSNuance: TTSInterface = null;
+    private mTTSHtml5: ITTS = null;
+    private mTTSAmazon: ITTS = null;
+    private mTTSGoogle: ITTS = null;
+    private mTTSMicrosoft: ITTS = null;
 
 
     // aktuell genutzte TTS
 
-    private mCurrentTTS: TTSInterface = null;
+    private mCurrentTTS: ITTS = null;
 
 
     // Event-Funktionen
@@ -129,7 +126,6 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
         }
         // eintragen der verfuegbaren TTS-Plugins
         this.insertPlugin( TTS_HTML5_NAME, this.mTTSFactory.create( TTS_HTML5_NAME, TTS_HTML5_NAME, false ));
-        this.insertPlugin( TTS_NUANCE_NAME, this.mTTSFactory.create( TTS_NUANCE_NAME, TTS_NUANCE_NAME, false ));
         this.insertPlugin( TTS_AMAZON_NAME, this.mTTSFactory.create( TTS_AMAZON_NAME, TTS_AMAZON_NAME, false ));
         this.insertPlugin( TTS_GOOGLE_NAME, this.mTTSFactory.create( TTS_GOOGLE_NAME, TTS_GOOGLE_NAME, false ));
         this.insertPlugin( TTS_MICROSOFT_NAME, this.mTTSFactory.create( TTS_MICROSOFT_NAME, TTS_MICROSOFT_NAME, false ));
@@ -143,7 +139,7 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
      */
 
     protected _initTTSHtml5( aOption: any ): void {
-        this.mTTSHtml5 = this.findPlugin( TTS_HTML5_NAME ) as TTSInterface;
+        this.mTTSHtml5 = this.findPlugin( TTS_HTML5_NAME ) as ITTS;
         if ( this.mTTSHtml5 ) {
             this.mTTSHtml5.init( aOption );
             if ( this.mTTSHtml5.isActive()) {
@@ -169,7 +165,7 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
      */
 
     protected _initTTSAmazon( aOption: any ): void {
-        this.mTTSAmazon = this.findPlugin( TTS_AMAZON_NAME ) as TTSInterface;
+        this.mTTSAmazon = this.findPlugin( TTS_AMAZON_NAME ) as ITTS;
         if ( this.mTTSAmazon ) {
             this.mTTSAmazon.init( aOption );
             if ( this.mTTSAmazon.isActive()) {
@@ -195,7 +191,7 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
      */
 
     protected _initTTSGoogle( aOption: any ): void {
-        this.mTTSGoogle = this.findPlugin( TTS_GOOGLE_NAME ) as TTSInterface;
+        this.mTTSGoogle = this.findPlugin( TTS_GOOGLE_NAME ) as ITTS;
         if ( this.mTTSGoogle ) {
             this.mTTSGoogle.init( aOption );
             if ( this.mTTSGoogle.isActive()) {
@@ -221,7 +217,7 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
      */
 
     protected _initTTSMicrosoft( aOption: any ): void {
-        this.mTTSMicrosoft = this.findPlugin( TTS_MICROSOFT_NAME ) as TTSInterface;
+        this.mTTSMicrosoft = this.findPlugin( TTS_MICROSOFT_NAME ) as ITTS;
         if ( this.mTTSMicrosoft ) {
             this.mTTSMicrosoft.init( aOption );
             if ( this.mTTSMicrosoft.isActive()) {
@@ -236,32 +232,6 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
         }
         if ( this.isErrorOutput()) {
             console.log('TTSGroup._initTTSMicrosoft: TTS nicht eingefuegt');
-        }
-    }
-
-
-    /**
-     * Initialisierung des NUANCE-TTS Plugins
-     *
-     * @param {*} aOption - optionale Parameter
-     */
-
-    protected _initTTSNuance( aOption: any ): void {
-        this.mTTSNuance = this.findPlugin( TTS_NUANCE_NAME ) as TTSInterface;
-        if ( this.mTTSNuance ) {
-            this.mTTSNuance.init( aOption );
-            if ( this.mTTSNuance.isActive()) {
-                if ( this.isErrorOutput()) {
-                    console.log('TTSGroup._initTTSNuance: TTS eingefuegt');
-                }
-                return;
-            }
-            this.removePlugin( TTS_NUANCE_NAME );
-            this.mTTSNuance.done();
-            this.mTTSNuance = null;
-        }
-        if ( this.isErrorOutput()) {
-            console.log('TTSGroup._initTTSNuance: TTS nicht eingefuegt');
         }
     }
 
@@ -300,10 +270,9 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
         // TTS eintragen in Reihenfolge ihrer Nutzung
 
         this._initTTSHtml5( option );   // Default-TTS
-        this._initTTSNuance( option );
-        this._initTTSAmazon( option );  // dritter wegen Tests
-        this._initTTSGoogle( option );  // vierter wegen Tests
-        this._initTTSMicrosoft( option );  // fuenfter wegen Tests
+        this._initTTSAmazon( option );  
+        this._initTTSGoogle( option );  
+        this._initTTSMicrosoft( option );
 
         // console.log('TTSGroup.init: erfolgreich');
         if ( super.init( aOption ) !== 0 ) {
@@ -312,7 +281,7 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
 
         // erste TTS einstellen als Default-TTS
 
-        this.mCurrentTTS = this.firstPlugin() as TTSInterface;
+        this.mCurrentTTS = this.firstPlugin() as ITTS;
         if ( !this.mCurrentTTS ) {
             // keine TTS verfuegbar !
             if ( this.isErrorOutput()) {
@@ -340,7 +309,6 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
         this.mTTSAmazon = null;
         this.mTTSGoogle = null;
         this.mTTSMicrosoft = null;
-        this.mTTSNuance = null;
         this.mCurrentTTS = null;
         return super.done();
     }
@@ -395,12 +363,12 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
 
     set onInit( aOnInitFunc: OnSpeechInitFunc ) {
         // console.log('TTSGroup.onInit:', aOnInitFunc );
-        let tts = this.firstPlugin() as TTSInterface;
+        let tts = this.firstPlugin() as ITTS;
         // console.log('TTSGroup.onInit: tts = ', tts);
         while ( tts ) {
             // console.log('TTSGroup.onInit:', tts.getName());
             tts.onInit = aOnInitFunc;
-            tts = this.nextPlugin() as TTSInterface;
+            tts = this.nextPlugin() as ITTS;
         }
     }
 
@@ -412,10 +380,10 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
      */
 
     set onSpeakStart( aOnSpeakStartFunc: OnTTSSpeakStartFunc ) {
-        let tts = this.firstPlugin() as TTSInterface;
+        let tts = this.firstPlugin() as ITTS;
         while ( tts ) {
             tts.onSpeakStart = aOnSpeakStartFunc;
-            tts = this.nextPlugin() as TTSInterface;
+            tts = this.nextPlugin() as ITTS;
         }
     }
 
@@ -427,10 +395,10 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
      */
 
     set onSpeakStop( aOnSpeakStopFunc: OnTTSSpeakStopFunc ) {
-        let tts = this.firstPlugin() as TTSInterface;
+        let tts = this.firstPlugin() as ITTS;
         while ( tts ) {
             tts.onSpeakStop = aOnSpeakStopFunc;
-            tts = this.nextPlugin() as TTSInterface;
+            tts = this.nextPlugin() as ITTS;
         }
     }
 
@@ -445,11 +413,11 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
         // console.log('TTSGroup.onError: start', aOnErrorFunc);
         this.mOnErrorFunc = aOnErrorFunc;
         // Schleife fuer alle Plugins
-        let tts = this.firstPlugin() as TTSInterface;
+        let tts = this.firstPlugin() as ITTS;
         // console.log('TTSGroup.onError: first tts = ', tts);
         while ( tts ) {
             tts.onError = aOnErrorFunc;
-            tts = this.nextPlugin() as TTSInterface;
+            tts = this.nextPlugin() as ITTS;
             // console.log('TTSGroup.onError: next tts = ', tts);
         }
     }
@@ -499,10 +467,6 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
 
             case TTS_MICROSOFT_NAME:
                 tts = this.mTTSMicrosoft;
-                break;
-
-            case TTS_NUANCE_NAME:
-                tts = this.mTTSNuance;
                 break;
 
             default:
@@ -562,7 +526,7 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
     setLanguage( aLanguage: string ): number {
         // console.log('TTSGroup.setLanguage', this.getTTS(), this.getTTSList());
         let result = 0;
-        let tts = this.firstPlugin() as TTSInterface;
+        let tts = this.firstPlugin() as ITTS;
         // pruefen, ob eine TTS vorhanden ist
         if ( !tts ) {
             this.error( 'setLanguage', 'Keine TTS vorhanden' );
@@ -573,7 +537,7 @@ export class TTSGroup extends PluginGroup implements TTSInterface {
             if ( tts.setLanguage( aLanguage ) !== 0 ) {
                 result = -1;
             }
-            tts = this.nextPlugin() as TTSInterface;
+            tts = this.nextPlugin() as ITTS;
         }
         return result;
     }

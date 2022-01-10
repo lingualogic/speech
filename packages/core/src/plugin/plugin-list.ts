@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Plugin-Liste zur Speicherung von Plugin-Komponenten
  *
- * Letzte Aenderung: 28.09.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/plugin
@@ -16,7 +16,7 @@ import { ErrorBase } from './../error/error-base';
 
 // plugin
 
-import { PluginInterface } from './plugin.interface';
+import { IPlugin } from './plugin.interface';
 
 
 /**
@@ -28,8 +28,8 @@ import { PluginInterface } from './plugin.interface';
 
 export class PluginList extends ErrorBase {
 
-    private mPluginList = new Map<string, PluginInterface>();
-    private mPluginIterator: IterableIterator<PluginInterface>;
+    private mPluginList = new Map<string, IPlugin>();
+    private mPluginIterator: IterableIterator<IPlugin>;
 
 
     /**
@@ -68,11 +68,11 @@ export class PluginList extends ErrorBase {
      * Eintragen eines Plugins
      *
      * @param {string} aPluginName - Name des Plugins
-     * @param {PluginInterface} aPlugin - Plugin Instanz
+     * @param {IPlugin} aPlugin - Plugin Instanz
      * @return {number} errorCode (0,-1) - Fehlercode
      */
 
-    insert( aPluginName: string, aPlugin: PluginInterface ): number {
+    insert( aPluginName: string, aPlugin: IPlugin ): number {
         try {
             if ( !aPluginName ) {
                 this.error( 'insert', 'kein Pluginname uebergeben' );
@@ -99,10 +99,10 @@ export class PluginList extends ErrorBase {
      * Zurueckgeben eines Plugins
      *
      * @param {string} aPluginName - Name des Plugins
-     * @returns {PluginInterface} - Plugin Instanz oder null
+     * @returns {IPlugin} - Plugin Instanz oder null
      */
 
-    find( aPluginName: string ): PluginInterface {
+    find( aPluginName: string ): IPlugin {
         try {
             return this.mPluginList.get( aPluginName );
         } catch ( aException ) {
@@ -115,10 +115,10 @@ export class PluginList extends ErrorBase {
     /**
      * erstes Plugin der Liste zurueckgeben
      *
-     * @return {PluginInterface} - Plugin Instanz oder null
+     * @return {IPlugin} - Plugin Instanz oder null
      */
 
-    first(): PluginInterface {
+    first(): IPlugin {
         try {
             this.mPluginIterator = this.mPluginList.values();
             return this.mPluginIterator.next().value;
@@ -133,10 +133,10 @@ export class PluginList extends ErrorBase {
     /**
      * naechstes Plugin der Liste zurueckgeben. Es muss vorher einmal first aufgerufen werden.
      *
-     * @return {PluginInterface} - Plugin Instanz oder null
+     * @return {IPlugin} - Plugin Instanz oder null
      */
 
-    next(): PluginInterface {
+    next(): IPlugin {
         try {
             return this.mPluginIterator.next().value;
         } catch ( aException ) {

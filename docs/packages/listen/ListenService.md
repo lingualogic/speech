@@ -12,8 +12,6 @@ In der folgenden Grafik werden die einzelnen Schichten, angefangen von der WebAp
 ![ListenService-Architektur](ListenService-1.gif)
 
 
-Ganz oben sind die für den ListenService notwendigen Credentials für die Cloud-Services dargestellt, die der WebApp übergeben werden müssen, wenn ein Cloud-Dienst als ASR zum Einsatz kommen soll. Eine Anleitung für die Erstellung der Credentials und die Einbindung der Cloud-Module in die WebApp zur Aktivierung des jeweiligen Cloud-Service findet man unter [docs/packages/CloudList.md](./../CloudList.md)
-
 Die nächste Grafik zeigt die konkrete Vererbungsbeziehung zu Service, sowie die Einbindung von ListenFactory und ListenInterface aus Speech. ListenFactory ist eine statische Klasse und erzeugt das Listen-Objekt zum ListenInterface. Auf der linken Seite sind das GoogleModule und das MicrosoftModule dargestellt, welche als statische Klassen implementiert sind und die jeweiligen Cloud-Singletons aus Speech einbinden.
 Damit die Cloud-Dienste funktioniern, müssen die Credentials vom jeweiligen Cloud-Module an das Cloud-Singleton weitergereicht werden. 
 
@@ -24,6 +22,9 @@ Damit die Cloud-Dienste funktioniern, müssen die Credentials vom jeweiligen Clo
 ## API
 
 Der ListenService definiert die öffentliche Schnittstelle von Speech für die Spracheingabe. Die folgende Grafik zeigt einen Überblick über die gesamte API des ListenServices. Die API teilt sich auf in statische Klassenfunktionen, Objektfunktionen, Objektereignisse und Objekteigenschaften. Die API verfügt über eine auf Funktionen und eine auf Eigenschaften basierende Schnittstelle. Die gleiche Aufgabe kann über Funktionsaufrufe oder über das Setzen von Eigenschaften erledigt werden. Z.B. kann die Sprache entweder mit listenService.setLanguage('de') oder mit listenService.language = 'de' eingetragen werden, bevor mit listenService.start() die Spracheingabe gestartet wird. 
+
+!!! Achtung, Diktiermodus erst später verfügbar !!!
+
 Der Modus bestimmt, ob Listen im Command-Modus oder im Diktier-Modus verwendet wird. Im Command-Modus wird nur ein einziger kurzer Satz erfasst, während im Diktier-Modus die ASR solange Sprache in Text übersetzt, bis Listen gestoppt wird. Dabei werden auch einige Interpunktionszeichen beachtet. Der Diktiermodus funtioniert zur Zeit nur mit der HTML5-ASR und kann nur im Chrome-Browser verwendet werden.
 
 
@@ -52,7 +53,7 @@ Dier erste Aufgabe vor Nutzung des ListenService besteht in der Festlegung der K
 Auszug aus der Datei: packages/listen/src/listen-service-config.ts:
 
 	// hier sind die Defaultwerte des ListenService festgelegt	
-	export const ListenServiceConfig: ListenServiceOptionInterface = {
+	export const ListenServiceConfig: IListenServiceOption = {
 	    /** ein/ausschalten der Listen-Komponente */
 	    activeFlag: true,
 	    /** setzt die Sprache fuer die Sprachausgabe ( 'de', 'en' )*/

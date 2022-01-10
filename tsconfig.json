@@ -5,36 +5,19 @@
     "baseUrl": "./",
     "outDir": "./build/",
     "paths": {
-      "@speech/action": ["packages/action/src"],
-      "@speech/agent": ["packages/agent/src"],
       "@speech/audio": ["packages/audio/src"],
       "@speech/base": ["packages/base/src"],
-      "@speech/bot": ["packages/bot/src"],
-      "@speech/cloud": ["packages/cloud/src"],
-      "@speech/cloud-amazon": ["packages/cloud-amazon/src"],
-      "@speech/cloud-google": ["packages/cloud-google/src"],
-      "@speech/cloud-microsoft": ["packages/cloud-microsoft/src"],
-      "@speech/cloud-nuance": ["packages/cloud-nuance/src"],
-      "@speech/cloud-rasa": ["packages/cloud-rasa/src"],
-      "@speech/common": ["packages/common/src"],
       "@speech/core": ["packages/core/src"],
-      "@speech/dialog": ["packages/dialog/src"],
       "@speech/file": ["packages/file/src"],
-      "@speech/inference": ["packages/inference/src"],
-      "@speech/intent": ["packages/intent/src"],
       "@speech/listen": ["packages/listen/src"],
       "@speech/net": ["packages/net/src"],
-      "@speech/prompt": ["packages/prompt/src"],
       "@speech/service": ["packages/service/src"],
-      "@speech/speak": ["packages/speak/src"],
-      "@speech/wakeword": [ "packages/wakeword/src" ]
+      "@speech/speak": ["packages/speak/src"]
     }
   },
 
   "include": [
-    "lib",
-    "src",
-    "packages/src"
+    "packages"
   ]
 
 }

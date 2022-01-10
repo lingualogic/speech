@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Event Rueckgabedaten, die jeder Event zurueckgibt
  *
- * Letzte Aenderung: 26.10.2018
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/event
@@ -9,7 +9,7 @@
  */
 
 
-export interface EventDataInterface {
+export interface IEventData {
     // Event
     event: string;
     // Eventtyp

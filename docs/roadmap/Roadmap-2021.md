@@ -3,15 +3,14 @@
 Die Roadmap zeigt die Reihenfolge der Veröffentlichung von Speech Versionen und deren Features.
 
 
-## Geplante Versionen
+
+## Veröffentlichte Versionen
 
 
-### März: Version 0.6.0
+
+### April: Version 0.6.0
 
 beinhaltet:
 
 * Umstellung auf ein Komponenten-Monorepo
-
-
-## Veröffentlichte Versionen
 

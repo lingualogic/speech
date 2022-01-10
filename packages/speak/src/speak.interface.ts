@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Oeffentliche Speak Schnittstelle als Teil des Speak-API
  *
- * API-Version: 1.4
- * Datum:       15.10.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module speak
@@ -14,7 +14,7 @@
 
 // base
 
-import { BaseInterface } from '@speech/base';
+import { IBase } from '@speech/base';
 
 
 // speak
@@ -29,7 +29,7 @@ import { OnSpeakAudioUnlockFunc } from './speak-function.type';
  * Speak Schnittstelle
  */
 
-export interface SpeakInterface extends BaseInterface {
+export interface ISpeak extends IBase {
 
 
     // Event-Funktionen

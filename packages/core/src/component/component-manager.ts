@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * ComponentManager zur Verwaltung aller Komponenten
  *
- * Letzte Aenderung: 14.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/component
@@ -22,12 +22,12 @@ import { ErrorBase } from './../error/error-base';
 // message
 
 import { MESSAGE_COMPONENT_TYPE } from './../message/message-const';
-import { MessageInterface } from './../message/message.interface';
+import { IMessage } from './../message/message.interface';
 
 
 // component
 
-import { ComponentInterface, ComponentSendMessageFunc } from './component.interface';
+import { IComponent, ComponentSendMessageFunc } from './component.interface';
 import { ComponentList } from './component-list';
 
 
@@ -45,7 +45,10 @@ export class ComponentManager {
 
     // statische Klasse, keine Instanz erzeugbar !
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     // Fehler-Funktionen
@@ -128,10 +131,10 @@ export class ComponentManager {
      *
      * @param {string} aComponentName - Name der Komponente
      *
-     * @return {ComponentInterface} - Rueckgabe der Komponente
+     * @return {IComponent} - Rueckgabe der Komponente
      */
 
-    static find( aComponentName: string ): ComponentInterface {
+    static find( aComponentName: string ): IComponent {
         const component = ComponentManager.mComponentList.find( aComponentName );
         if ( !component ) {
             return null;
@@ -144,12 +147,12 @@ export class ComponentManager {
      * Eintragen einer Komponente
      *
      * @param {string} aComponentName - Name der Komponente
-     * @param {ComponentInterface} aComponent - Instanz der Komponente
+     * @param {IComponent} aComponent - Instanz der Komponente
      *
      * @return {number} errorCode(0,-1) - Fehlercode
      */
 
-    static insert( aComponentName: string, aComponent: ComponentInterface ): number {
+    static insert( aComponentName: string, aComponent: IComponent ): number {
         return ComponentManager.mComponentList.insert( aComponentName, aComponent );
     }
 
@@ -197,7 +200,7 @@ export class ComponentManager {
      * @param aMessage - zu sendendes Nachrichten-Objekt
      */
 
-    static sendMessage( aMessage: MessageInterface ): number {
+    static sendMessage( aMessage: IMessage ): number {
         // nur Komponenten-Nachrichten verarbeiten
         if ( aMessage && aMessage.type === MESSAGE_COMPONENT_TYPE ) {
             // Zielkomponente auslesen
@@ -227,7 +230,7 @@ export class ComponentManager {
      */
 
     static getSendMessageFunc(): ComponentSendMessageFunc {
-        return (aMessage: MessageInterface) => ComponentManager.sendMessage( aMessage );
+        return (aMessage: IMessage) => ComponentManager.sendMessage( aMessage );
     }
 
 }

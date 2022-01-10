@@ -2,7 +2,7 @@
  * Port Schnittstelle fuer die Verbindung mit externen Diensten.
  * Ports sind Vermittler zwischen den externen Diensten und den internen Plugins.
  *
- * Letzte Aenderung: 20.03.2019
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/port
@@ -13,19 +13,19 @@
 // event
 
 import { EventFunc } from './../event/event-function.type';
-import { EventDataInterface } from './../event/event-data.interface';
+import { IEventData } from './../event/event-data.interface';
 
 
 // Port-Funktionen
 
-export type PortEventFunc = (aPortEvent: EventDataInterface) => number;
+export type PortEventFunc = (aPortEvent: IEventData) => number;
 
 
 /**
  * Port Interface
  */
 
-export interface PortInterface {
+export interface IPort {
 
 
     /**

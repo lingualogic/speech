@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Listen Interface
  *
- * API-Version: 1.5
- * Datum: 15.10.2020
+ * API-Version: 2.0
+ * Datum: 28.06.2021
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module listen
@@ -14,7 +14,7 @@
 
 // base
 
-import { BaseInterface } from '@speech/base';
+import { IBase } from '@speech/base';
 
 
 // listen
@@ -29,7 +29,7 @@ import { OnListenStartFunc, OnListenStopFunc, OnListenResultFunc, OnListenNoMatc
  * Listen Schnittstelle
  */
 
-export interface ListenInterface extends BaseInterface {
+export interface IListen extends IBase {
 
 
     // Event-Funktionen

@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente spielt die Audio-Dateien ab
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 08.01.2022
  * Status: rot
  *
  * @module audio/player
@@ -16,15 +16,17 @@
 import { FactoryManager, Plugin } from '@speech/core';
 
 
-// common
+// net
 
-import { AUDIOCONTEXT_FACTORY_NAME, XMLHTTPREQUEST_FACTORY_NAME, AudioContextManager, AudioContextFactory, XMLHttpRequestFactory } from '@speech/common';
+import { XMLHTTPREQUEST_FACTORY_NAME, XMLHttpRequestFactory } from '@speech/net';
 
 
 // audio
 
+import { AUDIOCONTEXT_FACTORY_NAME,  AudioContextFactory,  } from './../common/audiocontext-factory';
+import { AudioContextManager } from './../common/audiocontext-manager';
 import { AUDIOPLAYER_PLUGIN_NAME, AUDIO_MP3_FORMAT, AUDIO_WAV_FORMAT, AUDIO_DEFAULT_FORMAT, AUDIO_AUDIOSAMPLE_RATE, AUDIO_MIN_SAMPLERATE } from '../audio-const';
-import { AudioPlayerInterface, AudioPlayFunc, AudioStopFunc, OnAudioStartFunc, OnAudioStopFunc, OnAudioUnlockFunc } from './audio-player.interface';
+import { IAudioPlayer, AudioPlayFunc, AudioStopFunc, OnAudioStartFunc, OnAudioStopFunc, OnAudioUnlockFunc } from './audio-player.interface';
 import { AudioCodec } from './../stream/audio-codec';
 import { AudioResampler } from './../stream/audio-resampler';
 
@@ -41,7 +43,7 @@ const AUDIO_UNLOCK_TIMEOUT = 2000;
  * Die AudioPlayer Klasse kapselt das Audio Web-API von HTML5
  */
 
-export class AudioPlayer extends Plugin implements AudioPlayerInterface {
+export class AudioPlayer extends Plugin implements IAudioPlayer {
 
     /**
      * AudioContext-Klasse aus HTML5-WebAPI
@@ -682,13 +684,23 @@ export class AudioPlayer extends Plugin implements AudioPlayerInterface {
             // Decode asynchronously
 
             this.mRequest.onload = () => {
-                this._decodeAudio();
+                // console.log('AudioPlayer._loadAudioFile: onload');
+                // TODO: sollte in loadend erst gestartet werden, wenn Status 200 ist !
+                // this._decodeAudio();
                 // TODO: Hier muss ein onLoad Event hin
             };
 
             this.mRequest.onloadend = () => {
+                // console.log('AudioPlayer._loadAudioFile: onloadend', request.status);
                 if ( request.status === 404 ) {
+                    this.mAudioLoadFlag = false;
                     this.error( '_requestDialogFile', 'Error 404' );
+                    this._onAudioStop();
+                    return;
+                }
+                // TODO: wird hier neu hinzugefuegt, Audio sollte erst bei Status 200 verarbeitet werden!
+                if ( request.status === 200 ) {
+                    this._decodeAudio();
                 }
             };
 
@@ -697,12 +709,14 @@ export class AudioPlayer extends Plugin implements AudioPlayerInterface {
                 // console.log('AudioPlayer._loadAudioFile: onerror', aError);
                 this.mAudioLoadFlag = false;
                 this._onError(aError);
+                this._onAudioStop();
             };
 
             this.mRequest.onabord = ( aEvent: any ) => {
                 // TODOE: muss in Fehlerbehandlung uebertragen werden
-                console.log('AudioPlayer._loadAudioFile: onabord', aEvent);
+                // console.log('AudioPlayer._loadAudioFile: onabord', aEvent);
                 this.mAudioLoadFlag = false;
+                this._onAudioStop();
             };
 
             this.mRequest.send();
@@ -710,6 +724,7 @@ export class AudioPlayer extends Plugin implements AudioPlayerInterface {
         } catch (aException) {
             this.exception( '_loadAudioFile', aException );
             this.mAudioLoadFlag = false;
+            this._onAudioStop();
             return -1;
         }
     }
@@ -741,18 +756,24 @@ export class AudioPlayer extends Plugin implements AudioPlayerInterface {
             this.mAudioContext.decodeAudioData( this.mRequest.response, (aBuffer: AudioBuffer) => {
                 // console.log('AudioPlayer._decodeAudio: decodeAudioData start', aBuffer);
                 this.mAudioBuffer = aBuffer;
-                this._playStart();
+                try {
+                    this._playStart();
+                } catch ( aException ) {
+                    console.log('AudioPlayer._decodeAudio: Exception', aException);
+                }
                 // console.log('AudioPlayer._decodeAudio: decodeAudioData end');
             }, (aError: any) => {
                 // TODO: muss in Fehlerbehandlung uebertragen werden
                 // console.log('AudioPlayer._decodeAudio:', aError);
-                this.error('_decodeAudio', 'DOMException');
+                this.error('_decodeAudio', 'DOMException ' + aError);
                 this.mAudioLoadFlag = false;
+                this._onAudioStop();
             });
             return 0;
         } catch (aException) {
             this.exception( '_decodeAudio', aException );
             this.mAudioLoadFlag = false;
+            this._onAudioStop();
             return -1;
         }
     }
@@ -768,14 +789,17 @@ export class AudioPlayer extends Plugin implements AudioPlayerInterface {
     protected _playStart(): number {
         // console.log('AudioPlayer._playStart');
         if ( !this.mAudioBuffer ) {
+            // console.log('AudioPlayer._playStart: no AudioBuffer');
             return -1;
         }
         // pruefen auf Abbruch
         if ( this.isCancel()) {
+            // console.log('AudioPlayer._playStart: Cancel');
             this.mAudioLoadFlag = false;
             return 0;
         }
         if ( !this.mAudioContext ) {
+            // console.log('AudioPlayer._playStart: no AudioContext');
             this.error( '_playStart', 'kein AudioContext vorhanden' );
             return -1;
         }
@@ -788,7 +812,7 @@ export class AudioPlayer extends Plugin implements AudioPlayerInterface {
             // Ende-Event
             this.mSource.onended = () => {
                 // TODO: hier muss ein Ende-Event fuer Audio-Ende eingebaut werden
-                // console.log('AudioPlayer._playStart: onended');
+                // console.log('AudioPlayer._playStart: onended', this.isPlay());
                 if ( this.isPlay()) {
                     this.mAudioPlayFlag = false;
                     this._onAudioStop();
@@ -805,6 +829,7 @@ export class AudioPlayer extends Plugin implements AudioPlayerInterface {
             this._onAudioStart();
             return 0;
         } catch (aException) {
+            // console.log('AudioPlayer._playStart: Exception', aException);
             this.exception( '_playStart', aException );
             this.mAudioPlayFlag = false;
             return -1;

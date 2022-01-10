@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Builder Schnittstelle
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/builder
@@ -11,19 +11,19 @@
 
 // builder
 
-import { BuilderConfigInterface } from './builder-config.interface';
+import { IBuilderConfig } from './builder-config.interface';
 
 
 // component
 
-import { ComponentInterface } from '../component/component.interface';
+import { IComponent } from '../component/component.interface';
 
 
 /**
  * Builder Interface fuer die Erzeugung von Komponenten
  */
 
-export interface BuilderInterface {
+export interface IBuilder {
 
 
     // Builder-Funktionen
@@ -32,5 +32,5 @@ export interface BuilderInterface {
     getClass(): string;
     getName(): string;
 
-    build( aConfig?: BuilderConfigInterface ): ComponentInterface;
+    build( aConfig?: IBuilderConfig ): IComponent;
 }

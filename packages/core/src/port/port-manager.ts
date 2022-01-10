@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Verwaltet alle Ports des Systems. Ist eine statische Klasse.
  *
- * Letzte Aenderung: 28.09.2020
- * Status: gruen
+ * Letzte Aenderung: 15.10.2021
+ * Status: gelb
  *
  * @module core/port
  * @author SB
@@ -22,7 +22,7 @@ import { ErrorBase } from './../error/error-base';
 // port
 
 import { PortList } from './port-list';
-import { PortInterface } from './port.interface';
+import { IPort } from './port.interface';
 import { Port } from './port';
 
 
@@ -48,21 +48,30 @@ export class PortManager {
 
     // statische Klasse, keine Instanz erzeugbar !
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     // Fehler-Funktionen
 
 
+    static setErrorOutput( aErrorOutputFlag: boolean ): void {
+        PortManager.mErrorBase.setErrorOutput( aErrorOutputFlag );
+        PortManager.mPortList.setErrorOutput( aErrorOutputFlag );
+    }
+
+
     static setErrorOutputOn(): void {
-        PortManager.mPortList.setErrorOutputOn();
         PortManager.mErrorBase.setErrorOutputOn();
+        PortManager.mPortList.setErrorOutputOn();
     }
 
 
     static setErrorOutputOff(): void {
-        PortManager.mPortList.setErrorOutputOff();
         PortManager.mErrorBase.setErrorOutputOff();
+        PortManager.mPortList.setErrorOutputOff();
     }
 
 
@@ -73,8 +82,8 @@ export class PortManager {
      */
 
     static setErrorOutputFunc( aErrorFunc: SpeechErrorFunc ): void {
-        PortManager.mPortList.setErrorOutputFunc( aErrorFunc );
         PortManager.mErrorBase.setErrorOutputFunc( aErrorFunc );
+        PortManager.mPortList.setErrorOutputFunc( aErrorFunc );
     }
 
 
@@ -104,15 +113,53 @@ export class PortManager {
 
 
     /**
+     * Portliste mit allen Ports eines Typs zurueckgeben.
+     *
+     * @param aPortType - Typ der Ports
+     */
+
+     static findTypeList( aPortType: string ): IPort[] {
+        const portList: IPort[] = [];
+        let port = PortManager.first();
+        while ( port ) {
+            if ( port.getType() === aPortType ) {
+                portList.push( port );
+            }
+            port = PortManager.next();
+        }
+        return portList;
+    }
+
+
+    /**
+     * Portliste mit allen Ports eines Typs zurueckgeben.
+     *
+     * @param aPortClass - Klasse der Ports
+     */
+
+    static findClassList( aPortClass: string ): IPort[] {
+        const portList: IPort[] = [];
+        let port = PortManager.first();
+        while ( port ) {
+            if ( port.getClass() === aPortClass ) {
+                portList.push( port );
+            }
+            port = PortManager.next();
+        }
+        return portList;
+    }
+
+
+    /**
      * Gibt einen neuen oder bereits vorhandenen Port zurueck
      *
      * @param {string } aPortName - Name des Ports
      * @param {PortClass} [aPortClass] - Klasse des Ports
      *
-     * @return {PortInterface} gibt ein Objekt von Port zurueck oder null
+     * @return {IPort} gibt ein Objekt von Port zurueck oder null
      */
 
-    static get( aPortName: string, aPortClass?: typeof Port ): PortInterface {
+    static get( aPortName: string, aPortClass?: typeof Port ): IPort {
         if ( !aPortName ) {
             PortManager.mErrorBase.error( 'get', 'kein Portname uebergeben' );
             return null;
@@ -151,10 +198,10 @@ export class PortManager {
      *
      * @param {string} aPortName - Name des Ports
      *
-     * @return {PortInterface} gibt ein Objekt von Port zurueck oder null
+     * @return {IPort} gibt ein Objekt von Port zurueck oder null
      */
 
-    static find( aPortName ): PortInterface {
+    static find( aPortName ): IPort {
         // console.log('PortManager.find:', aPortName);
         const port = PortManager.mPortList.find( aPortName );
         if ( !port ) {
@@ -167,10 +214,10 @@ export class PortManager {
     /**
      * ersten Port der Liste zurueckgeben
      *
-     * @return {PortInterface} - Port Instanz
+     * @return {IPort} - Port Instanz
      */
 
-    static first(): PortInterface  {
+    static first(): IPort  {
         return PortManager.mPortList.first();
     }
 
@@ -178,10 +225,10 @@ export class PortManager {
     /**
      * naechsten Port der Liste zurueckgeben. Es muss vorher einmal first aufgerufen werden.
      *
-     * @return {PortInterface} - Port Instanz
+     * @return {IPort} - Port Instanz
      */
 
-    static next(): PortInterface {
+    static next(): IPort {
         return PortManager.mPortList.next();
     }
 
@@ -190,12 +237,12 @@ export class PortManager {
      * Fuegt einen Port in den PortManager ein
      *
      * @param {string} aPortName - Name des Ports
-     * @param {PortInterface} aBuilder - Instanz des Ports
+     * @param {IPort} aBuilder - Instanz des Ports
      *
      * @return {number} errorCode(0,-1)
      */
 
-    static insert( aPortName: string, aPort: PortInterface ): number {
+    static insert( aPortName: string, aPort: IPort ): number {
         // console.log('PortManager.insert:', aPortName );
         return PortManager.mPortList.insert( aPortName, aPort );
     }

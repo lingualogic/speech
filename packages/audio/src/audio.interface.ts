@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Public Audio Schnittstelle
  *
- * API-Version: 1.2
- * Datum:       24.03.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
  * @module audio
  * @author SB
@@ -30,7 +30,7 @@ import {
  * Bot Schnittstelle
  */
 
-export interface AudioInterface {
+export interface IAudio {
 
 
     // Komponenten-Funktionen
@@ -210,6 +210,7 @@ export interface AudioInterface {
     // Player-Funktionen
 
 
+    play( aDataPath: string, aName: string ): number;
     playFile( aFileName: string ): number;
 
     /**

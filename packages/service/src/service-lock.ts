@@ -27,8 +27,6 @@ export class ServiceLock {
     private mLockEvent = new EventEmitter<string>();
     private mUnlockEvent = new EventEmitter<string>();
 
-    constructor() {}
-
     // event funcktions
 
     get lockEvent() {

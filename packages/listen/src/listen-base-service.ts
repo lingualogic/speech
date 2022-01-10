@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * ListenBaseService fuer die Integration von Listen in alle UI-Frameworks
  *
- * API-Version: 1.4
- * Datum:       19.01.2021
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 19.01.2021
+ * Letzte Aenderung: 21.12.2021
  * Status: gelb
  *
  * @module listen
@@ -21,10 +21,10 @@ import { ServiceManager, Service, EventEmitter } from '@speech/service';
 
 import { LISTEN_COMPONENT_NAME, LISTEN_SERVICE_NAME } from './listen-const';
 import { LISTEN_API_VERSION } from './listen-version';
-import { ListenInterface } from './listen.interface';
-import { ListenOptionInterface } from './listen-option.interface';
+import { IListen } from './listen.interface';
+import { IListenOption } from './listen-option.interface';
 import { ListenServiceConfig } from './listen-service-config';
-import { ListenServiceInterface } from './listen-service.interface';
+import { IListenService } from './listen-service.interface';
 
 
 // Konstanten
@@ -44,7 +44,7 @@ const LISTEN_ASYNC_EVENT = false;
  * @class ListenBaseService
  */
 
-export class ListenBaseService extends Service implements ListenServiceInterface {
+export class ListenBaseService extends Service implements IListenService {
 
     /** definiert die Konfiguration des Service */
 
@@ -56,7 +56,7 @@ export class ListenBaseService extends Service implements ListenServiceInterface
 
     // Listen-Komponente
 
-    protected mListen: ListenInterface = null;
+    protected mListen: IListen = null;
 
     // Service-Events
 
@@ -118,7 +118,7 @@ export class ListenBaseService extends Service implements ListenServiceInterface
      * @return  ListenBaseServiceOptions - dient zur Einstellung der otionalen Parameter
      */
 
-    static getConfig(): ListenOptionInterface {
+    static getConfig(): IListenOption {
         return ListenBaseService.listenServiceConfig;
     }
 
@@ -137,7 +137,7 @@ export class ListenBaseService extends Service implements ListenServiceInterface
             }
         }
         if ( ServiceManager.insert( this ) !== 0 ) {
-            console.log('ListenBaseService: wurde nicht in ServiceManager eingetragen');
+            this._error('ListenBaseService', 'ListenSerive wurde nicht in ServiceManager eingetragen');
         }
     }
 
@@ -152,7 +152,7 @@ export class ListenBaseService extends Service implements ListenServiceInterface
      * @param aOption - optionale Parameter
      */
 
-    protected _setOption( aOption: ListenOptionInterface ): number {
+    protected _setOption( aOption: IListenOption ): number {
         // console.log('ListenBaseService._setOption:', aOption);
         if ( super._setOption( aOption ) !== 0 ) {
             return -1;
@@ -176,7 +176,7 @@ export class ListenBaseService extends Service implements ListenServiceInterface
      * @return {*} Rueckgabe der Listen-Instanz
      */
 
-    protected _createComponent( aComponentName: string, aOption: ListenOptionInterface ): any {
+    protected _createComponent( aComponentName: string, aOption: IListenOption ): any {
         return null;
     }
 
@@ -189,7 +189,7 @@ export class ListenBaseService extends Service implements ListenServiceInterface
      * @return {number} errorCode(0,-1)
      */
 
-    init( aOption?: ListenOptionInterface ): number {
+    init( aOption?: IListenOption ): number {
         return super.init( aOption );
     }
 
@@ -202,7 +202,7 @@ export class ListenBaseService extends Service implements ListenServiceInterface
      * @return {number} Fehlercode 0 oder -1
      */
 
-    reset( aOption?: ListenOptionInterface ): number {
+    reset( aOption?: IListenOption ): number {
         return super.reset( aOption );
     }
 

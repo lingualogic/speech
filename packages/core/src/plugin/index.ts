@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer Plugin
  *
- * Version: 1.1
- * Datum:   14.10.2020
+ * Version: 2.0
+ * Datum:   28.06.2021
  *
  * Definiert das gesamte Plugin-API:
  *
@@ -22,9 +22,9 @@
 export { PluginList } from './plugin-list';
 export { PluginManager } from './plugin-manager';
 export { PluginFactory } from './plugin-factory';
-export { PluginFactoryInterface } from './plugin-factory.interface';
+export { IPluginFactory } from './plugin-factory.interface';
 export { PluginGroup } from './plugin-group';
-export { PluginGroupInterface } from './plugin-group.interface';
+export { IPluginGroup } from './plugin-group.interface';
 export { Plugin } from './plugin';
-export { PluginInterface } from './plugin.interface';
+export { IPlugin } from './plugin.interface';
 

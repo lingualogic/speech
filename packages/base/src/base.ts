@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Base API Wrapper fuer alle Komponenten.
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module base
@@ -11,33 +11,33 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc, SessionInterface, BuilderConfigInterface, BuilderManager } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc, ISession, IBuilderConfig, BuilderManager } from '@speech/core';
 
 
 // base
 
 import { OnBaseStartFunc, OnBaseStopFunc } from './base-function.type';
-import { BaseOptionInterface } from './base-option.interface';
-import { BaseComponentInterface } from './component/base-component.interface';
-import { BaseInterface } from './base.interface';
+import { IBaseOption } from './base-option.interface';
+import { IBaseComponent } from './component/base-component.interface';
+import { IBase } from './base.interface';
 
 
 /** @export
  * Base Klasse als API-Wrapper fuer alle Komponenten
  */
 
-export class Base implements BaseInterface {
+export class Base implements IBase {
 
     // interne Komponente
 
-    protected mComponent: BaseComponentInterface = null;
+    protected mComponent: IBaseComponent = null;
 
 
     /**
      * Konstruktor fuer ereignisbasierte Initialisierung von Action
      */
 
-    constructor( aOption?: BaseOptionInterface ) {
+    constructor( aOption?: IBaseOption ) {
         if ( this._init( aOption ) !== 0 ) {
             throw new Error('Komponente nicht initialisiert');
         }
@@ -62,7 +62,7 @@ export class Base implements BaseInterface {
      * @param aOption - Optionen der Komponente
      */
 
-    protected _getComponentName( aOption: BaseOptionInterface ): string {
+    protected _getComponentName( aOption: IBaseOption ): string {
         if ( aOption && aOption.componentName === 'string' ) {
             return aOption.componentName;
         }
@@ -77,7 +77,7 @@ export class Base implements BaseInterface {
      * @param aOption - Optionen der Komponente
      */
 
-    protected _getComponentClass( aOption: BaseOptionInterface ): string {
+    protected _getComponentClass( aOption: IBaseOption ): string {
         if ( aOption && aOption.componentClass === 'string' ) {
             return aOption.componentClass;
         }
@@ -91,8 +91,8 @@ export class Base implements BaseInterface {
      * @param aOption - Optionale Parameter
      */
 
-    protected _getBuilderConfig( aOption: BaseOptionInterface ): BuilderConfigInterface {
-        const builderConfig: BuilderConfigInterface = {
+    protected _getBuilderConfig( aOption: IBaseOption ): IBuilderConfig {
+        const builderConfig: IBuilderConfig = {
             componentName: this._getComponentName( aOption ),
             componentClass: this._getComponentClass( aOption )
         };
@@ -104,12 +104,12 @@ export class Base implements BaseInterface {
      * Initialisierung von Base
      *
      * @private
-     * @param {BaseOptionInterface} aOption - optionale Parameter zur Konfiguration
+     * @param {IBaseOption} aOption - optionale Parameter zur Konfiguration
      *
      * @return {number} errorCode(0,-1)
      */
 
-    protected _init( aOption?: BaseOptionInterface ): number {
+    protected _init( aOption?: IBaseOption ): number {
         // console.log('Base.init:', aOption);
 
         // pruefen auf Fehlerausgabe
@@ -144,7 +144,7 @@ export class Base implements BaseInterface {
 
             // erzeugen der Komponente
 
-            this.mComponent = builder.build( this._getBuilderConfig( aOption )) as BaseComponentInterface;
+            this.mComponent = builder.build( this._getBuilderConfig( aOption )) as IBaseComponent;
             if ( !this.mComponent ) {
                 if ( errorOutputFlag ) {
                     console.log('Base._init: keine Komponente erzeugt');
@@ -283,7 +283,7 @@ export class Base implements BaseInterface {
         return this.mComponent.isRunning();
     }
 
-    start( aSession?: SessionInterface ): number {
+    start( aSession?: ISession ): number {
         return this.mComponent.start( aSession );
     }
 

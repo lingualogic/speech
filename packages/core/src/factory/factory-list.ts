@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * FactoryList zur Speicherung von Factories
  *
- * Letzte Aenderung: 04.10.2018
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/factory
@@ -16,7 +16,7 @@ import { ErrorBase } from '../error/error-base';
 
 // factory
 
-import { FactoryInterface } from './factory.interface';
+import { IFactory } from './factory.interface';
 
 
 /**
@@ -28,8 +28,8 @@ import { FactoryInterface } from './factory.interface';
 
 export class FactoryList extends ErrorBase {
 
-    private mFactoryList = new Map<string, FactoryInterface>();
-    private mFactoryIterator: IterableIterator<FactoryInterface> = null;
+    private mFactoryList = new Map<string, IFactory>();
+    private mFactoryIterator: IterableIterator<IFactory> = null;
 
 
     /**
@@ -57,12 +57,12 @@ export class FactoryList extends ErrorBase {
      * Eintragen einer Factory
      *
      * @param {string} aFactoryName - Name der Factory
-     * @param {FactoryInterface} aFactory - Factory Instanz
+     * @param {IFactory} aFactory - Factory Instanz
      *
      * @return {number} Fehlercode 0 oder -1
      */
 
-    insert( aFactoryName: string, aFactory: FactoryInterface ): number {
+    insert( aFactoryName: string, aFactory: IFactory ): number {
         try {
             if ( !aFactoryName ) {
                 this.error( 'insert', 'kein Factoryname uebergeben' );
@@ -89,10 +89,10 @@ export class FactoryList extends ErrorBase {
      * Zurueckgeben einer Factory
      *
      * @param {string} aFactoryName - Name der Factory
-     * @returns {FactoryInterface} - Factory Instanz
+     * @returns {IFactory} - Factory Instanz
      */
 
-    find( aFactoryName: string ): FactoryInterface {
+    find( aFactoryName: string ): IFactory {
         try {
             return this.mFactoryList.get( aFactoryName );
         } catch ( aException ) {
@@ -105,10 +105,10 @@ export class FactoryList extends ErrorBase {
     /**
      * erste Factory der Liste zurueckgeben
      *
-     * @return {FactoryInterface} - Factory Instanz
+     * @return {IFactory} - Factory Instanz
      */
 
-    first(): FactoryInterface  {
+    first(): IFactory  {
         try {
             this.mFactoryIterator = this.mFactoryList.values();
             return this.mFactoryIterator.next().value;
@@ -122,10 +122,10 @@ export class FactoryList extends ErrorBase {
     /**
      * naechste Factory der Liste zurueckgeben. Es muss vorher einmal first aufgerufen werden.
      *
-     * @return {FactoryInterface} - Factory Instanz
+     * @return {IFactory} - Factory Instanz
      */
 
-    next(): FactoryInterface {
+    next(): IFactory {
         try {
             return this.mFactoryIterator.next().value;
         } catch ( aException ) {

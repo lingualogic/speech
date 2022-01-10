@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Component-Liste zur Speicherung von Komponenten
  *
- * Letzte Aenderung: 14.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/component
@@ -16,7 +16,7 @@ import { ErrorBase } from './../error/error-base';
 
 // component
 
-import { ComponentInterface } from './component.interface';
+import { IComponent } from './component.interface';
 
 
 /**
@@ -28,8 +28,8 @@ import { ComponentInterface } from './component.interface';
 
 export class ComponentList extends ErrorBase {
 
-    private mComponentList = new Map<string, ComponentInterface>();
-    private mComponentIterator: IterableIterator<ComponentInterface>;
+    private mComponentList = new Map<string, IComponent>();
+    private mComponentIterator: IterableIterator<IComponent>;
 
 
     /**
@@ -110,12 +110,12 @@ export class ComponentList extends ErrorBase {
      * Eintragen einer Komponente
      *
      * @param {string} aComponentName - Name der Komponente
-     * @param {ComponentInterface} aComponent - Plugin Instanz
+     * @param {IComponent} aComponent - Plugin Instanz
      *
      * @return {number} errorCode (0,-1) - Fehlercode
      */
 
-    insert( aComponentName: string, aComponent: ComponentInterface ): number {
+    insert( aComponentName: string, aComponent: IComponent ): number {
         try {
             if ( !aComponentName ) {
                 this.error( 'insert', 'kein Komponentenname uebergeben' );
@@ -143,10 +143,10 @@ export class ComponentList extends ErrorBase {
      *
      * @param {string} aComponentName - Name der Komponente
      *
-     * @returns {ComponentInterface} - Instanz oder null
+     * @returns {IComponent} - Instanz oder null
      */
 
-    find( aComponentName: string ): ComponentInterface {
+    find( aComponentName: string ): IComponent {
         try {
             return this.mComponentList.get( aComponentName );
         } catch ( aException ) {
@@ -159,10 +159,10 @@ export class ComponentList extends ErrorBase {
     /**
      * erste Komponente der Liste zurueckgeben
      *
-     * @return {ComponentInterface} - Instanz oder null
+     * @return {IComponent} - Instanz oder null
      */
 
-    first(): ComponentInterface {
+    first(): IComponent {
         try {
             this.mComponentIterator = this.mComponentList.values();
             return this.mComponentIterator.next().value;
@@ -176,10 +176,10 @@ export class ComponentList extends ErrorBase {
     /**
      * naechste Komponente der Liste zurueckgeben. Es muss vorher einmal first aufgerufen werden.
      *
-     * @return {ComponentInterface} - Instanz oder null
+     * @return {IComponent} - Instanz oder null
      */
 
-    next(): ComponentInterface {
+    next(): IComponent {
         try {
             return this.mComponentIterator.next().value;
         } catch ( aException ) {

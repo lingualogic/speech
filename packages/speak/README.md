@@ -33,7 +33,7 @@ Das Speech-Speak NPM-Paket ist zusammen mit allen anderen NP-Paketen von Speech 
 Speech-Speak ist von folgenden anderen Speech NPM-Paketen abhängig:
 
     * Speech-Core
-    * Speech-Common
+    * Speech-Net
     * Speech-Cloud
     * Speech-Audio
     * Speech-Base
@@ -41,21 +41,21 @@ Speech-Speak ist von folgenden anderen Speech NPM-Paketen abhängig:
 
 Diese NPM-Pakete müssen zusammen mit Speech-Speak im eigenen Projekt installiert werden, wenn sie nicht vorher schon installiert worden sind. Das kann mit Hilfe folgenden Befehls durchgeführt werden, wenn alle abhängigen NPM-Pakete zusammen ins eigene Projektverzeichnis kopiert worden sind:
 
-    $ npm install speech-core-0.6.x.tgz speech-common-0.6.x.tgz speech-cloud-0.6.x.tgz speech-audio-0.6.x.tgz speech-base-0.6.x.tgz speech-service-0.6.x.tgz speech-speak-0.6.x.tgz
+    $ npm install speech-core-0.6.x.tgz speech-net-0.6.x.tgz speech-cloud-0.6.x.tgz speech-audio-0.6.x.tgz speech-base-0.6.x.tgz speech-service-0.6.x.tgz speech-speak-0.6.x.tgz
 
 
 ### Über globales NPM-Repository
 
 Das öffentliche Speech-Speak NPM-Paket kann über folgenden Befehl zusammen mit seinen abhängigen NPM-Paketen aus dem globalen NPM-Repository installiert werden:
 
-    $ npm install @speech/core @speech/common @speech/cloud @speech/audio @speech/base @speech/service @speech/speak
+    $ npm install @speech/core @speech/net @speech/cloud @speech/audio @speech/base @speech/service @speech/speak
 
 
 ## Deinstallation
 
 Das Speech-Speak NPM-Paket kann mit folgendem Befehl wieder deinstalliert werden:
 
-    $ npm uninstall speech-speak
+    $ npm uninstall @speech/speak
 
 
 ## Bekannte Probleme

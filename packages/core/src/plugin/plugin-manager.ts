@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * PluginManager zur Verwaltung aller Plugins
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/plugin
@@ -21,8 +21,8 @@ import { ErrorBase } from './../error/error-base';
 
 // plugin
 
-import { PluginFactoryInterface } from './plugin-factory.interface';
-import { PluginInterface } from './plugin.interface';
+import { IPluginFactory } from './plugin-factory.interface';
+import { IPlugin } from './plugin.interface';
 import { PluginList } from './plugin-list';
 
 
@@ -40,7 +40,10 @@ export class PluginManager {
 
     // statische Klasse, keine Instanz erzeugbar !
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     // Fehler-Funktionen
@@ -104,7 +107,7 @@ export class PluginManager {
      * @return Rueckgabe des Plugins oder null
      */
 
-    static get( aPluginName: string, aPluginClass?: string, aPluginFactory?: PluginFactoryInterface ): PluginInterface {
+    static get( aPluginName: string, aPluginClass?: string, aPluginFactory?: IPluginFactory ): IPlugin {
         if ( !aPluginName ) {
             PluginManager.mErrorBase.error( 'get', 'kein PluginName uebergeben' );
             return null;
@@ -132,7 +135,7 @@ export class PluginManager {
      * @return {AudioPluginInterface} - Rueckgabe des AudioPlugins
      */
 
-    static find( aPluginName: string ): PluginInterface {
+    static find( aPluginName: string ): IPlugin {
         const plugin = PluginManager.mPluginList.find( aPluginName );
         if ( !plugin ) {
             return null;
@@ -145,12 +148,12 @@ export class PluginManager {
      * Eintragen eines Plugin
      *
      * @param {string} aPluginName - Name des Plugins
-     * @param {PluginInterface} aPlugin - Plugin
+     * @param {IPlugin} aPlugin - Plugin
      *
      * @return {number} errorCode(0,-1) - Fehlercode
      */
 
-    static insert( aPluginName: string, aPlugin: PluginInterface ): number {
+    static insert( aPluginName: string, aPlugin: IPlugin ): number {
         return PluginManager.mPluginList.insert( aPluginName, aPlugin );
     }
 

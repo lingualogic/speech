@@ -2,7 +2,7 @@
  * Speak API fuer SpeakComponent, einmalige Initialisierung, alle anderen Initialisierungen
  * laufen auf der gleichen SpeakComponent.
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module speak
@@ -19,30 +19,30 @@ import { Base } from '@speech/base';
 
 import { SPEAK_TYPE_NAME, SPEAK_ASYNC_EVENT } from './speak-const';
 import { OnSpeakAudioUnlockFunc } from './speak-function.type';
-import { SpeakOptionInterface } from './speak-option.interface';
-import { SpeakInterface } from './speak.interface';
-import { SpeakComponentInterface } from './component/speak-component.interface';
+import { ISpeakOption } from './speak-option.interface';
+import { ISpeak } from './speak.interface';
+import { ISpeakComponent } from './component/speak-component.interface';
 
 
 /** @export
  * Speak Klasse als API-Wrapper fuer die SpeakComponent
  */
 
-export class Speak extends Base implements SpeakInterface {
+export class Speak extends Base implements ISpeak {
 
 
     // SpeakComponent
 
-    private mSpeakComponent: SpeakComponentInterface;
+    private mSpeakComponent: ISpeakComponent;
 
 
     /**
      * Konstruktor fuer ereignisbasierte Initialisierung von Speak
      */
 
-    constructor( aOption?: SpeakOptionInterface ) {
+    constructor( aOption?: ISpeakOption ) {
         super( aOption );
-        this.mSpeakComponent = this.mComponent as SpeakComponentInterface;
+        this.mSpeakComponent = this.mComponent as ISpeakComponent;
     }
 
 

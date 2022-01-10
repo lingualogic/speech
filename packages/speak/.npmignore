@@ -1,0 +1,9 @@
+/lib/**/*.js
+/src
+/node_modules
+/package-lock.json
+/speech-speak.js
+/rollup.config.js
+/tsconfig.*
+*.log
+*.tgz

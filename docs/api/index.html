@@ -65,24 +65,40 @@
 				<a href="#speech-quellcode-referenz" id="speech-quellcode-referenz" style="color: inherit; text-decoration: none;">
 					<h1>Speech Quellcode Referenz</h1>
 				</a>
-				<p><strong>Version:</strong> <strong>0.6.0</strong></p>
+				<p><strong>Version:</strong> <strong>0.6.1</strong></p>
 				<p>Der Quellcode aller Komponenten von Speech ist vollständig im Verzeichnis packages untergebracht.</p>
-				<a href="#komponenten-im-packages-ordner" id="komponenten-im-packages-ordner" style="color: inherit; text-decoration: none;">
-					<h2>Komponenten im packages-Ordner</h2>
+				<a href="#kernkomponenten-im-packages-ordner" id="kernkomponenten-im-packages-ordner" style="color: inherit; text-decoration: none;">
+					<h2>Kernkomponenten im packages-Ordner</h2>
 				</a>
+				<p>Die Kernkomponenten sind die zentralen Bestandteile des Speech-Frameworks. Sie erbringen die Funktionen für die Sprachanbindung einer Web-App.</p>
 				<ul>
-					<li><p><strong>action:</strong> Action Speech-Komponente zur Ausführung von beliebigen Aktionen in der Web-App</p>
-					</li>
-					<li><p><strong>bot:</strong>  Bot Speech-Komponente zur Steuerung von Speak und Action mit Hilfe von Dialog</p>
-					</li>
-					<li><p><strong>dialog:</strong> Dialog Speech-Komponente zur Ausführung von Dialogskripten (NLG) als Sprach- und Aktionsausgaben</p>
-					</li>
-					<li><p><strong>intent:</strong> Intent Speech-Komponente zur Sprachanalyse (NLU) von einzenen Sätzen und Rückgabe eines Intents</p>
-					</li>
 					<li><p><strong>listen:</strong> Listen Speech-Kompnente zur Spracherkennung (ASR) und Rückgabe des Textes</p>
 					</li>
 					<li><p><strong>speak:</strong> Speak Speech-Komponente zur Sprachausgabe (TTS) von Texten</p>
 					</li>
+				</ul>
+				<a href="#basiskomponenten-im-packages-ordner" id="basiskomponenten-im-packages-ordner" style="color: inherit; text-decoration: none;">
+					<h2>Basiskomponenten im packages-Ordner</h2>
+				</a>
+				<p>Basiskomponenten dienen anderen Komponenten zur Erbringung von Diensten.</p>
+				<ul>
+					<li><p><strong>audio:</strong> Audio Basiskomponente für Audio-Player und Audio-Recorder</p>
+					</li>
+					<li><p><strong>base:</strong> Base Basiskomponente für alle Kernkomponenten von Speech</p>
+					</li>
+					<li><p><strong>file:</strong> File Basiskomponente zum Lesen und Schreiben von Dateien</p>
+					</li>
+					<li><p><strong>net:</strong> Net Basiskomponente zum Aufbau von WebSocket-Verbindungen</p>
+					</li>
+					<li><p><strong>service:</strong> Service Basiskomponente zur Verwaltung aller Services</p>
+					</li>
+				</ul>
+				<a href="#basisklassen-im-package-ordner" id="basisklassen-im-package-ordner" style="color: inherit; text-decoration: none;">
+					<h2>Basisklassen im package-Ordner</h2>
+				</a>
+				<p>Basisklassen dienen als Grundgerüst für die Architektur des Speech-Frameworks.</p>
+				<ul>
+					<li><strong>core:</strong> Alle Basisklassen des Speech-Frameworks</li>
 				</ul>
 			</div>
 		</div>
@@ -91,30 +107,6 @@
 				<ul>
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/action.html">action</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/agent.html">agent</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/cloud_amazon.html">cloud-<wbr>amazon</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/cloud_google.html">cloud-<wbr>google</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/cloud_microsoft.html">cloud-<wbr>microsoft</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/cloud_rasa.html">cloud-<wbr>rasa</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/dialog.html">dialog</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/intent.html">intent</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/listen.html">listen</a>

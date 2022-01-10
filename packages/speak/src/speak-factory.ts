@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung einer Speak API Instanz
  *
- * API-Version: 1.0
- * Datum:   03.09.2018
+ * API-Version: 2.0
+ * Datum:   28.06.2021
  *
- * Letzte Aenderung: 23.01.2021
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module speak
@@ -21,8 +21,8 @@ import { SystemManager } from '@speech/core';
 
 import { SPEAK_TYPE_NAME, SPEAK_COMPONENT_NAME, SPEAK_MOCK_NAME } from './speak-const';
 import { SpeakComponentBuilder } from './component/speak-component-builder';
-import { SpeakOptionInterface } from './speak-option.interface';
-import { SpeakInterface } from './speak.interface';
+import { ISpeakOption } from './speak-option.interface';
+import { ISpeak } from './speak.interface';
 import { SpeakMobile } from './speak-mobile';
 import { Speak } from './speak';
 
@@ -41,7 +41,10 @@ export class SpeakFactory {
      * Konstruktor ist privat, es kann keine Instanz der Klasse erzeugt werden
      */
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     /**
@@ -49,12 +52,12 @@ export class SpeakFactory {
      * zurueckgeben, einschließlich eines Speak-Mocks.
      *
      * @param {string} aName - Name des zu erzeugenden Speak
-     * @param {SpeakOptionInterface} aOption - optionale Parameter
+     * @param {ISpeakOption} aOption - optionale Parameter
      *
-     * @return {SpeakInterface} Speak Instanz wird zurueckgegeben
+     * @return {ISpeak} Speak Instanz wird zurueckgegeben
      */
 
-    static create( aName?: string, aOption?: SpeakOptionInterface ): SpeakInterface {
+    static create( aName?: string, aOption?: ISpeakOption ): ISpeak {
         // console.log('SpeakFactory.create:', aName, aOption );
         const name = aName || SPEAK_COMPONENT_NAME;
         // Mock zurueckgeben

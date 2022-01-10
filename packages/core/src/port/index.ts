@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer Plort
  *
- * Version: 1.0
- * Datum:   01.12.2018
+ * Version: 2.0
+ * Datum:   01.11.2021
  *
  * Definiert das gesamte Port-API:
  *
@@ -26,9 +26,26 @@ export {
     PORT_RESULT_EVENT,
     PORT_ERROR_EVENT
 } from './port-event-const';
+export {
+    PORT_NLP_ACTION,
+    PORT_NLU_ACTION,
+    PORT_ASR_ACTION,
+    PORT_ASRNLU_ACTION,
+    PORT_TTS_ACTION
+} from './port-action-const';
+// TODO: sollte eigentlich erst in CloudPort definiert sein, Abhaengigkeit wird spaeter aufgeloest
+//       dazu muessen die Port-Namen als Konfiguration induziert werden
+export {
+    CLOUD_AMAZON_PORT,
+    CLOUD_GOOGLE_PORT,
+    CLOUD_MICROSOFT_PORT,
+    CLOUD_RASA_PORT
+} from './port-cloud-const';
 export { PortList } from './port-list';
 export { PortManager } from './port-manager';
-export { Port } from './port';
 export { PortTransaction } from './port-transaction';
-export { PortInterface } from './port.interface';
+export { IPortFactory } from './port-factory.interface';
+export { PortFactory } from './port-factory';
+export { IPort } from './port.interface';
+export { Port } from './port';
 

@@ -2,7 +2,7 @@
  * Globale Export-Datei fuer Factory
  *
  * Version: 1.0
- * Datum:   01.12.2018
+ * Datum:   28.ß6.2021
  *
  * Definiert das gesamte Factory-API:
  *
@@ -19,4 +19,4 @@
 
 export { FactoryManager } from './factory-manager';
 export { Factory } from './factory';
-export { FactoryInterface } from './factory.interface';
+export { IFactory } from './factory.interface';

@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer Service
  *
- * Version: 1.0
- * Datum:   15.10.2020
+ * Version: 2.0
+ * Datum:   28.06.2021
  *
  * Definiert das gesamte Service-API:
  *
@@ -19,5 +19,5 @@ export * from './service-const';
 export { SERVICE_API_VERSION, SERVICE_VERSION_STRING } from './service-version';
 export { ServiceLock } from './service-lock';
 export { ServiceManager } from './service-manager';
-export { ServiceInterface } from './service.interface';
+export { IService } from './service.interface';
 export { Service } from './service';

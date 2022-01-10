@@ -1,7 +1,7 @@
 /**
  * Base API Wrapper fuer alle Cordova-Komponenten.
  *
- * Letzte Aenderung: 23.01.2021
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module base
@@ -29,15 +29,15 @@ import {
 // base
 
 import { OnBaseStartFunc, OnBaseStopFunc } from './base-function.type';
-import { BaseOptionInterface } from './base-option.interface';
-import { BaseInterface } from './base.interface';
+import { IBaseOption } from './base-option.interface';
+import { IBase } from './base.interface';
 
 
 /** @export
  * Base Klasse als API-Wrapper fuer alle Komponenten
  */
 
-export class BaseMobile extends ErrorBase implements BaseInterface {
+export class BaseMobile extends ErrorBase implements IBase {
 
 
     // Cordova-Plugin
@@ -64,7 +64,7 @@ export class BaseMobile extends ErrorBase implements BaseInterface {
      * Konstruktor fuer ereignisbasierte Initialisierung von Action
      */
 
-    constructor( aComponentName?: string, aOption?: BaseOptionInterface ) {
+    constructor( aComponentName?: string, aOption?: IBaseOption ) {
         super( aComponentName );
         if ( this._init( aOption ) !== 0 ) {
             throw new Error('Komponente nicht initialisiert');
@@ -96,12 +96,12 @@ export class BaseMobile extends ErrorBase implements BaseInterface {
      * Initialisierung von Base
      *
      * @private
-     * @param {BaseOptionInterface} aOption - optionale Parameter zur Konfiguration
+     * @param {IBaseOption} aOption - optionale Parameter zur Konfiguration
      *
      * @return {number} errorCode(0,-1)
      */
 
-    protected _init( aOption?: BaseOptionInterface ): number {
+    protected _init( aOption?: IBaseOption ): number {
         // console.log('Base.init:', aOption);
 
         // pruefen auf Fehlerausgabe

@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * PluginGroup als Manager fuer Plugins.
  *
- * Letzte Aenderung: 14.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/plugin
@@ -12,16 +12,16 @@
 // plugin
 
 import { PluginList } from './plugin-list';
-import { PluginInterface } from './plugin.interface';
+import { IPlugin } from './plugin.interface';
 import { Plugin } from './plugin';
-import { PluginGroupInterface } from './plugin-group.interface';
+import { IPluginGroup } from './plugin-group.interface';
 
 
 /**
  * Definiert die Basisklasse aller PluginGroup
  */
 
-export class PluginGroup extends Plugin implements PluginGroupInterface {
+export class PluginGroup extends Plugin implements IPluginGroup {
 
 
     /**
@@ -39,7 +39,7 @@ export class PluginGroup extends Plugin implements PluginGroupInterface {
      * @type {Plugin}
      */
 
-    protected mCurrentPlugin: PluginInterface = null;
+    protected mCurrentPlugin: IPlugin = null;
 
 
     /**
@@ -119,7 +119,7 @@ export class PluginGroup extends Plugin implements PluginGroupInterface {
         // Funktion zum testen eines leeren Objekts
         const isEmpty = (obj: any) => {
             for ( const key in obj ) {
-                if ( obj.hasOwnProperty( key )) {
+                if ( Object.prototype.hasOwnProperty.call(obj, key )) {
                     // console.log('PluginGroup.setFeatureList: key = ', key);
                     return false;
                 }
@@ -178,12 +178,12 @@ export class PluginGroup extends Plugin implements PluginGroupInterface {
      * Einfuegen eines Plugins in die Komponente
      *
      * @param {string} aPluginName - Name des Plugins
-     * @param {PluginInterface} aPlugin - Plugin
+     * @param {IPlugin} aPlugin - Plugin
      *
      * @return {number} errorCode(0,-1) - Fehlercode
      */
 
-    insertPlugin( aPluginName: string, aPlugin: PluginInterface ): number {
+    insertPlugin( aPluginName: string, aPlugin: IPlugin ): number {
         // console.log('Component.insertPlugin:', aPluginName);
         return this.mPluginList.insert( aPluginName, aPlugin );
     }
@@ -218,10 +218,10 @@ export class PluginGroup extends Plugin implements PluginGroupInterface {
      *
      * @param {string} aPluginName - Name des Plugins
      *
-     * @return {PluginInterface} - Rueckgabe des Plugins oder null
+     * @return {IPlugin} - Rueckgabe des Plugins oder null
      */
 
-    findPlugin( aPluginName: string, aPluginType?: string ): PluginInterface {
+    findPlugin( aPluginName: string, aPluginType?: string ): IPlugin {
         const plugin = this.mPluginList.find( aPluginName );
         if ( !plugin ) {
             return null;
@@ -230,12 +230,12 @@ export class PluginGroup extends Plugin implements PluginGroupInterface {
     }
 
 
-    firstPlugin(): PluginInterface {
+    firstPlugin(): IPlugin {
         return this.mPluginList.first();
     }
 
 
-    nextPlugin(): PluginInterface {
+    nextPlugin(): IPlugin {
         return this.mPluginList.next();
     }
 
@@ -284,10 +284,10 @@ export class PluginGroup extends Plugin implements PluginGroupInterface {
     /**
      * Aktuelles Plugin zurueckgeben
      *
-     * @return {PluginInterface} Rueckgabe des aktuellen Plugins oder null
+     * @return {IPlugin} Rueckgabe des aktuellen Plugins oder null
      */
 
-    getCurrentPlugin(): PluginInterface {
+    getCurrentPlugin(): IPlugin {
         return this.mCurrentPlugin;
     }
 

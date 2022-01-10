@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * SpeakService fuer die Integration von Speak in Angular
  *
- * API-Version: 1.4
- * Datum: 24.10.2020
+ * API-Version: 2.0
+ * Datum: 28.06.2021
  *
- * Letzte Aenderung: 23.01.2021
+ * Letzte Aenderung: 21.12.2021
  * Status: rot
  *
  * @module speak
@@ -21,10 +21,10 @@ import { ServiceManager, Service, EventEmitter } from '@speech/service';
 
 import { SPEAK_COMPONENT_NAME, SPEAK_SERVICE_NAME, SPEAK_ASYNC_EVENT } from './speak-const';
 import { SPEAK_API_VERSION } from './speak-version';
-import { SpeakOptionInterface } from './speak-option.interface';
-import { SpeakInterface } from './speak.interface';
+import { ISpeakOption } from './speak-option.interface';
+import { ISpeak } from './speak.interface';
 import { SpeakServiceConfig } from './speak-service-config';
-import { SpeakServiceInterface } from './speak-service.interface';
+import { ISpeakService } from './speak-service.interface';
 import { SpeakFactory } from './speak-factory';
 
 
@@ -32,7 +32,7 @@ import { SpeakFactory } from './speak-factory';
  * SpeakService Klasse
  */
 
-export class SpeakService extends Service implements SpeakServiceInterface {
+export class SpeakService extends Service implements ISpeakService {
 
     /** definiert die Konfiguration des Service */
 
@@ -44,7 +44,7 @@ export class SpeakService extends Service implements SpeakServiceInterface {
 
     // Speak-Komponente
 
-    protected mSpeak: SpeakInterface = null;
+    protected mSpeak: ISpeak = null;
 
     // Service-Events
 
@@ -96,7 +96,7 @@ export class SpeakService extends Service implements SpeakServiceInterface {
      * @return SpeakServiceOptions - dient zur Einstellung der otionalen Parameter
      */
 
-    static getConfig(): SpeakOptionInterface {
+    static getConfig(): ISpeakOption {
         return SpeakService.speakServiceConfig;
     }
 
@@ -114,7 +114,7 @@ export class SpeakService extends Service implements SpeakServiceInterface {
             }
         }
         if ( ServiceManager.insert( this ) !== 0 ) {
-            console.log('SpeakService: wurde nicht in ServiceManager eingetragen');
+            this._error('SpeakService', 'speakService wurde nicht in ServiceManager eingetragen');
         }
     }
 
@@ -129,7 +129,7 @@ export class SpeakService extends Service implements SpeakServiceInterface {
      * @param aOption - optionale Parameter
      */
 
-    protected _setOption( aOption: SpeakOptionInterface ): number {
+    protected _setOption( aOption: ISpeakOption ): number {
         // console.log('SpeakService._setOption:', aOption);
         if ( super._setOption( aOption ) !== 0 ) {
             return -1;
@@ -180,7 +180,7 @@ export class SpeakService extends Service implements SpeakServiceInterface {
      * @return {number} Fehlercode 0 oder -1
      */
 
-    init( aOption?: SpeakOptionInterface ): number {
+    init( aOption?: ISpeakOption ): number {
         return super.init( aOption );
     }
 
@@ -193,7 +193,7 @@ export class SpeakService extends Service implements SpeakServiceInterface {
      * @return {number} Fehlercode 0 oder -1
      */
 
-    reset( aOption?: SpeakOptionInterface ): number {
+    reset( aOption?: ISpeakOption ): number {
         return super.reset( aOption );
     }
 

@@ -1,13 +1,14 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer Message
  *
- * Version: 1.0
- * Datum:   14.10.2020
+ * Version: 2.0
+ * Datum:   02.07.2021
  *
  * Definiert das gesamte Message-API:
  *
  *      MessageConst     - Message Konstanten
- *      MessageInterface - Message-Interface fuer alle Message-Objekte
+ *      MessageFunc      - Message-Funktionen
+ *      IMessage         - Message-Interface fuer alle Message-Objekte
  *
  * @module core/message
  * @author SB
@@ -18,5 +19,6 @@
 
 
 export * from './message-const';
-export { MessageInterface } from './message.interface';
+export { SendMessageFunc, HandleMessageFunc } from './message-function.type';
+export { IMessage } from './message.interface';
 

@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Oeffentliche Base Schnittstelle, fuer alle Komponenten APIs.
  *
- * API-Version: 1.1
- * Datum:       24.10.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module base
@@ -14,7 +14,7 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc, SessionInterface } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc, ISession } from '@speech/core';
 
 
 // base
@@ -32,7 +32,7 @@ import {
  * Base Schnittstelle
  */
 
-export interface BaseInterface {
+export interface IBase {
 
 
     /**
@@ -264,7 +264,7 @@ export interface BaseInterface {
      * @return {number} Fehlercode 0 oder -1
      */
 
-    start( aSession?: SessionInterface ): number;
+    start( aSession?: ISession ): number;
 
 
     /**

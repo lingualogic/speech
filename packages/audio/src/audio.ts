@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Dialog API Wrapper fuer AudioComponent (erst mal AudioPlayer)
  *
- * Letzte Aenderung: 06.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module audio
@@ -19,8 +19,8 @@ import { OnSpeechInitFunc, OnSpeechErrorFunc, FactoryManager, PluginManager } fr
 import { AUDIO_API_VERSION } from './audio-version';
 import { AUDIOPLAYER_FACTORY_NAME, AUDIOPLAYER_PLUGIN_NAME, AUDIO_MP3_FORMAT, AUDIO_WAV_FORMAT } from './audio-const';
 import { OnAudioStartFunc, OnAudioStopFunc, OnAudioUnlockFunc } from './audio-function.type';
-import { AudioInterface } from './audio.interface';
-import { AudioPlayerInterface } from './player/audio-player.interface';
+import { IAudio } from './audio.interface';
+import { IAudioPlayer } from './player/audio-player.interface';
 import { AudioPlayerFactory } from './player/audio-player-factory';
 
 
@@ -28,11 +28,11 @@ import { AudioPlayerFactory } from './player/audio-player-factory';
  * Audio Klasse als API-Wrapper fuer die AudioComponent
  */
 
-export class Audio implements AudioInterface {
+export class Audio implements IAudio {
 
     // interne Komponenten
 
-    mAudioPlayer: AudioPlayerInterface = null;
+    mAudioPlayer: IAudioPlayer = null;
 
 
     /**
@@ -64,7 +64,7 @@ export class Audio implements AudioInterface {
             // erzeugen der Bot-Komponente
 
             const audioPlayerFactory = FactoryManager.get( AUDIOPLAYER_FACTORY_NAME, AudioPlayerFactory );
-            this.mAudioPlayer = PluginManager.get( AUDIOPLAYER_PLUGIN_NAME, AUDIOPLAYER_PLUGIN_NAME, audioPlayerFactory ) as AudioPlayerInterface;
+            this.mAudioPlayer = PluginManager.get( AUDIOPLAYER_PLUGIN_NAME, AUDIOPLAYER_PLUGIN_NAME, audioPlayerFactory ) as IAudioPlayer;
             if ( !this.mAudioPlayer ) {
                 console.log('Audio._init: kein AudioPlayer erzeugt');
                 return -1;
@@ -193,6 +193,10 @@ export class Audio implements AudioInterface {
 
     // Player-Funktionen
 
+
+    play( aDataPath: string, aName: string ): number {
+        return this.mAudioPlayer.play( aDataPath, aName );
+    }
 
     playFile( aFileName: string ): number {
         return this.mAudioPlayer.playFile( aFileName );

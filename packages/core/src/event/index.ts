@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer Event
  *
- * Version: 1.1
- * Datum:   24.10.2020
+ * Version: 2.0
+ * Datum:   28.06.2021
  *
  * Definiert das gesamte Event-API:
  *
@@ -18,5 +18,5 @@
 
 
 export { EventFunc } from './event-function.type';
-export { EventDataInterface } from './event-data.interface';
+export { IEventData } from './event-data.interface';
 export { EventFunctionList } from './event-function-list';

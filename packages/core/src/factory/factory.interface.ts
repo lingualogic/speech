@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Factory-Interface fuer die Erzeugung von Objekten
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 27.10.2021
  * Status: rot
  *
  * @module core/factory
@@ -9,14 +9,17 @@
  */
 
 
+import { IErrorBase } from './../error/error-base.interface';
+
+
 /**
  * Erzeugt ein neues Objekt
  *
  * @export
- * @interface FactoryInterface
+ * @interface IFactory
  */
 
-export interface FactoryInterface {
+export interface IFactory extends IErrorBase {
 
 
     isMock(): boolean;
@@ -41,7 +44,7 @@ export interface FactoryInterface {
 
 
     /**
-     * Erzeugt ein neues Objekt zum uebergebenen ObjektNamen
+     * Erzeugt ein neues Objekt zum uebergebenen ObjektNamen (synchron)
      *
      * @param [aObjectName] - einmaliger  Instanzen-Name des zu erzeugenden Objektes
      * @param [aObjectClass] - Klassen-Name des zu erzeugenden Objektes
@@ -51,5 +54,18 @@ export interface FactoryInterface {
      */
 
     create( aObjectName?: string, aObjectClass?: string, aRegisterFlag?: boolean ): any;
+
+
+    /**
+     * Erzeugt ein neues Objekt zum uebergebenen ObjektNamen (asynchron)
+     *
+     * @param [aObjectName] - einmaliger  Instanzen-Name des zu erzeugenden Objektes
+     * @param [aObjectClass] - Klassen-Name des zu erzeugenden Objektes
+     * @param [aRegisterFlag] - true, wenn Objekt global in einen Manager eingetragen werden soll
+     *
+     * @return {any} - Objekt Instanz oder null
+     */
+
+     createAsync( aObjectName?: string, aObjectClass?: string, aRegisterFlag?: boolean ): Promise<any>;
 
 }

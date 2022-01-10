@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Builder-Konfiguration Schnittstelle
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/builder
@@ -13,7 +13,7 @@
  * Builder-Konfiguration Interface zur Konfiguration einer Komponente
  */
 
-export interface BuilderConfigInterface {
+export interface IBuilderConfig {
 
     // Instanzen-Name einer Komponente
 

@@ -6,11 +6,10 @@
  * Installierte ASR:
  *
  *      ASRHtml5     - Default Web-ASR
- *      ASRNuance    - Nuance-Service ASR (deprecated)
  *      ASRGoogle    - Google-Service ASR (nur mit Speech-Server)
  *      ASRMicrosoft - Google-Service ASR (nur mit Speech-Server)
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 21.12.2021
  * Status: rot
  *
  * @module listen/asr
@@ -20,7 +19,7 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc, PluginGroup } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc, PluginGroup, PluginList } from '@speech/core';
 
 
 // asr
@@ -29,12 +28,11 @@ import {
     ASR_TYPE_NAME,
     ASR_GROUP_NAME,
     ASR_HTML5_NAME,
-    ASR_NUANCE_NAME,
     ASR_GOOGLE_NAME,
     ASR_MICROSOFT_NAME
 } from './asr-const';
 import {
-    ASRInterface,
+    IASR,
     ASRStartListenFunc,
     ASRStopListenFunc,
     OnASRListenStartFunc,
@@ -42,6 +40,7 @@ import {
     OnASRListenResultFunc,
     OnASRListenNoMatchFunc
 } from './asr.interface';
+import { IASROption } from './asr-option.interface';
 import { ASRFactory } from './asr-factory';
 
 
@@ -49,7 +48,7 @@ import { ASRFactory } from './asr-factory';
  * Diese Klasse ist die Verwaltungsklasse fuer alle implementierten ASR
  */
 
-export class ASRGroup extends PluginGroup implements ASRInterface {
+export class ASRGroup extends PluginGroup implements IASR {
 
 
     /**
@@ -62,18 +61,51 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
 
     // alle inneren ASR
 
-    private mASRHtml5: ASRInterface = null;
-    private mASRNuance: ASRInterface = null;
-    private mASRGoogle: ASRInterface = null;
-    private mASRMicrosoft: ASRInterface = null;
+    private mASRList = new PluginList();
+    private mASRHtml5: IASR = null;
+    private mASRGoogle: IASR = null;
+    private mASRMicrosoft: IASR = null;
 
 
     // aktuell genutzte ASR
 
-    private mCurrentASR: ASRInterface = null;
+    private mCurrentASR: IASR = null;
 
 
     // Event-Funktionen
+
+
+    /**
+     * Callback-Funktion fuer Connect-Event
+     * @private
+     */
+
+    // private mOnConnectFunc: OnASRConnectFunc = null;
+
+
+    /**
+     * Callback-Funktion fuer Disconnect-Event
+     * @private
+     */
+ 
+    // private mOnDisconnectFunc: OnASRDisconnectFunc = null;
+ 
+
+    // Event-Funktionen
+ 
+    private mOnListenStartFunc: OnASRListenStartFunc = null;
+    private mOnListenStopFunc: OnASRListenStopFunc = null;
+    private mOnListenResultFunc: OnASRListenResultFunc = null;
+    private mOnListenInterimResultFunc: OnASRListenResultFunc = null;
+    private mOnListenNoMatchFunc: OnASRListenNoMatchFunc = null;
+    private mOnListenRecognitionStartFunc: OnASRListenStartFunc = null;
+    private mOnListenRecognitionStopFunc: OnASRListenStopFunc = null;
+    private mOnListenAudioStartFunc: OnASRListenStartFunc = null;
+    private mOnListenAudioStopFunc: OnASRListenStopFunc = null;
+    private mOnListenSoundStartFunc: OnASRListenStartFunc = null;
+    private mOnListenSoundStopFunc: OnASRListenStopFunc = null;
+    private mOnListenSpeechStartFunc: OnASRListenStartFunc = null;
+    private mOnListenSpeechStopFunc: OnASRListenStopFunc = null;
 
 
     /**
@@ -113,6 +145,25 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
     }
 
 
+    // Uebergabe-Funktionen
+
+
+    /**
+     * CloudPort Name eintragen
+     * 
+     * @param aCloudPortName 
+     */
+
+    setCloudPortName( aCloudPortName: string ): void {
+        // muss von erbenden Klassen ueberschrieben werden
+    }
+
+    
+    getCloudPortName(): string {
+        return '';
+    }
+
+
     // Plugin-Funktionen
 
 
@@ -128,7 +179,6 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
         }
         // eintragen der verfuegbaren ASR-Plugins
         this.insertPlugin( ASR_HTML5_NAME, this.mASRFactory.create( ASR_HTML5_NAME, ASR_HTML5_NAME, false ));
-        this.insertPlugin( ASR_NUANCE_NAME, this.mASRFactory.create( ASR_NUANCE_NAME, ASR_NUANCE_NAME, false ));
         this.insertPlugin( ASR_GOOGLE_NAME, this.mASRFactory.create( ASR_GOOGLE_NAME, ASR_GOOGLE_NAME, false ));
         this.insertPlugin( ASR_MICROSOFT_NAME, this.mASRFactory.create( ASR_MICROSOFT_NAME, ASR_MICROSOFT_NAME, false ));
     }
@@ -141,7 +191,7 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     protected _initASRHtml5( aOption: any ): void {
-        this.mASRHtml5 = this.findPlugin( ASR_HTML5_NAME ) as ASRInterface;
+        this.mASRHtml5 = this.findPlugin( ASR_HTML5_NAME ) as IASR;
         if ( this.mASRHtml5 ) {
             this.mASRHtml5.init( aOption );
             if ( this.mASRHtml5.isActive()) {
@@ -161,39 +211,13 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
 
 
     /**
-     * Initialisierung des NUANCE-ASR Plugins
-     *
-     * @param {*} aOption - optionale Parameter
-     */
-
-    protected _initASRNuance( aOption: any ): void {
-        this.mASRNuance = this.findPlugin( ASR_NUANCE_NAME ) as ASRInterface;
-        if ( this.mASRNuance ) {
-            this.mASRNuance.init( aOption );
-            if ( this.mASRNuance.isActive()) {
-                if ( this.isErrorOutput()) {
-                    console.log('ASRGroup._initASRNuance: ASR eingefuegt');
-                }
-                return;
-            }
-            this.removePlugin( ASR_NUANCE_NAME );
-            this.mASRNuance.done();
-            this.mASRNuance = null;
-        }
-        if ( this.isErrorOutput()) {
-            console.log('ASRGroup._initASRNuance: ASR nicht eingefuegt');
-        }
-    }
-
-
-    /**
      * Initialisierung des GOOGLE-ASR Plugins
      *
      * @param {*} aOption - optionale Parameter
      */
 
     protected _initASRGoogle( aOption: any ): void {
-        this.mASRGoogle = this.findPlugin( ASR_GOOGLE_NAME ) as ASRInterface;
+        this.mASRGoogle = this.findPlugin( ASR_GOOGLE_NAME ) as IASR;
         if ( this.mASRGoogle ) {
             this.mASRGoogle.init( aOption );
             if ( this.mASRGoogle.isActive()) {
@@ -219,7 +243,7 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     protected _initASRMicrosoft( aOption: any ): void {
-        this.mASRMicrosoft = this.findPlugin( ASR_MICROSOFT_NAME ) as ASRInterface;
+        this.mASRMicrosoft = this.findPlugin( ASR_MICROSOFT_NAME ) as IASR;
         if ( this.mASRMicrosoft ) {
             this.mASRMicrosoft.init( aOption );
             if ( this.mASRMicrosoft.isActive()) {
@@ -272,7 +296,6 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
         // ASR eintragen in Reihenfolge ihrer Nutzung
 
         this._initASRHtml5( option );   // Default-ASR
-        this._initASRNuance( option );
         this._initASRGoogle( option );
         this._initASRMicrosoft( option );
 
@@ -283,12 +306,15 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
 
         // erste ASR einstellen als Default-ASR
 
-        this.mCurrentASR = this.firstPlugin() as ASRInterface;
+        this.mCurrentASR = this.firstPlugin() as IASR;
         if ( !this.mCurrentASR ) {
             // keine ASR verfuegbar !
             if ( this.isErrorOutput()) {
                 console.log('ASRGroup.init: keine ASR verfuegbar');
             }
+            // TODO: Problem an dieser Stelle, wenn ASR-Plugins dynamisch hinzugefuegt werden
+            //       dann sollte Active wieder auf ON gesetzt werden. Problem wird in insertASR
+            //       geloest.
             this.setActiveOff();
         }
 
@@ -308,10 +334,24 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
 
     done(): number {
         this.mASRHtml5 = null;
-        this.mASRNuance = null;
         this.mASRGoogle = null;
         this.mASRMicrosoft = null;
         this.mCurrentASR = null;
+        // this.mOnConnectFunc = null;
+        // this.mOnDisconnectFunc = null;
+        this.mOnListenStartFunc = null;
+        this.mOnListenStopFunc = null;
+        this.mOnListenResultFunc = null;
+        this.mOnListenInterimResultFunc = null;
+        this.mOnListenNoMatchFunc = null;
+        this.mOnListenRecognitionStartFunc = null;
+        this.mOnListenRecognitionStopFunc = null;
+        this.mOnListenAudioStartFunc = null;
+        this.mOnListenAudioStopFunc = null;
+        this.mOnListenSoundStartFunc = null;
+        this.mOnListenSoundStopFunc = null;
+        this.mOnListenSpeechStartFunc = null;
+        this.mOnListenSpeechStopFunc = null;
         return super.done();
     }
 
@@ -326,9 +366,15 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
     isActive(): boolean {
         // pruefen auf vorhandene ASR
         if ( !this.mCurrentASR ) {
+            if ( this.isErrorOutput()) {
+                console.log('ASRGroup.isActive: keine ASR eingestellt');
+            }
             return false;
         }
         if ( !this.mCurrentASR.isActive()) {
+            if ( this.isErrorOutput()) {
+                console.log('ASRGroup.isActive: ASR ist nicht aktiv ', this.mCurrentASR.getName());
+            }
             return false;
         }
         return super.isActive();
@@ -365,12 +411,13 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
 
     set onInit( aOnInitFunc: OnSpeechInitFunc ) {
         // console.log('ASRGroup.onInit:', aOnInitFunc );
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnInitFunc = aOnInitFunc;
+        let asr = this.firstPlugin() as IASR;
         // console.log('ASRGroup.onInit: asr = ', asr);
         while ( asr ) {
             // console.log('ASRGroup.onInit:', asr.getName());
             asr.onInit = aOnInitFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -382,10 +429,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenStart( aOnListenStartFunc: OnASRListenStartFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenStartFunc = aOnListenStartFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenStart = aOnListenStartFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -397,10 +445,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenStop( aOnListenStopFunc: OnASRListenStopFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenStopFunc = aOnListenStopFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenStop = aOnListenStopFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -412,10 +461,12 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenResult( aOnListenResultFunc: OnASRListenResultFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenResultFunc = aOnListenResultFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
+            // console.log('ASRGroup._onListenResult: asr = ', asr.getName());
             asr.onListenResult = aOnListenResultFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -427,10 +478,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenInterimResult( aOnListenInterimResultFunc: OnASRListenResultFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenInterimResultFunc = aOnListenInterimResultFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenInterimResult = aOnListenInterimResultFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -442,10 +494,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenNoMatch( aOnListenNoMatchFunc: OnASRListenNoMatchFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenNoMatchFunc = aOnListenNoMatchFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenNoMatch = aOnListenNoMatchFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -457,10 +510,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenRecognitionStart( aOnListenRecognitionStartFunc: OnASRListenStartFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenRecognitionStartFunc = aOnListenRecognitionStartFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenRecognitionStart = aOnListenRecognitionStartFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -472,10 +526,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenRecognitionStop( aOnListenRecognitionStopFunc: OnASRListenStopFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenRecognitionStopFunc = aOnListenRecognitionStopFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenRecognitionStop = aOnListenRecognitionStopFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -487,10 +542,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenAudioStart( aOnListenAudioStartFunc: OnASRListenStartFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenAudioStartFunc = aOnListenAudioStartFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenAudioStart = aOnListenAudioStartFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -502,10 +558,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenAudioStop( aOnListenAudioStopFunc: OnASRListenStopFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenAudioStopFunc = aOnListenAudioStopFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenAudioStop = aOnListenAudioStopFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -517,10 +574,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenSoundStart( aOnListenSoundStartFunc: OnASRListenStartFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenSoundStartFunc = aOnListenSoundStartFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenSoundStart = aOnListenSoundStartFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -532,10 +590,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenSoundStop( aOnListenSoundStopFunc: OnASRListenStopFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenSoundStopFunc = aOnListenSoundStopFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenSoundStop = aOnListenSoundStopFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -546,10 +605,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenSpeechStart( aOnListenSpeechStartFunc: OnASRListenStartFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenSpeechStartFunc = aOnListenSpeechStartFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenSpeechStart = aOnListenSpeechStartFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -561,10 +621,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     set onListenSpeechStop( aOnListenSpeechStopFunc: OnASRListenStopFunc ) {
-        let asr = this.firstPlugin() as ASRInterface;
+        this.mOnListenSpeechStopFunc = aOnListenSpeechStopFunc;
+        let asr = this.firstPlugin() as IASR;
         while ( asr ) {
             asr.onListenSpeechStop = aOnListenSpeechStopFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
     }
 
@@ -579,11 +640,11 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
         // console.log('ASRGroup.onError: start', aOnErrorFunc);
         this.mOnErrorFunc = aOnErrorFunc;
         // Schleife fuer alle Plugins
-        let asr = this.firstPlugin() as ASRInterface;
+        let asr = this.firstPlugin() as IASR;
         // console.log('ASRGroup.onError: first asr = ', asr);
         while ( asr ) {
             asr.onError = aOnErrorFunc;
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
             // console.log('ASRGroup.onError: next asr = ', asr);
         }
     }
@@ -607,6 +668,93 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
 
 
     /**
+     * Einfuegen einer ASR
+     *
+     * @param aASRName - individueller ASR-Name
+     * @param aASRClass - Klassenname der ASR
+     * @param aOption - optionale Parameter zur Initialisierung der ASR
+     */
+
+     insertASR( aASRName: string, aASRClass: string, aOption: IASROption ): number {
+        // pruefen auf vorhandenes Plugin
+        if ( this.findPlugin( aASRName )) {
+            return 0;
+        }
+        // Plugin eintragen
+        // TODO: Untersuchen, warum ich hier RegisterFlag = false gemacht habe
+        if ( this.insertPlugin( aASRName, this.mASRFactory.create( aASRName, aASRClass, false )) !== 0 ) {
+            return -1;
+        }
+        // Plugin initialisieren
+        const asrPlugin = this.findPlugin( aASRName ) as IASR;
+        // console.log('ASRGroup.insertASR: asr = ', asrPlugin);
+        if ( asrPlugin ) {
+            asrPlugin.init( aOption );
+            if ( asrPlugin.isActive()) {
+                if ( this.isErrorOutput()) {
+                    console.log('ASRGroup.insertASR: ASR eingefuegt ', aASRName, aASRClass);
+                }
+                // console.log('ASRGroup._insertASR: resultFunc = ', this.mOnListenResultFunc);
+                // Funktionen verbinden
+                asrPlugin.onInit = this.mOnInitFunc;
+                asrPlugin.onListenStart = this.mOnListenStartFunc;
+                asrPlugin.onListenStop = this.mOnListenStopFunc;
+                asrPlugin.onListenRecognitionStart = this.onListenRecognitionStart;
+                asrPlugin.onListenRecognitionStop = this.onListenRecognitionStop;
+                asrPlugin.onListenAudioStart = this.onListenAudioStart;
+                asrPlugin.onListenAudioStop = this.onListenAudioStop;
+                asrPlugin.onListenSoundStart = this.onListenSoundStart;
+                asrPlugin.onListenSoundStop = this.onListenSoundStop;
+                asrPlugin.onListenSpeechStart = this.onListenSpeechStart;
+                asrPlugin.onListenSpeechStop = this.onListenSpeechStop;
+                asrPlugin.onListenResult = this.mOnListenResultFunc;
+                asrPlugin.onListenInterimResult = this.onListenInterimResult;
+                asrPlugin.onListenNoMatch = this.onListenNoMatch;
+                asrPlugin.onError = this.mOnErrorFunc;
+                // ASR eintragen
+                let result = this.mASRList.insert( aASRName, asrPlugin );
+                // falls es sich um die erste ASR handelt, die dynamisch eingefuegt wird,
+                // muss geprueft werden ob Active auf OFF gesetzt war und keine CurrentASR
+                // gesetzt ist
+                if ( this.getASR() === '' ) {
+                    // console.log('ASRGroup.insertASR: getASR = ""');
+                    if ( this.setASR( aASRName ) === 0 ) {
+                        result = this.setActiveOn();
+                        // console.log('ASRGroup.insertASR: setActiveOn ', result);
+                    }
+                }
+                return result;
+            }
+            this.removePlugin( aASRName );
+        }
+        if ( this.isErrorOutput()) {
+            console.log('ASRGroup.insertASR: ASR nicht eingefuegt ', aASRName, aASRClass);
+        }
+        return -1;
+    }
+
+
+    /**
+     * Einfuegen einer ASR
+     *
+     * @param aASRName - individueller ASR-Name
+     */
+
+    removeASR( aASRName: string ): number {
+        // Plugin initialisieren
+        const asrPlugin = this.mASRList.find( aASRName );
+        if ( asrPlugin ) {
+            this.mASRList.remove( aASRName );
+            return this.removePlugin( aASRName );
+        }
+        if ( this.isErrorOutput()) {
+            console.log('ASRGroup.removeASR: ASR nicht vorhanden');
+        }
+        return -1;
+    }
+
+
+    /**
      * Setzen der aktuellen ASR ueber ihren Namen
      *
      * @param {string} aASRName - Name der ASR
@@ -624,11 +772,6 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
                 asr = this.mASRHtml5;
                 break;
 
-            case ASR_NUANCE_NAME:
-                // console.log( 'ASRGroup.setASR: Nuance', this.mASRNuance);
-                asr = this.mASRNuance;
-                break;
-
             case ASR_GOOGLE_NAME:
                 // console.log( 'ASRGroup.setASR: Google', this.mASRGoogle);
                 asr = this.mASRGoogle;
@@ -640,6 +783,8 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
                 break;
 
             default:
+                // individuelle ASRs suchen
+                asr = this.mASRList.find( aASRName );
                 break;
         }
 
@@ -696,7 +841,7 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
     setLanguage( aLanguage: string ): number {
         // console.log('ASRGroup.setLanguage', this.getASR(), this.getASRList());
         let result = 0;
-        let asr = this.firstPlugin() as ASRInterface;
+        let asr = this.firstPlugin() as IASR;
         // pruefen, ob eine ASR vorhanden ist
         if ( !asr ) {
             this.error( 'setLanguage', 'Keine ASR vorhanden' );
@@ -707,7 +852,7 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
             if ( asr.setLanguage( aLanguage ) !== 0 ) {
                 result = -1;
             }
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
         return result;
     }
@@ -805,7 +950,7 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
             return -1;
         }
         let result = 0;
-        let asr = this.firstPlugin() as ASRInterface;
+        let asr = this.firstPlugin() as IASR;
         // pruefen, ob eine ASR vorhanden ist
         if ( !asr ) {
             this.error( 'setMode', 'Keine ASR vorhanden' );
@@ -819,7 +964,7 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
                     result = -1;
                 }
             }
-            asr = this.nextPlugin() as ASRInterface;
+            asr = this.nextPlugin() as IASR;
         }
         return result;
     }
@@ -928,13 +1073,19 @@ export class ASRGroup extends PluginGroup implements ASRInterface {
      */
 
     stopListen(): number {
+        // console.log('ASRGroup.stopListen: start');
         // pruefen auf aktive Komponente
         if ( !this.isActive()) {
             // kein Fehler
+            // console.log('ASRGroup.stopListen: no Active');
             if ( this.isErrorOutput()) {
                 console.log('ASRGroup.stopListen: ASR ist nicht aktiv');
             }
             return 0;
+        }
+        if ( !this.mCurrentASR ) {
+            console.log('ASRGroup.stopListen: no currentASR');
+            return -1;
         }
         return this.mCurrentASR.stopListen();
     }

@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * ListenComponent Interface
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module listen/component
@@ -11,7 +11,7 @@
 
 // base
 
-import { BaseComponentInterface } from '@speech/base';
+import { IBaseComponent } from '@speech/base';
 
 
 // asr
@@ -21,7 +21,7 @@ import { OnASRListenStartFunc, OnASRListenStopFunc, OnASRListenResultFunc, OnASR
 
 // listen
 
-import { ListenInterface } from '../listen.interface';
+import { IListen } from '../listen.interface';
 
 
 // Funktionen
@@ -31,7 +31,7 @@ import { ListenInterface } from '../listen.interface';
  * ListenComponent Schnittstelle
  */
 
-export interface ListenComponentInterface extends BaseComponentInterface, ListenInterface {
+export interface IListenComponent extends IBaseComponent, IListen {
 
   // Listen-Events
 

@@ -4,7 +4,7 @@ import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 // SpeechFramework
 
@@ -23,7 +23,7 @@ console.log('');
 
 // Parameter fuer die Erzeugung der SpeechDialog..bundle.js Datei
 
-let readableSourceCode = true; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
+let readableSourceCode = false; // true, wenn Code lesbar sein soll, false sonst (uglify/minify)
 let preambleText =
 `/**
  * Speech-Core Bundle
@@ -53,15 +53,26 @@ let typescriptOverride = { compilerOptions: { declaration: false } };
 
 export default {
     input: './src/index.ts',
-    output: {
-        file: './speech-core.js',
-        format: 'umd',
-        name: 'speechCore',
-        sourcemap: false,
-        globals: {
-        }
+    output: [
+        {
+            file: './speech-core.js',
+            format: 'umd',
+            name: 'speechCore',
+            sourcemap: false,
+            globals: {
+            }
 
-    },
+        },
+        {
+            file: './speech-core-module.js',
+            format: 'es',
+            name: 'speechCore',
+            sourcemap: false,
+            globals: {
+            }
+
+        }
+    ],
     preserveSymlinks: true,
     plugins: [
         typescript({
@@ -72,21 +83,11 @@ export default {
 
         json(),
 
-        /* Uglify-ES
-        uglify({ output: {
+        terser({ output: {
             beautify: readableSourceCode,
             preamble: preambleText,
             quote_style: 3
-        }}, minify),
-        */
-
-        uglify({
-            output: {
-                beautify: readableSourceCode,
-                preamble: preambleText,
-                quote_style: 3
-            }
-        }),
+        }}),
 
         nodeResolve({
             jsnext: true,

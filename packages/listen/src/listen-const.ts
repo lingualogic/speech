@@ -4,7 +4,7 @@
  * API-Version: 1.0
  * Datum: 08.10.2018
  *
- * Letzte Aenderung: 08.10.2018
+ * Letzte Aenderung: 15.10.2021
  * Status: gelb
  *
  * @module listen
@@ -50,7 +50,6 @@ export const LISTEN_ASYNC_EVENT = false;
 // ASR-Konstanten (muessen mit den Konstenten in ASR synchron gehalten werden!)
 
 export const LISTEN_HTML5_ASR = 'ASRHtml5';
-export const LISTEN_NUANCE_ASR = 'ASRNuance';
 export const LISTEN_GOOGLE_ASR = 'ASRGoogle';
 export const LISTEN_MICROSOFT_ASR = 'ASRMicrosoft';
 

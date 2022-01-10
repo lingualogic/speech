@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Builder-Liste zur Speicherung von Plugin-Komponenten
  *
- * Letzte Aenderung: 24.08.2018
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module core/builder
@@ -15,7 +15,7 @@ import { ErrorBase } from './../error/error-base';
 
 // builder
 
-import { BuilderInterface } from './builder.interface';
+import { IBuilder } from './builder.interface';
 
 
 /**
@@ -31,14 +31,14 @@ export class BuilderList extends ErrorBase {
      * Map mit allen erzeugten Buildern
      */
 
-    private mBuilderList = new Map<string, BuilderInterface>();
+    private mBuilderList = new Map<string, IBuilder>();
 
 
     /**
      * Iterator fuer BuilderList
      */
 
-    private mBuilderIterator: IterableIterator<BuilderInterface>;
+    private mBuilderIterator: IterableIterator<IBuilder>;
 
 
     /**
@@ -66,11 +66,11 @@ export class BuilderList extends ErrorBase {
      * Eintragen eines Builders
      *
      * @param {string} aBuilderName - Name des Builders
-     * @param {BuilderInterface} aBuilder - Builder Instanz
+     * @param {IBuilder} aBuilder - Builder Instanz
      * @return {number} errorCode (0,-1) - Fehlercode
      */
 
-    insert( aBuilderName: string, aBuilder: BuilderInterface ): number {
+    insert( aBuilderName: string, aBuilder: IBuilder ): number {
         try {
             if ( !aBuilderName ) {
                 this.error( 'insert', 'kein Buildername uebergeben' );
@@ -98,10 +98,10 @@ export class BuilderList extends ErrorBase {
      * Zurueckgeben eines Builders
      *
      * @param {string} aBuilderName - Name des Builders
-     * @returns {BuilderInterface} - Builder Instanz
+     * @returns {IBuilder} - Builder Instanz
      */
 
-    find( aBuilderName: string ): BuilderInterface {
+    find( aBuilderName: string ): IBuilder {
         try {
             return this.mBuilderList.get( aBuilderName );
         } catch ( aException ) {
@@ -114,10 +114,10 @@ export class BuilderList extends ErrorBase {
     /**
      * ersten Builder der Liste zurueckgeben
      *
-     * @return {BuilderInterface} - Builder Instanz
+     * @return {IBuilder} - Builder Instanz
      */
 
-    first(): BuilderInterface  {
+    first(): IBuilder  {
         try {
             this.mBuilderIterator = this.mBuilderList.values();
             return this.mBuilderIterator.next().value;
@@ -131,10 +131,10 @@ export class BuilderList extends ErrorBase {
     /**
      * naechsten Builder der Liste zurueckgeben. Es muss vorher einmal first aufgerufen werden.
      *
-     * @return {BuilderInterface} - Builder Instanz
+     * @return {IBuilder} - Builder Instanz
      */
 
-    next(): BuilderInterface {
+    next(): IBuilder {
         try {
             return this.mBuilderIterator.next().value;
         } catch ( aException ) {

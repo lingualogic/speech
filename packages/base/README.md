@@ -5,7 +5,7 @@ Die Speech-Base Komponente definiert die Basisfunktionalität für Komponenten z
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 13.04.2021
+* 0.6.1.0002 alpha vom 08.01.2022
 
 
 ## Installation
@@ -50,7 +50,7 @@ Das öffentliche Speech-Base NPM-Paket kann über folgenden Befehl zusammen mit 
 
 Das Speech-Base NPM-Paket kann mit folgendem Befehl wieder deinstalliert werden:
 
-    $ npm uninstall speech-base
+    $ npm uninstall @speech/base
 
 
 ## Bekannte Probleme

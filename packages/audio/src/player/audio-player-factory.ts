@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung eines AudioPlayer
  *
- * API-Version: 1.2
- * Datum:       16.10.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module audio/player
@@ -20,7 +20,7 @@ import { PluginFactory } from '@speech/core';
 // audio
 
 import { AUDIOPLAYER_FACTORY_NAME, AUDIOPLAYER_PLUGIN_NAME, AUDIOPLAYER_MOCK_NAME } from '../audio-const';
-import { AudioPlayerInterface } from './audio-player.interface';
+import { IAudioPlayer } from './audio-player.interface';
 import { AudioPlayer } from './audio-player';
 
 
@@ -45,7 +45,7 @@ export class AudioPlayerFactory extends PluginFactory {
     }
 
 
-    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): AudioPlayerInterface {
+    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): IAudioPlayer {
         return new AudioPlayer( AUDIOPLAYER_PLUGIN_NAME, aRegisterFlag );
     }
 
@@ -61,7 +61,7 @@ export class AudioPlayerFactory extends PluginFactory {
      * @return AudioPlayer wird zurueckgegeben
      */
 
-    create( aPlayerName = '', aPlayerClass = '', aRegisterFlag = true ): AudioPlayerInterface {
+    create( aPlayerName = '', aPlayerClass = '', aRegisterFlag = true ): IAudioPlayer {
         const playerName = aPlayerName || AUDIOPLAYER_PLUGIN_NAME;
         const playerClass = aPlayerClass || AUDIOPLAYER_PLUGIN_NAME;
         // Mock zurueckgeben

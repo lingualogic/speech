@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Oeffentliche Service Schnittstelle, fuer alle Service-APIs.
  *
- * API-Version: 1.0
- * Datum:       24.10.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 23.01.2021
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module service
@@ -14,7 +14,7 @@
 
 // base 
 
-import { BaseOptionInterface } from '@speech/base';
+import { IBaseOption } from '@speech/base';
 
 
 // service
@@ -29,7 +29,7 @@ import { EventEmitter } from './event-emitter';
  * Service Schnittstelle
  */
 
-export interface ServiceInterface {
+export interface IService {
 
     // Service-Eigenschaften
 
@@ -88,11 +88,10 @@ export interface ServiceInterface {
      * Initialisierung des Service
      *
      * @param aOption - optionale Parameter zur Konfiguration des Service
-     *
      * @return  Fehlercode 0 oder -1
      */
 
-    init( aOption?: BaseOptionInterface ): number;
+    init( aOption?: any): number;
 
 
     /**
@@ -101,7 +100,7 @@ export interface ServiceInterface {
      * @param {*} aOption - optionale Parameter
      */
 
-    reset( aOption?: BaseOptionInterface ): number;
+    reset( aOption?: any ): number;
 
 
     /**

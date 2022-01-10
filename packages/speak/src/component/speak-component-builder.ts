@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * SpeakComponentBuilder erzeugt die lokale Speak-Komponente
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module speak/component
@@ -11,25 +11,25 @@
 
 // core
 
-import { Builder, BuilderConfigInterface } from '@speech/core';
+import { Builder, IBuilderConfig } from '@speech/core';
 
 
 // audio
 
-import { AUDIOPLAYER_FACTORY_NAME, AUDIOPLAYER_PLUGIN_NAME, AudioPlayerFactory, AudioPlayerInterface } from '@speech/audio';
+import { AUDIOPLAYER_FACTORY_NAME, AUDIOPLAYER_PLUGIN_NAME, AudioPlayerFactory, IAudioPlayer } from '@speech/audio';
 
 
 // tts
 
 import { TTS_FACTORY_NAME, TTS_DEFAULT_NAME } from '../tts/tts-const';
 import { TTSFactory } from '../tts/tts-factory';
-import { TTSInterface } from '../tts/tts.interface';
+import { ITTS } from '../tts/tts.interface';
 
 
 // speak
 
 import { SPEAK_COMPONENTBUILDER_NAME, SPEAK_COMPONENTFACTORY_NAME, SPEAK_COMPONENT_NAME, SPEAK_TYPE_NAME } from '../speak-const';
-import { SpeakComponentInterface } from './speak-component.interface';
+import { ISpeakComponent } from './speak-component.interface';
 import { SpeakComponentFactory } from './speak-component-factory';
 
 
@@ -67,19 +67,19 @@ export class SpeakComponentBuilder extends Builder {
      * @return Rueckgabe der Speak-Komponente
      */
 
-    build( aConfig?: BuilderConfigInterface ): SpeakComponentInterface {
+    build( aConfig?: IBuilderConfig ): ISpeakComponent {
         // console.log('SpeakComponentBuilder.build: start');
         // pruefen, ob Komponente schon vorhanden ist
         const componentName = this._getComponentName( aConfig ) || SPEAK_COMPONENT_NAME;
-        let speak = this._findComponent( componentName ) as SpeakComponentInterface;
+        let speak = this._findComponent( componentName ) as ISpeakComponent;
         if ( speak ) {
             return speak;
         }
         // neue Komponente erzeugen
         try {
             speak = this._buildComponent( aConfig );
-            const tts = this._getPlugin( TTS_DEFAULT_NAME, TTS_DEFAULT_NAME, TTS_FACTORY_NAME, TTSFactory ) as TTSInterface;
-            const audioPlayer = this._getPlugin( AUDIOPLAYER_PLUGIN_NAME, AUDIOPLAYER_PLUGIN_NAME, AUDIOPLAYER_FACTORY_NAME, AudioPlayerFactory ) as AudioPlayerInterface;
+            const tts = this._getPlugin( TTS_DEFAULT_NAME, TTS_DEFAULT_NAME, TTS_FACTORY_NAME, TTSFactory ) as ITTS;
+            const audioPlayer = this._getPlugin( AUDIOPLAYER_PLUGIN_NAME, AUDIOPLAYER_PLUGIN_NAME, AUDIOPLAYER_FACTORY_NAME, AudioPlayerFactory ) as IAudioPlayer;
             if ( this._binder( speak, tts, audioPlayer ) !== 0 ) {
                 this.error( 'build', 'Komponenten nicht verbunden' );
                 return null;
@@ -100,10 +100,10 @@ export class SpeakComponentBuilder extends Builder {
      * @return Rueckgabe der Komponente
      */
 
-    protected _buildComponent( aConfig?: BuilderConfigInterface ): SpeakComponentInterface {
+    protected _buildComponent( aConfig?: IBuilderConfig ): ISpeakComponent {
         const componentName = this._getComponentName( aConfig ) || SPEAK_COMPONENT_NAME;
         const componentClass = this._getComponentClass( aConfig ) || SPEAK_COMPONENT_NAME;
-        return this._getPlugin( componentName, componentClass, SPEAK_COMPONENTFACTORY_NAME, SpeakComponentFactory ) as SpeakComponentInterface;
+        return this._getPlugin( componentName, componentClass, SPEAK_COMPONENTFACTORY_NAME, SpeakComponentFactory ) as ISpeakComponent;
     }
 
 
@@ -118,7 +118,7 @@ export class SpeakComponentBuilder extends Builder {
      * @return {number} errorCode(0,-1)
      */
 
-    protected _binder( aSpeak: SpeakComponentInterface, aTTS: TTSInterface, aAudioPlayer: AudioPlayerInterface ): number {
+    protected _binder( aSpeak: ISpeakComponent, aTTS: ITTS, aAudioPlayer: IAudioPlayer ): number {
         if ( !aSpeak ) {
             this.error( '_binder', 'Keine Speak-Komponente vorhanden' );
             return -1;

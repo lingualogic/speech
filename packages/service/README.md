@@ -5,7 +5,7 @@ Die Speech-Service Komponente definiert die öffentliche API der Komponenten.
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 13.04.2021
+* 0.6.1.0002 alpha vom 08.01.2022
 
 
 ## Installation
@@ -50,7 +50,7 @@ Das öffentliche Speech-Service NPM-Paket kann über folgenden Befehl zusammen m
 
 Das Speech-Service NPM-Paket kann mit folgendem Befehl wieder deinstalliert werden:
 
-    $ npm uninstall speech-service
+    $ npm uninstall @speech/service
 
 
 ## Bekannte Probleme

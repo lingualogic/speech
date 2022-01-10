@@ -1,13 +1,13 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer Session
  *
- * Version: 1.0
- * Datum:   14.10.2020
+ * Version: 2.0
+ * Datum:   29.06.2021
  *
  * Definiert das gesamte Session-API:
  *
  *      SessionConst     - Session Konstanten
- *      SessionInterface - Session-Interface fuer alle Session-Objekte
+ *      ISession - Session-Interface fuer alle Session-Objekte
  *
  * @module core/session
  * @author SB
@@ -18,5 +18,5 @@
 
 
 // export * from './session-const';
-export { SessionInterface } from './session.interface';
+export { ISession } from './session.interface';
 

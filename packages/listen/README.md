@@ -4,7 +4,7 @@ Die Speech-Listen Komponente dient der Spracherkennung.
 
 ## Letzte Version
 
-* 0.6.0.0001 alpha vom 13.04.2021
+* 0.6.1.0002 alpha vom 08.01.2022
 
 
 ## Installation
@@ -32,28 +32,28 @@ Das Speech-Listen NPM-Paket ist zusammen mit allen anderen NP-Paketen von Speech
 Speech-Listen ist von folgenden anderen Speech NPM-Paketen abhängig:
 
     * Speech-Core
-    * Speech-Common
+    * Speech-Net
     * Speech-Cloud
     * Speech-Base
     * Speech-Service
 
 Diese NPM-Pakete müssen zusammen mit Speech-Listen im eigenen Projekt installiert werden, wenn sie nicht vorher schon installiert worden sind. Das kann mit Hilfe folgenden Befehls durchgeführt werden, wenn alle abhängigen NPM-Pakete zusammen ins eigene Projektverzeichnis kopiert worden sind:
 
-    $ npm install speech-core-0.6.x.tgz speech-common-0.6.x.tgz speech-cloud-0.6.x.tgz speech-base-0.6.x.tgz speech-service-0.6.x.tgz speech-listen-0.6.x.tgz
+    $ npm install speech-core-0.6.x.tgz speech-net-0.6.x.tgz speech-cloud-0.6.x.tgz speech-base-0.6.x.tgz speech-service-0.6.x.tgz speech-listen-0.6.x.tgz
 
 
 ### Über globales NPM-Repository
 
 Das öffentliche Speech-Listen NPM-Paket kann über folgenden Befehl zusammen mit seinen abhängigen NPM-Paketen aus dem globalen NPM-Repository installiert werden:
 
-    $ npm install @speech/core @speech/common @speech/cloud @speech/base @speech/service @speech/listen
+    $ npm install @speech/core @speech/net @speech/cloud @speech/base @speech/service @speech/listen
 
 
 ## Deinstallation
 
 Das Speech-Listen NPM-Paket kann mit folgendem Befehl wieder deinstalliert werden:
 
-    $ npm uninstall speech-listen
+    $ npm uninstall @speech/listen
 
 
 ## Bekannte Probleme

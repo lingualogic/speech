@@ -7,7 +7,7 @@
  */
 
 
-export interface SessionInterface {
+export interface ISession {
     // eindeutige Session-ID fuer diese Aktion
     session: string;
     // Name der aufrufenden Komponente

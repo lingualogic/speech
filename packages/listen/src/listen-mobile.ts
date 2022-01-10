@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Listen API fuer Listen-Cordova Komponente (Wrapper)
  *
- * Letzte Aenderung: 23.01.2021
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module listen
@@ -32,15 +32,15 @@ import { BaseMobile } from '@speech/base';
 // listen
 
 import { OnListenResultFunc, OnListenNoMatchFunc, OnListenStartFunc, OnListenStopFunc } from './listen-function.type';
-import { ListenOptionInterface } from './listen-option.interface';
-import { ListenInterface } from './listen.interface';
+import { IListenOption } from './listen-option.interface';
+import { IListen } from './listen.interface';
 
 
 /** @export
  * Listen Klasse als API-Wrapper fuer die ListenComponent
  */
 
-export class ListenMobile extends BaseMobile implements ListenInterface {
+export class ListenMobile extends BaseMobile implements IListen {
 
     // Events
 
@@ -69,7 +69,7 @@ export class ListenMobile extends BaseMobile implements ListenInterface {
      * Konstruktor fuer ereignisbasierte Initialisierung des Listen
      */
 
-    constructor( aOption?: ListenOptionInterface ) {
+    constructor( aOption?: IListenOption ) {
         super( 'Listen', aOption );
     }
 
@@ -89,18 +89,18 @@ export class ListenMobile extends BaseMobile implements ListenInterface {
      * Initialisierung von Base
      *
      * @private
-     * @param {ListenOptionInterface} aOption - optionale Parameter zur Konfiguration
+     * @param {IListenOption} aOption - optionale Parameter zur Konfiguration
      *
      * @return {number} errorCode(0,-1)
      */
 
-    protected _init( aOption?: ListenOptionInterface ): number {
+    protected _init( aOption?: IListenOption ): number {
         console.log('Listen.init:', aOption);
 
         // pruefen auf Fehlerausgabe
 
         if ( aOption && typeof aOption.errorOutputFlag === 'boolean' ) {
-            this.setErrorOutputFlag( aOption.errorOutputFlag );
+            this.setErrorOutput( aOption.errorOutputFlag );
         }
 
         // pruefen auf cordova

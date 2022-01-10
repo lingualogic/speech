@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Globale Konstanten fuer Speak
  *
- * API-Version: 1.0
- * Datum: 03.09.2018
+ * API-Version: 2.0
+ * Datum: 15.10.2021
  *
- * Letzte Aenderung: 03.09.2018
+ * Letzte Aenderung: 15.10.2021
  * Status: gruen
  *
  * @module speak
@@ -53,7 +53,6 @@ export const SPEAK_AUDIO_FLAG = false;
 
 export const SPEAK_HTML5_TTS = 'TTSHtml5';
 export const SPEAK_AMAZON_TTS = 'TTSAmazon';
-export const SPEAK_NUANCE_TTS = 'TTSNuance';
 export const SPEAK_GOOGLE_TTS = 'TTSGoogle';
 export const SPEAK_MICROSOFT_TTS = 'TTSMicrosoft';
 

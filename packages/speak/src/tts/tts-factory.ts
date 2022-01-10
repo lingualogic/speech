@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung einer TTS Version
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 15.10.2021
  * Status: rot
  *
  * @module speak/tts
@@ -16,14 +16,13 @@ import { PluginFactory } from '@speech/core';
 
 // tts
 
-import { TTS_TYPE_NAME, TTS_FACTORY_NAME, TTS_DEFAULT_NAME, TTS_GROUP_NAME, TTS_PLUGIN_NAME, TTS_MOCK_NAME, TTS_HTML5_NAME, TTS_AMAZON_NAME, TTS_GOOGLE_NAME, TTS_MICROSOFT_NAME, TTS_NUANCE_NAME } from './tts-const';
-import { TTSInterface } from './tts.interface';
+import { TTS_TYPE_NAME, TTS_FACTORY_NAME, TTS_DEFAULT_NAME, TTS_GROUP_NAME, TTS_PLUGIN_NAME, TTS_MOCK_NAME, TTS_HTML5_NAME, TTS_AMAZON_NAME, TTS_GOOGLE_NAME, TTS_MICROSOFT_NAME } from './tts-const';
+import { ITTS } from './tts.interface';
 import { TTSMock } from './tts-mock';
 import { TTSHtml5 } from './tts-html5';
 import { TTSAmazon } from './tts-amazon';
 import { TTSGoogle } from './tts-google';
 import { TTSMicrosoft } from './tts-microsoft';
-import { TTSNuance } from './tts-nuance';
 import { TTSGroup } from './tts-group';
 
 
@@ -72,8 +71,8 @@ export class TTSFactory extends PluginFactory {
      * @return gibt TTS Instanz oder null zurueck
      */
 
-    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): TTSInterface {
-        let tts: TTSInterface = null;
+    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): ITTS {
+        let tts: ITTS = null;
         switch ( aPluginClass ) {
             case TTS_GROUP_NAME:
                 tts = new TTSGroup( this, aPluginName, aRegisterFlag );
@@ -82,6 +81,7 @@ export class TTSFactory extends PluginFactory {
             case TTS_PLUGIN_NAME:
                 // durchfallen ist beabsichtigt, da TTSHtml5 als Default-Plugin
                 // verwendet wird
+            /* typescript-eslint-disable no-fallthrough */                
             case TTS_HTML5_NAME:
                 tts = new TTSHtml5( aPluginName, aRegisterFlag );
                 break;
@@ -96,10 +96,6 @@ export class TTSFactory extends PluginFactory {
             // Microsoft-TTS
             case TTS_MICROSOFT_NAME:
                 tts = new TTSMicrosoft( aPluginName, aRegisterFlag );
-                break;
-            // Nuance-TTS
-            case TTS_NUANCE_NAME:
-                tts = new TTSNuance( aPluginName, aRegisterFlag );
                 break;
             // Mock-TTS
             case TTS_MOCK_NAME:
@@ -125,7 +121,7 @@ export class TTSFactory extends PluginFactory {
      * @return TTS-Komponente wird zurueckgegeben
      */
 
-    create( aPluginName = '', aPluginClass = '', aRegisterFlag = true ): TTSInterface {
+    create( aPluginName = '', aPluginClass = '', aRegisterFlag = true ): ITTS {
         const pluginName = aPluginName || TTS_DEFAULT_NAME;
         const pluginClass = aPluginClass || TTS_DEFAULT_NAME;
 

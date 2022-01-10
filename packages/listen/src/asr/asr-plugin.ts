@@ -1,8 +1,8 @@
 /** @packageDocumentation
  *  ASRPlugin definiert die Basisklasse aller ASRs
  *
- * Letzte Aenderung: 25.10.2020
- * Status: gruen
+ * Letzte Aenderung: 31.10.2021
+ * Status: gelb
  *
  * @module listen/asr
  * @author SB
@@ -28,7 +28,7 @@ import {
     ASR_DEFAULT_MODE
 } from './asr-const';
 import {
-    ASRInterface,
+    IASR,
     ASRStartListenFunc,
     ASRStopListenFunc,
     OnASRListenStartFunc,
@@ -36,13 +36,14 @@ import {
     OnASRListenResultFunc,
     OnASRListenNoMatchFunc
 } from './asr.interface';
+import { IASROption } from './asr-option.interface';
 
 
 /**
  * Diese Klasse ist die Basisklasse aller ASRs
  */
 
-export class ASRPlugin extends Plugin implements ASRInterface {
+export class ASRPlugin extends Plugin implements IASR {
 
     /**
      * Flag fuer laufende Spracherkennung
@@ -196,6 +197,7 @@ export class ASRPlugin extends Plugin implements ASRInterface {
 
     protected mOnListenSpeechStopFunc: OnASRListenStopFunc = null;
 
+
     /**
      * ASRPlugin erzeugen
      *
@@ -240,7 +242,7 @@ export class ASRPlugin extends Plugin implements ASRInterface {
      * @return {number} errorCode (0,-1)
      */
 
-    init( aOption?: any ): number {
+    init( aOption?: IASROption ): number {
         // console.log('ASRPlugin.init:', aOption);
         // pruefen auf doppelte Initialisierung
 
@@ -251,6 +253,7 @@ export class ASRPlugin extends Plugin implements ASRInterface {
 
         // console.log('ASRPlugin.init: erfolgreich');
         if ( super.init( aOption ) !== 0 ) {
+            console.log('ASRPlugin.init: super.init -1');
             return -1;
         }
 
@@ -342,6 +345,25 @@ export class ASRPlugin extends Plugin implements ASRInterface {
     }
 
 
+    // Uebergabe-Funktionen
+
+
+    /**
+     * CloudPort Name eintragen
+     * 
+     * @param aCloudPortName 
+     */
+
+    setCloudPortName( aCloudPortName: string ): void {
+        // muss von erbenden Klassen ueberschrieben werden
+    }
+
+    
+    getCloudPortName(): string {
+        return '';
+    }
+
+
     // Event-Funktionen
 
 
@@ -397,7 +419,7 @@ export class ASRPlugin extends Plugin implements ASRInterface {
      */
 
     protected _onListenResult( aResultData: any ): number {
-        // console.log('ASRPlugin._onListenResult:', this.getName(), aResultData);
+        // console.log('ASRPlugin._onListenResult:', this.getName(), aResultData, this.mOnListenResultFunc);
         try {
             if ( typeof this.mOnListenResultFunc === 'function' ) {
                 return this.mOnListenResultFunc( aResultData );
@@ -1156,6 +1178,30 @@ export class ASRPlugin extends Plugin implements ASRInterface {
 
 
     /**
+     * Einfuegen einer ASR
+     *
+     * @param aASRName - individueller ASR-Name
+     * @param aASRClass - Klassenname der ASR
+     * @param aOption - optionale Parameter zur Initialisierung der ASR
+     */
+
+    insertASR( aASRName: string, aASRClass: string, aOption: any ): number {
+        return -1;
+    }
+
+
+    /**
+     * Einfuegen einer ASR
+     *
+     * @param aASRName - individueller ASR-Name
+     */
+
+    removeASR( aASRName: string ): number {
+        return 0;
+    }
+
+
+    /**
      * Setzen der aktuellen ASR ueber ihren Namen
      *
      * @param {string} aASRName - Name der ASR
@@ -1484,11 +1530,12 @@ export class ASRPlugin extends Plugin implements ASRInterface {
      */
 
     stopListen(): number {
-        // console.log('ASRPlugin._stopAbortListen:', aAbortFlag);
+        // console.log('ASRPlugin._stopAbortListen');
 
         // pruefen auf aktive Komponente
 
         if ( !this.isActive()) {
+            console.log('ASRPlugin._stopAbortListen: no Active');
             // kein Fehler
             if ( this.isErrorOutput()) {
                 console.log('ASRPlugin.stopListen: ASR ist nicht aktiv');
@@ -1499,6 +1546,7 @@ export class ASRPlugin extends Plugin implements ASRInterface {
         // pruefen auf laufende Spracheingabe
 
         if ( !this.isListenRunning()) {
+            // console.log('ASRPlugin._stopListen: no Listen Running');
             // TODO: Sollte eigentlich kein Fehler sein, da StopListen immer aufrufbar sein soll,
             //       auch wenn gerade keine Sprachausgabe laeuft
             // this.error( 'stopListen', 'Spracheingabe nicht gestartet' );

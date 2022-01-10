@@ -11,12 +11,6 @@
         "path": "../core/tsconfig.build.json"
       },
       {
-        "path": "../common/tsconfig.build.json"
-      },
-      {
-        "path": "../cloud/tsconfig.build.json"
-      },
-      {
         "path": "../audio/tsconfig.build.json"
       },
       {

@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung einer Listen API Instanz
  *
- * API-Version: 1.0
- * Datum: 08.10.2018
+ * API-Version: 2.0
+ * Datum: 28.06.2021
  *
- * Letzte Aenderung: 23.01.2021
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module listen
@@ -21,8 +21,8 @@ import { SystemManager } from '@speech/core';
 
 import { LISTEN_TYPE_NAME, LISTEN_COMPONENT_NAME, LISTEN_MOCK_NAME } from './listen-const';
 import { ListenComponentBuilder } from './component/listen-component-builder';
-import { ListenOptionInterface } from './listen-option.interface';
-import { ListenInterface } from './listen.interface';
+import { IListenOption } from './listen-option.interface';
+import { IListen } from './listen.interface';
 import { ListenMobile } from './listen-mobile';
 import { Listen } from './listen';
 
@@ -41,7 +41,10 @@ export class ListenFactory {
      * Konstruktor ist privat, es kann keine Instanz der Klasse erzeugt werden
      */
 
-    private constructor() {}
+    /* typescript-eslint-disable no-empty-function */
+    private constructor() {
+        // statische Klasse
+    }
 
 
     /**
@@ -49,12 +52,12 @@ export class ListenFactory {
      * zurueckgeben, einschließlich eines Listen-Mocks.
      *
      * @param {string} aName - Name des zu erzeugenden Listen
-     * @param {ListenOptionInterface} aOption - optionale Parameter
+     * @param {IListenOption} aOption - optionale Parameter
      *
-     * @return {ListenInterface} Listen Instanz wird zurueckgegeben
+     * @return {IListen} Listen Instanz wird zurueckgegeben
      */
 
-    static create( aName?: string, aOption?: ListenOptionInterface ): ListenInterface {
+    static create( aName?: string, aOption?: IListenOption ): IListen {
         const name = aName || LISTEN_COMPONENT_NAME;
         // Mock zurueckgeben
         if ( name === LISTEN_MOCK_NAME ) {

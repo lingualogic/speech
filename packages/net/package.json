@@ -1,0 +1,42 @@
+{
+  "name": "@speech/net",
+  "version": "0.6.1",
+  "description": "Net Library for Speech-Framework",
+  "author": "LinguaLogic Team",
+  "homepage": "https://lingualogic.de",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "lib/speech-net-module.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/speech-net-module.js",
+    "lib/**/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lingualogic/speech",
+    "directory": "packages/net"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "npm run compile",
+    "clean": "gulp clean",
+    "compile": "tsc -b tsconfig.build.json",
+    "bundle": "npx rollup -c ./rollup.config.js && cp speech-net.js ./lib/index.js && cp speech-net.js ./../../dist/deploy",
+    "bundle:module": "cp speech-net-module.js ./lib && cp speech-net-module.js ./../../dist/module",
+    "pack": "npm pack && cp speech-net-0.6.1.tgz ./../../dist",
+    "link": "npm link",
+    "linkGlobal": "cd ../.. && npm link @speech/net --legacy-peer-deps",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "peerDependencies": {
+    "@speech/core": "0.6.1"
+  }
+}

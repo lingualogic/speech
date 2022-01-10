@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Speak API fuer Speak-Cordova Komponente (Wrapper)
  *
- * Letzte Aenderung: 23.01.2021
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module speak
@@ -18,15 +18,15 @@ import { BaseMobile } from '@speech/base';
 // speak
 
 import { OnSpeakAudioUnlockFunc } from './speak-function.type';
-import { SpeakOptionInterface } from './speak-option.interface';
-import { SpeakInterface } from './speak.interface';
+import { ISpeakOption } from './speak-option.interface';
+import { ISpeak } from './speak.interface';
 
 
 /** @export
  * Speak Klasse als API-Wrapper fuer die Speak-Android API
  */
 
-export class SpeakMobile extends BaseMobile implements SpeakInterface {
+export class SpeakMobile extends BaseMobile implements ISpeak {
 
     // innere Attribute
 
@@ -48,7 +48,7 @@ export class SpeakMobile extends BaseMobile implements SpeakInterface {
      * Konstruktor fuer ereignisbasierte Initialisierung von Speak
      */
 
-    constructor( aOption?: SpeakOptionInterface ) {
+    constructor( aOption?: ISpeakOption ) {
         super( 'SpeakMobile', aOption );
     }
 
@@ -68,18 +68,18 @@ export class SpeakMobile extends BaseMobile implements SpeakInterface {
      * Initialisierung von Base
      *
      * @private
-     * @param {SpeakOptionInterface} aOption - optionale Parameter zur Konfiguration
+     * @param {ISpeakOption} aOption - optionale Parameter zur Konfiguration
      *
      * @return {number} errorCode(0,-1)
      */
 
-    _init( aOption?: SpeakOptionInterface ): number {
+    _init( aOption?: ISpeakOption ): number {
         console.log('Speak.init:', aOption);
 
         // pruefen auf Fehlerausgabe
 
         if ( aOption && typeof aOption.errorOutputFlag === 'boolean' ) {
-            this.setErrorOutputFlag( aOption.errorOutputFlag );
+            this.setErrorOutput( aOption.errorOutputFlag );
         }
 
         // pruefen auf cordova

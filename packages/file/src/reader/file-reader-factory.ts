@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung eines FileReader Plugins
  *
- * Version: 1.1
- * Datum:   06.10.2020
+ * Version: 2.0
+ * Datum:   12.07.2021
  *
  * @module file/reader
  * @author SB
@@ -17,7 +17,7 @@ import { PluginFactory } from '@speech/core';
 // file
 
 import { FILEREADER_FACTORY_NAME, FILEREADER_PLUGIN_NAME, FILEREADER_MOCK_NAME } from '../const/file-const';
-import { FileReaderInterface } from './file-reader.interface';
+import { IFileReader } from './file-reader.interface';
 import { FileReader } from './file-reader';
 
 
@@ -37,7 +37,7 @@ export class FileReaderFactory extends PluginFactory {
         return FILEREADER_FACTORY_NAME;
     }
 
-    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): FileReaderInterface {
+    protected _newPlugin( aPluginName: string, aPluginClass: string, aRegisterFlag: boolean ): IFileReader {
         return new FileReader( aRegisterFlag );
     }
 
@@ -49,10 +49,10 @@ export class FileReaderFactory extends PluginFactory {
      * @param {string} aReaderName - Name der zu erzeugenden FileReader-Komponente
      * @param {boolean} aRegisterFlag - wenn gesetztm, wird das Plugin in den PluginManager eingetragen
      *
-     * @return {FileReaderInterface} fileReader wird zurueckgegeben
+     * @return {IFileReader} fileReader wird zurueckgegeben
      */
 
-    create( aReaderName?: string, aPluginClass = '', aRegisterFlag = true ): FileReaderInterface {
+    create( aReaderName?: string, aPluginClass = '', aRegisterFlag = true ): IFileReader {
         const readerName = aReaderName || FILEREADER_PLUGIN_NAME;
         // Mock zurueckgeben
         if ( readerName === FILEREADER_MOCK_NAME ) {

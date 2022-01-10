@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Hier wird die ASRPort als Adapter fuer CloudPort implementiert.
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 15.10.2021
  * Status: rot
  *
  * @module listen/asr
@@ -11,12 +11,7 @@
 
 // core
 
-import { EventDataInterface, PortInterface } from '@speech/core';
-
-
-// cloud
-
-import { CLOUD_ASR_ACTION, CloudManager } from '@speech/cloud';
+import { IEventData, IPort, PortManager, PORT_ASR_ACTION } from '@speech/core';
 
 
 // asr
@@ -33,7 +28,7 @@ export class ASRPort extends ASRPlugin {
 
     // externer Google-Port
 
-    protected mPort: PortInterface = null;
+    protected mPort: IPort = null;
     protected mPortName = '';
     protected mCloudPortName = '';
 
@@ -46,10 +41,9 @@ export class ASRPort extends ASRPlugin {
      * @param {boolean} aRegisterFlag - bestimmt, ob Plugin in PluginManager eingetragen wird
      */
 
-    constructor( aCloudPortName: string, aPluginName?: string, aRegisterFlag = true ) {
+    constructor( aPluginName?: string, aRegisterFlag = true ) {
         super( aPluginName || ASR_PORT_NAME, aRegisterFlag );
         this.mPortName = aPluginName;
-        this.mCloudPortName = aCloudPortName;
     }
 
 
@@ -67,6 +61,14 @@ export class ASRPort extends ASRPlugin {
     // Plugin-Funktionen
 
 
+    protected _setOption( aOption: any ): number {
+        if ( typeof aOption.cloudPortName === 'string' ) {
+            this.mCloudPortName = aOption.cloudPortName;
+        }
+        return 0;
+    }
+
+
     /**
      * Freigabe von TTS
      */
@@ -78,6 +80,25 @@ export class ASRPort extends ASRPlugin {
             this.mPort = null;
         }
         return super.done();
+    }
+
+
+    // Uebergabe-Funktionen
+
+
+    /**
+     * CloudPort Name eintragen
+     * 
+     * @param aCloudPortName 
+     */
+
+    setCloudPortName( aCloudPortName: string ): void {
+        this.mCloudPortName = aCloudPortName;
+    }
+
+    
+    getCloudPortName(): string {
+        return this.mCloudPortName;
     }
 
 
@@ -115,7 +136,14 @@ export class ASRPort extends ASRPlugin {
      */
 
     protected _detectRecognition(): boolean {
-        this.mPort = CloudManager.findPort( this.mCloudPortName );
+        // console.log('ASRPort._detectRecognition: asrName = ', this.getName(),'cloudPortName = ', this.mCloudPortName);
+        if ( !this.mCloudPortName ) {
+            this.error( '_detectRecognition', 'kein CloudPortName vorhanden');
+            return false;
+        }
+
+        this.mPort = PortManager.find( this.mCloudPortName );
+        // console.log('ASRPort._detectRecognition: cloudPort = ', this.mPort);
         if ( !this.mPort ) {
             this.error( '_detectRecognition', 'kein Port vorhanden' );
             return false;
@@ -143,21 +171,23 @@ export class ASRPort extends ASRPlugin {
             this.error( '_initRecognition', 'Port ist nicht initialisiert' );
             return -1;
         }
+        /* TODO: isOpen ist hier falsch, da ein WebSocket auch erst beim Start der ASR geoeffnet werden kann
         if ( !this.mPort.isOpen()) {
             this.error( '_initRecognition', 'Port ist nicht geoeffnet' );
             return -1;
         }
-        this.mPort.addStartEvent( this.mPortName, (aEventData: EventDataInterface) => {
+        */
+        this.mPort.addStartEvent( this.mPortName, (aEventData: IEventData) => {
             // console.log('ASRPort._initRecognition: startEvent = ', aEventData);
             this._onRecognitionStart();
             return 0;
         });
-        this.mPort.addStopEvent( this.mPortName, (aEventData: EventDataInterface) => {
-            // onsole.log('ASRPort._initRecognition: stopEvent = ', aEventData);
+        this.mPort.addStopEvent( this.mPortName, (aEventData: IEventData) => {
+            // console.log('ASRPort._initRecognition: stopEvent = ', aEventData);
             this._onRecognitionEnd();
             return 0;
         });
-        this.mPort.addResultEvent( this.mPortName, (aEventData: EventDataInterface) => {
+        this.mPort.addResultEvent( this.mPortName, (aEventData: IEventData) => {
             // console.log('ASRPort._initRecognition: resultEvent = ', aEventData);
             this._onRecognitionResult( aEventData.data );
             return 0;
@@ -186,7 +216,7 @@ export class ASRPort extends ASRPlugin {
 
     protected _isRecognition(): boolean {
         if ( this.mPort ) {
-            return this.mPort.isAction( CLOUD_ASR_ACTION );
+            return this.mPort.isAction( PORT_ASR_ACTION );
         }
         return false;
     }
@@ -202,7 +232,9 @@ export class ASRPort extends ASRPlugin {
     protected _getRecognitionResult( aEvent: any ): any {
         // hier wird das Ergebnis in ein definiertes Result-DatentransferObjekt umgewandelt
         // console.log('ARSGoogle._getRecognitionResult:', aEvent);
-        return aEvent[0].transcript;
+        // TODO: Anpassung an Format muss in Cloud-Port vorgenommen werde!
+        // return aEvent[0].transcript;
+        return aEvent;
     }
 
 
@@ -217,7 +249,7 @@ export class ASRPort extends ASRPlugin {
         // console.log('ASRPort._startRecognition');
         if ( this.mPort ) {
             // console.log('ASRPort._startRecognition:', this._getASRLanguage());
-            return this.mPort.start( this.mPortName, CLOUD_ASR_ACTION, { language: this._getASRLanguage() });
+            return this.mPort.start( this.mPortName, PORT_ASR_ACTION, { language: this._getASRLanguage() });
         }
         return -1;
     }
@@ -231,9 +263,9 @@ export class ASRPort extends ASRPlugin {
      */
 
     protected _stopRecognition(): number {
-        // console.log('ASRPort._stopRecognition');
+        // console.log('ASRPort._stopRecognition:', this.mPortName, this.mCloudPortName, this.mPort );
         if ( this.mPort ) {
-            return this.mPort.stop( this.mPortName, CLOUD_ASR_ACTION );
+            return this.mPort.stop( this.mPortName, PORT_ASR_ACTION );
         }
         return -1;
     }
@@ -263,7 +295,7 @@ export class ASRPort extends ASRPlugin {
         // console.log('TTSGoogle._isRecognitionRunning');
         if ( this.mPort ) {
             // console.log('ASRPort._isRecognitionRunning: ', this.mPort.isRunning( this.mPortName, this.mCloudPortName ));
-            return this.mPort.isRunning( this.mPortName, CLOUD_ASR_ACTION );
+            return this.mPort.isRunning( this.mPortName, PORT_ASR_ACTION );
         }
         return false;
     }

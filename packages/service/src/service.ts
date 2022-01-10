@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Service als abstrakte Basisklasse aller Services zur Anbindung an UI-Frameworks
  *
- * API-Version: 1.0
- * Datum:       24.10.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module service
@@ -14,7 +14,7 @@
 
 // base
 
-import { BaseInterface, BaseOptionInterface } from '@speech/base';
+import { IBase, IBaseOption } from '@speech/base';
 
 
 // service
@@ -23,18 +23,18 @@ import { EventEmitter } from './event-emitter';
 
 import { SERVICE_API_VERSION, SERVICE_VERSION_STRING } from './service-version';
 import { SERVICE_ASYNC_EVENT, SERVICE_ERROR_OUTPUT } from './service-const';
-import { ServiceInterface } from './service.interface';
+import { IService } from './service.interface';
 
 
 /** @export
  * Service als abstrakte Klasse fuer alle Services.
  */
 
-export class Service implements ServiceInterface {
+export class Service implements IService {
 
     // innere Komponente
 
-    private mComponent: BaseInterface = null;
+    private mComponent: IBase = null;
     protected mComponentName = '';
 
     // Service Attribute
@@ -97,7 +97,7 @@ export class Service implements ServiceInterface {
      * @return Fehlercode 0 oder -1
      */
 
-    protected _setOption( aOption: BaseOptionInterface ): number {
+    protected _setOption( aOption: IBaseOption ): number {
         // console.log('Service._setOption:', aOption);
         if ( !aOption ) {
             return -1;
@@ -123,7 +123,7 @@ export class Service implements ServiceInterface {
      * @return {*} Rueckgabe der Komponenteninstanz
      */
 
-    protected _createComponent( aComponentName: string, aOption: BaseOptionInterface ): any {
+    protected _createComponent( aComponentName: string, aOption: IBaseOption ): any {
         // muss von erbenden Klassen ueberschrieben werden
         return null;
     }
@@ -133,11 +133,10 @@ export class Service implements ServiceInterface {
      * Initialisierung des Service
      *
      * @param aOption - optionale Parameter zur Konfiguration des Service
-     *
      * @return  Fehlercode 0 oder -1
      */
 
-    init( aOption?: BaseOptionInterface ): number {
+    init( aOption?: any ): number {
         // console.log('Service.init:', aOption, this.mComponent !== null);
         // pruefen auf bereits initialisiert
         if ( this.mComponent ) {
@@ -145,7 +144,7 @@ export class Service implements ServiceInterface {
             return 0;
         }
         // Komponente erzeugen
-        this.mComponent = this._createComponent( this.getComponentName(), aOption ) as BaseInterface;
+        this.mComponent = this._createComponent( this.getComponentName(), aOption ) as IBase;
         if ( !this.mComponent ) {
             this._error('init', 'Komponente nicht erzeugt');
             return -1;
@@ -167,7 +166,7 @@ export class Service implements ServiceInterface {
      * @return Fehlercode 0 oder -1
      */
 
-    reset( aOption?: BaseOptionInterface ): number {
+    reset( aOption?: any ): number {
         if ( !this.mComponent ) {
             this._error('reset', 'keine Komponente vorhanden');
             return -1;

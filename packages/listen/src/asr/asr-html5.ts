@@ -3,7 +3,7 @@
  * Funktioniert zur Zeit nur in Chrome. Ist Speech-Recognition nicht vorhanden, wird
  * die Komponente in Active Off versetzt.
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 21.12.2021
  * Status: gelb
  *
  * @module listen/asr
@@ -24,9 +24,9 @@
 import { FactoryManager } from '@speech/core';
 
 
-// common
+// listen
 
-import { SPEECHRECOGNITION_FACTORY_NAME, SpeechRecognitionFactory } from '@speech/common';
+import { SPEECHRECOGNITION_FACTORY_NAME, SpeechRecognitionFactory } from './../common/speechrecognition-factory';
 
 
 // asr
@@ -338,9 +338,13 @@ export class ASRHtml5 extends ASRPlugin {
                 this._onRecognitionSpeechStart();
             };
             this.mRecognition.onspeechend = () => this._onRecognitionSpeechEnd();
-            this.mRecognition.onresult = (aEvent: any) => this._onRecognitionResult( aEvent );
+            this.mRecognition.onresult = (aEvent: any) => {
+                // console.log('ASRHtml5.onresult:', aEvent);
+                this._onRecognitionResult( aEvent );
+            };
             this.mRecognition.onnomatch = (aEvent: any) => this._onRecognitionNoMatch( aEvent );
             this.mRecognition.onerror = (aEvent: any) => {
+                // console.log('ASRHtml5.onerror:', aEvent);
                 this._clearBreakTimeout();
                 this._onRecognitionError( aEvent );
             };
@@ -387,7 +391,7 @@ export class ASRHtml5 extends ASRPlugin {
      */
 
     protected _getRecognitionResult( aEvent: any ): any {
-        // console.log('ARSHTML._getRecognitionResult:', aEvent);
+        // console.log('ARSHtml5._getRecognitionResult:', aEvent.results);
 
         // hier wird das Ergebnis in ein definiertes Result-DatentransferObjekt umgewandelt
 
@@ -397,26 +401,50 @@ export class ASRHtml5 extends ASRPlugin {
 
         // letzten Text holen
 
-        const pos = aEvent.results.length - 1;
-        let resultText = aEvent.results[ pos ][ 0 ].transcript;
+        // TODO: fuer Zwischenergebnisse muss der Code komplett ueberarbeitet werden
+        //       das Cordova-Plugin Speech-Recognition muss ebenfalls angepasst werden
+        /*
+        try {
+            const pos = aEvent.results.length - 1;
+            let resultText = aEvent.results[ pos ][ 0 ].transcript;
 
-        // Schleife fuer alle nicht finalen Texte
+            // Schleife fuer alle nicht finalen Texte
 
-        let text = '';
-        for ( const result of aEvent.results ) {
-            if ( !result.isFinal ) {
-                text += result[ 0 ].transcript;
+            let text = '';
+            for ( const result of aEvent.results ) {
+                if ( !result.isFinal ) {
+                    text += result[ 0 ].transcript;
+                }
             }
+            if ( text ) {
+                resultText = text;
+            }
+
+            // TODO: alte Version mit einem Ergebnis im Command-Mode
+            // return aEvent.results[0][0].transcript;
+
+            console.log('ASRHtml5._getRecognitionResult:', resultText);
+            return resultText;
+        } catch ( aException ) {
+            this.exception( '_getRecognitionResult', aException );
+            return '';
         }
-        if ( text ) {
-            resultText = text;
+        */
+
+        // Work-Around Code
+        try {
+            const resultText = aEvent.results[ 0 ][ 0 ].transcript;
+
+            // TODO: alte Version mit einem Ergebnis im Command-Mode
+            // return aEvent.results[0][0].transcript;
+
+            // console.log('ASRHtml5._getRecognitionResult:', resultText);
+            return resultText;
+        } catch ( aException ) {
+            this.exception( '_getRecognitionResult', aException );
+            return '';
         }
 
-        // TODO: alte Version mit einem Ergebnis im Command-Mode
-        // return aEvent.results[0][0].transcript;
-
-        // console.log('ASRHtml5._getRecognitionResult:', resultText)
-        return resultText;
     }
 
 
@@ -436,13 +464,18 @@ export class ASRHtml5 extends ASRPlugin {
             return true;
         }
 
-        const pos = aEvent.results.length - 1;
-        // wenn isFinal nicht exisitert wird finales Result angenommen
-        // console.log('ASRHtml5._isRecognitionFinalResult:', pos, aEvent.results[ pos ].isFinal);
-        if ( typeof aEvent.results[ pos ].isFinal !== 'boolean' ) {
-            return true;
+        try {
+            const pos = aEvent.results.length - 1;
+            // wenn isFinal nicht exisitert wird finales Result angenommen
+            // console.log('ASRHtml5._isRecognitionFinalResult:', pos, aEvent.results[ pos ].isFinal);
+            if ( typeof aEvent.results[ pos ].isFinal !== 'boolean' ) {
+                return true;
+            }
+            return aEvent.results[ pos ].isFinal;
+        } catch ( aException ) {
+            this.exception( '_getRecognitionFinalResult', aException );
+            return false;
         }
-        return aEvent.results[ pos ].isFinal;
     }
 
 
@@ -483,6 +516,7 @@ export class ASRHtml5 extends ASRPlugin {
      */
 
     protected _stopRecognition(): number {
+        // console.log('ASRHtml5._stopRecognition');
         if ( this.mRecognition ) {
             this._clearBreakTimeout();
             this.mRecognition.stop();

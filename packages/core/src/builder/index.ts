@@ -1,15 +1,15 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer Builder
  *
- * Version: 1.1
- * Datum:   16.10.2020
+ * Version: 2.0
+ * Datum:   28.06.2021
  *
  * Definiert das gesamte Builder-API:
  *
  *      BuilderManager         - Manager aller Builder
  *      Builder                - Komponenten-Builder
- *      BuilderInterface       - Komponenten-Builder Interface
- *      BuilderConfigInterface - Komponenten-Builder Konfigurations-Interface
+ *      IBuilder               - Komponenten-Builder Interface
+ *      IBuilderConfig         - Komponenten-Builder Konfigurations-Interface
  *
  * @module core/builder
  * @author SB
@@ -20,6 +20,6 @@
 
 
 export { BuilderManager } from './builder-manager';
-export { BuilderConfigInterface } from './builder-config.interface';
-export { BuilderInterface } from './builder.interface';
+export { IBuilderConfig } from './builder-config.interface';
+export { IBuilder } from './builder.interface';
 export { Builder } from './builder';

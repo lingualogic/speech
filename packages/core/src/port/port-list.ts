@@ -1,7 +1,7 @@
-/** @packageDocumentation
+    /** @packageDocumentation
  * Port-Liste zur Speicherung von Port-Komponenten
  *
- * Letzte Aenderung: 28.09.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/port
@@ -16,7 +16,7 @@ import { ErrorBase } from './../error/error-base';
 
 // port
 
-import { PortInterface } from './port.interface';
+import { IPort } from './port.interface';
 
 
 /**
@@ -32,14 +32,14 @@ export class PortList extends ErrorBase {
      * Map mit allen erzeugten Ports
      */
 
-    private mPortList = new Map<string, PortInterface>();
+    private mPortList = new Map<string, IPort>();
 
 
     /**
      * Iterator fuer PortList
      */
 
-    private mPortIterator: IterableIterator<PortInterface>;
+    private mPortIterator: IterableIterator<IPort>;
 
 
     /**
@@ -78,7 +78,7 @@ export class PortList extends ErrorBase {
     getNameList(): string[] {
         try {
             const keyList: string[] = [];
-            this.mPortList.forEach( (value: PortInterface, key: string) => {
+            this.mPortList.forEach( (value: IPort, key: string) => {
                 keyList.push( key );
             });
             return keyList;
@@ -94,12 +94,12 @@ export class PortList extends ErrorBase {
      * Eintragen eines Ports
      *
      * @param {string} aPortName - Name des Ports
-     * @param {PortInterface} aPort - Port Instanz
+     * @param {IPort} aPort - Port Instanz
      *
      * @return {number} errorCode (0,-1) - Fehlercode
      */
 
-    insert( aPortName: string, aPort: PortInterface ): number {
+    insert( aPortName: string, aPort: IPort ): number {
         try {
             if ( !aPortName ) {
                 this.error( 'insert', 'kein Portname uebergeben' );
@@ -129,10 +129,10 @@ export class PortList extends ErrorBase {
      * Zurueckgeben eines Ports
      *
      * @param {string} aPortName - Name des Ports
-     * @returns {PortInterface} - Port Instanz
+     * @returns {IPort} - Port Instanz
      */
 
-    find( aPortName: string ): PortInterface {
+    find( aPortName: string ): IPort {
         try {
             // const port = this.mPortList.get( aPortName );
             // console.log('PortList.find:', aPortName, port);
@@ -148,10 +148,10 @@ export class PortList extends ErrorBase {
     /**
      * ersten Port der Liste zurueckgeben
      *
-     * @return {PortInterface} - Port Instanz
+     * @return {IPort} - Port Instanz
      */
 
-    first(): PortInterface  {
+    first(): IPort  {
         try {
             this.mPortIterator = this.mPortList.values();
             return this.mPortIterator.next().value;
@@ -165,10 +165,10 @@ export class PortList extends ErrorBase {
     /**
      * naechsten Port der Liste zurueckgeben. Es muss vorher einmal first aufgerufen werden.
      *
-     * @return {PortInterface} - Port Instanz
+     * @return {IPort} - Port Instanz
      */
 
-    next(): PortInterface {
+    next(): IPort {
         try {
             return this.mPortIterator.next().value;
         } catch ( aException ) {

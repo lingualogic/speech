@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * TTS Schnittstelle
  *
- * Letzte Aenderung: 07.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gelb
  *
  * @module speak/tts
@@ -11,7 +11,7 @@
 
 // plugin
 
-import { PluginInterface } from '@speech/core';
+import { IPlugin } from '@speech/core';
 
 
 // Funktionen
@@ -27,10 +27,10 @@ export type OnTTSSpeakStopFunc = () => number;
 
 
 /**
- * TTSInterface Interface
+ * ITTS Interface
  */
 
-export interface TTSInterface extends PluginInterface {
+export interface ITTS extends IPlugin {
 
     // Speak-Events
 
@@ -96,7 +96,7 @@ export interface TTSInterface extends PluginInterface {
      * aktuell eingestellte Sprache zurueckgeben
      *
      * @returns {SpeakLanguage}
-     * @memberof SpeakInterface
+     * @memberof ISpeak
      */
 
     getLanguage(): string;

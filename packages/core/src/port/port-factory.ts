@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * PortFactory zur Erzeugung von Ports
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/port
@@ -16,8 +16,8 @@ import { Factory } from './../factory/factory';
 
 // port
 
-import { PortFactoryInterface } from './port-factory.interface';
-import { PortInterface } from './port.interface';
+import { IPortFactory } from './port-factory.interface';
+import { IPort } from './port.interface';
 import { Port } from './port';
 
 
@@ -26,10 +26,10 @@ import { Port } from './port';
  *
  * @export
  * @class PortFactory
- * @implements {PortFactoryInterface}
+ * @implements {IPortFactory}
  */
 
-export class PortFactory extends Factory implements PortFactoryInterface {
+export class PortFactory extends Factory implements IPortFactory {
 
     /**
      * Creates an instance of PortFactory.
@@ -61,7 +61,7 @@ export class PortFactory extends Factory implements PortFactoryInterface {
     // Port-Funktionen
 
 
-    protected _newPort( aPortName: string, aPortClass: string, aRegisterFlag: boolean ): PortInterface {
+    protected _newPort( aPortName: string, aPortClass: string, aRegisterFlag: boolean ): IPort {
         return new Port( aPortName, aRegisterFlag );
     }
 
@@ -76,7 +76,7 @@ export class PortFactory extends Factory implements PortFactoryInterface {
      * @return Instanz des Ports
      */
 
-    create( aPortName = '', aPortClass = '', aRegisterFlag = true ): PortInterface {
+    create( aPortName = '', aPortClass = '', aRegisterFlag = true ): IPort {
         const portName = aPortName || 'Port';
         const portClass = aPortClass || 'Port';
         try {

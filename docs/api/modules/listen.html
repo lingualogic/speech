@@ -80,14 +80,22 @@
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/listen.listenbaseservice.html" class="tsd-kind-icon">Listen<wbr>Base<wbr>Service</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/listen.listenservice.html" class="tsd-kind-icon">Listen<wbr>Service</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/listen.listenoptioninterface.html" class="tsd-kind-icon">Listen<wbr>Option<wbr>Interface</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/listen.listenserviceinterface.html" class="tsd-kind-icon">Listen<wbr>Service<wbr>Interface</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/listen.ilistenoption.html" class="tsd-kind-icon">IListen<wbr>Option</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/listen.ilistenservice.html" class="tsd-kind-icon">IListen<wbr>Service</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/listen.listenserviceoptioninterface.html" class="tsd-kind-icon">Listen<wbr>Service<wbr>Option<wbr>Interface</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="listen.html#listen_async_event" class="tsd-kind-icon">LISTEN_<wbr>ASYNC_<wbr>EVENT</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -96,6 +104,24 @@
 								<li class="tsd-kind-object-literal tsd-parent-kind-module"><a href="listen.html#listenserviceconfig" class="tsd-kind-icon">Listen<wbr>Service<wbr>Config</a></li>
 							</ul>
 						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="listen_async_event" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> LISTEN_<wbr>ASYNC_<wbr>EVENT</h3>
+					<div class="tsd-signature tsd-kind-icon">LISTEN_<wbr>ASYNC_<wbr>EVENT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/listen/src/listen-base-service.ts:37</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Stellt ein, ob die Events synchron oder asynchron ausgeliefert werden</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -133,12 +159,42 @@
 						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="listenserviceconfig.asrdefault" class="tsd-anchor"></a>
+						<h3>asr<wbr>Default</h3>
+						<div class="tsd-signature tsd-kind-icon">asr<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = LISTEN_HTML5_ASR</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in packages/listen/src/listen-service-config.ts:29</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Einstellen der Default-ASR</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="listenserviceconfig.asrlist" class="tsd-anchor"></a>
+						<h3>asr<wbr>List</h3>
+						<div class="tsd-signature tsd-kind-icon">asr<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in packages/listen/src/listen-service-config.ts:27</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Liste aller ASRs</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="listenserviceconfig.erroroutputflag" class="tsd-anchor"></a>
 						<h3>error<wbr>Output<wbr>Flag</h3>
 						<div class="tsd-signature tsd-kind-icon">error<wbr>Output<wbr>Flag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> = false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in packages/listen/src/listen-service-config.ts:29</li>
+								<li>Defined in packages/listen/src/listen-service-config.ts:33</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -153,7 +209,7 @@
 						<div class="tsd-signature tsd-kind-icon">listen<wbr>Language<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = LISTEN_DE_LANGUAGE</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in packages/listen/src/listen-service-config.ts:27</li>
+								<li>Defined in packages/listen/src/listen-service-config.ts:31</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -171,30 +227,6 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="action.html">action</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="agent.html">agent</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="cloud_amazon.html">cloud-<wbr>amazon</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="cloud_google.html">cloud-<wbr>google</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="cloud_microsoft.html">cloud-<wbr>microsoft</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="cloud_rasa.html">cloud-<wbr>rasa</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="dialog.html">dialog</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="intent.html">intent</a>
-					</li>
 					<li class="current tsd-kind-module">
 						<a href="listen.html">listen</a>
 					</li>
@@ -209,13 +241,22 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/listen.listenbaseservice.html" class="tsd-kind-icon">Listen<wbr>Base<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="../classes/listen.listenservice.html" class="tsd-kind-icon">Listen<wbr>Service</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/listen.listenoptioninterface.html" class="tsd-kind-icon">Listen<wbr>Option<wbr>Interface</a>
+						<a href="../interfaces/listen.ilistenoption.html" class="tsd-kind-icon">IListen<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/listen.listenserviceinterface.html" class="tsd-kind-icon">Listen<wbr>Service<wbr>Interface</a>
+						<a href="../interfaces/listen.ilistenservice.html" class="tsd-kind-icon">IListen<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/listen.listenserviceoptioninterface.html" class="tsd-kind-icon">Listen<wbr>Service<wbr>Option<wbr>Interface</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="listen.html#listen_async_event" class="tsd-kind-icon">LISTEN_<wbr>ASYNC_<wbr>EVENT</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-module">
 						<a href="listen.html#listenserviceconfig" class="tsd-kind-icon">Listen<wbr>Service<wbr>Config</a>

@@ -92,8 +92,8 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/service.serviceinterface.html" class="tsd-signature-type">ServiceInterface</a></li>
-					<li><a href="../interfaces/speak.speakserviceinterface.html" class="tsd-signature-type">SpeakServiceInterface</a></li>
+					<li><a href="../interfaces/service.iservice.html" class="tsd-signature-type">IService</a></li>
+					<li><a href="../interfaces/speak.ispeakservice.html" class="tsd-signature-type">ISpeakService</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -317,7 +317,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 					<a name="mspeak" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> m<wbr>Speak</h3>
-					<div class="tsd-signature tsd-kind-icon">m<wbr>Speak<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SpeakInterface</span><span class="tsd-signature-symbol"> = null</span></div>
+					<div class="tsd-signature tsd-kind-icon">m<wbr>Speak<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ISpeak</span><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in packages/speak/src/speak-service.ts:47</li>
@@ -374,7 +374,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
 					<a name="speakserviceconfig" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> speak<wbr>Service<wbr>Config</h3>
-					<div class="tsd-signature tsd-kind-icon">speak<wbr>Service<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a><span class="tsd-signature-symbol"> = SpeakServiceConfig</span></div>
+					<div class="tsd-signature tsd-kind-icon">speak<wbr>Service<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a><span class="tsd-signature-symbol"> = SpeakServiceConfig</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in packages/speak/src/speak-service.ts:39</li>
@@ -401,7 +401,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#active">active</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:260</li>
+									<li>Defined in packages/service/src/service.ts:259</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -420,7 +420,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#active">active</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:244</li>
+									<li>Defined in packages/service/src/service.ts:243</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,7 +529,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#errorevent">errorEvent</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:453</li>
+									<li>Defined in packages/service/src/service.ts:452</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -558,7 +558,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#erroroutput">errorOutput</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:326</li>
+									<li>Defined in packages/service/src/service.ts:325</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -577,7 +577,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#erroroutput">errorOutput</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:310</li>
+									<li>Defined in packages/service/src/service.ts:309</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -714,7 +714,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#initevent">initEvent</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:417</li>
+									<li>Defined in packages/service/src/service.ts:416</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -867,7 +867,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#startevent">startEvent</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:429</li>
+									<li>Defined in packages/service/src/service.ts:428</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -895,7 +895,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#stopevent">stopEvent</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:441</li>
+									<li>Defined in packages/service/src/service.ts:440</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1191,7 +1191,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#_error">_error</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:338</li>
+									<li>Defined in packages/service/src/service.ts:337</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1229,7 +1229,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#_exception">_exception</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:353</li>
+									<li>Defined in packages/service/src/service.ts:352</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1260,7 +1260,7 @@
 					<a name="_setoption" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _set<wbr>Option</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">_set<wbr>Option<span class="tsd-signature-symbol">(</span>aOption<span class="tsd-signature-symbol">: </span><a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">_set<wbr>Option<span class="tsd-signature-symbol">(</span>aOption<span class="tsd-signature-symbol">: </span><a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -1278,7 +1278,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>aOption: <a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a></h5>
+									<h5>aOption: <a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>optionale Parameter</p>
 									</div>
@@ -1297,7 +1297,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getapiversion">getApiVersion</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getapiversion">getApiVersion</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#getapiversion">getApiVersion</a></p>
 								<ul>
 									<li>Defined in packages/service/src/service.ts:84</li>
@@ -1316,7 +1316,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getaudiofilename">getAudioFileName</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getaudiofilename">getAudioFileName</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:472</li>
 								</ul>
@@ -1340,7 +1340,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getaudiofilepath">getAudioFilePath</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getaudiofilepath">getAudioFilePath</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:418</li>
 								</ul>
@@ -1364,7 +1364,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getaudioformat">getAudioFormat</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getaudioformat">getAudioFormat</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:364</li>
 								</ul>
@@ -1387,7 +1387,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getcomponentname">getComponentName</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getcomponentname">getComponentName</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#getcomponentname">getComponentName</a></p>
 								<ul>
 									<li>Defined in packages/service/src/service.ts:72</li>
@@ -1406,7 +1406,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getlanguage">getLanguage</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getlanguage">getLanguage</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:625</li>
 								</ul>
@@ -1430,7 +1430,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getlanguagelist">getLanguageList</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getlanguagelist">getLanguageList</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:662</li>
 								</ul>
@@ -1454,7 +1454,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getname">getName</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getname">getName</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#getname">getName</a></p>
 								<ul>
 									<li>Defined in packages/service/src/service.ts:76</li>
@@ -1473,7 +1473,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#gettts">getTTS</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#gettts">getTTS</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:541</li>
 								</ul>
@@ -1497,7 +1497,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getttslist">getTTSList</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getttslist">getTTSList</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:578</li>
 								</ul>
@@ -1521,7 +1521,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#gettext">getText</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#gettext">getText</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:793</li>
 								</ul>
@@ -1545,7 +1545,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getversion">getVersion</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getversion">getVersion</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#getversion">getVersion</a></p>
 								<ul>
 									<li>Defined in packages/service/src/service.ts:80</li>
@@ -1564,7 +1564,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getvoice">getVoice</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getvoice">getVoice</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:709</li>
 								</ul>
@@ -1588,7 +1588,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#getvoicelist">getVoiceList</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#getvoicelist">getVoiceList</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:746</li>
 								</ul>
@@ -1607,12 +1607,11 @@
 					<a name="init" class="tsd-anchor"></a>
 					<h3>init</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>aOption<span class="tsd-signature-symbol">?: </span><a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>aOption<span class="tsd-signature-symbol">?: </span><a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#init">init</a></p>
 								<p>Overrides <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#init">init</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:183</li>
@@ -1626,7 +1625,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> aOption: <a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> aOption: <a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>optionale Parameter zur Konfiguration des Service</p>
 									</div>
@@ -1646,10 +1645,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#isactive">isActive</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#isactive">isActive</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#isactive">isActive</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:202</li>
+									<li>Defined in packages/service/src/service.ts:201</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1671,7 +1670,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#isaudio">isAudio</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#isaudio">isAudio</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:276</li>
 								</ul>
@@ -1695,10 +1694,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#iserroroutput">isErrorOutput</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#iserroroutput">isErrorOutput</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#iserroroutput">isErrorOutput</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:272</li>
+									<li>Defined in packages/service/src/service.ts:271</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1719,10 +1718,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#isinit">isInit</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#isinit">isInit</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#isinit">isInit</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:188</li>
+									<li>Defined in packages/service/src/service.ts:187</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1744,10 +1743,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#isrunning">isRunning</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#isrunning">isRunning</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#isrunning">isRunning</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:467</li>
+									<li>Defined in packages/service/src/service.ts:466</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1769,7 +1768,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#istts">isTTS</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#istts">isTTS</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:510</li>
 								</ul>
@@ -1792,7 +1791,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#isunlockaudio">isUnlockAudio</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#isunlockaudio">isUnlockAudio</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:261</li>
 								</ul>
@@ -1810,12 +1809,11 @@
 					<a name="reset" class="tsd-anchor"></a>
 					<h3>reset</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">reset<span class="tsd-signature-symbol">(</span>aOption<span class="tsd-signature-symbol">?: </span><a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">reset<span class="tsd-signature-symbol">(</span>aOption<span class="tsd-signature-symbol">?: </span><a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#reset">reset</a></p>
 								<p>Overrides <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#reset">reset</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:196</li>
@@ -1829,7 +1827,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> aOption: <a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> aOption: <a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>optionale Parameter zur Konfiguration des Service</p>
 									</div>
@@ -1849,10 +1847,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setactiveoff">setActiveOff</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setactiveoff">setActiveOff</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#setactiveoff">setActiveOff</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:230</li>
+									<li>Defined in packages/service/src/service.ts:229</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1874,10 +1872,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setactiveon">setActiveOn</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setactiveon">setActiveOn</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#setactiveon">setActiveOn</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:216</li>
+									<li>Defined in packages/service/src/service.ts:215</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1899,7 +1897,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setaudiofilename">setAudioFileName</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setaudiofilename">setAudioFileName</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:457</li>
 								</ul>
@@ -1932,7 +1930,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setaudiofilepath">setAudioFilePath</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setaudiofilepath">setAudioFilePath</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:403</li>
 								</ul>
@@ -1965,7 +1963,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setaudioformat">setAudioFormat</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setaudioformat">setAudioFormat</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:351</li>
 								</ul>
@@ -1998,7 +1996,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setaudiooff">setAudioOff</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setaudiooff">setAudioOff</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:306</li>
 								</ul>
@@ -2022,7 +2020,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setaudioon">setAudioOn</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setaudioon">setAudioOn</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:291</li>
 								</ul>
@@ -2046,10 +2044,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#seterroroutputoff">setErrorOutputOff</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#seterroroutputoff">setErrorOutputOff</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#seterroroutputoff">setErrorOutputOff</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:296</li>
+									<li>Defined in packages/service/src/service.ts:295</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2070,10 +2068,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#seterroroutputon">setErrorOutputOn</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#seterroroutputon">setErrorOutputOn</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#seterroroutputon">setErrorOutputOn</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:284</li>
+									<li>Defined in packages/service/src/service.ts:283</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2094,7 +2092,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setlanguage">setLanguage</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setlanguage">setLanguage</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:610</li>
 								</ul>
@@ -2127,7 +2125,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#settts">setTTS</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#settts">setTTS</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:526</li>
 								</ul>
@@ -2160,7 +2158,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#settext">setText</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#settext">setText</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:778</li>
 								</ul>
@@ -2193,7 +2191,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#setvoice">setVoice</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#setvoice">setVoice</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:694</li>
 								</ul>
@@ -2226,10 +2224,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#start">start</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#start">start</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#start">start</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:481</li>
+									<li>Defined in packages/service/src/service.ts:480</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2251,10 +2249,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#stop">stop</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#stop">stop</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#stop">stop</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:496</li>
+									<li>Defined in packages/service/src/service.ts:495</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2276,10 +2274,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#test">test</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#test">test</a></p>
 								<p>Inherited from <a href="service.service-1.html">Service</a>.<a href="service.service-1.html#test">test</a></p>
 								<ul>
-									<li>Defined in packages/service/src/service.ts:516</li>
+									<li>Defined in packages/service/src/service.ts:515</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2316,7 +2314,7 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/speak.speakserviceinterface.html">SpeakServiceInterface</a>.<a href="../interfaces/speak.speakserviceinterface.html#unlockaudio">unlockAudio</a></p>
+								<p>Implementation of <a href="../interfaces/speak.ispeakservice.html">ISpeakService</a>.<a href="../interfaces/speak.ispeakservice.html#unlockaudio">unlockAudio</a></p>
 								<ul>
 									<li>Defined in packages/speak/src/speak-service.ts:248</li>
 								</ul>
@@ -2338,7 +2336,7 @@
 					<a name="getconfig" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Config</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -2360,7 +2358,7 @@
 									<dd></dd>
 								</dl>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/speak.speakoptioninterface.html" class="tsd-signature-type">SpeakOptionInterface</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/speak.ispeakoption.html" class="tsd-signature-type">ISpeakOption</a></h4>
 							<p>SpeakServiceOptions - dient zur Einstellung der otionalen Parameter</p>
 						</li>
 					</ul>
@@ -2451,30 +2449,6 @@
 				<ul>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/action.html">action</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/agent.html">agent</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/cloud_amazon.html">cloud-<wbr>amazon</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/cloud_google.html">cloud-<wbr>google</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/cloud_microsoft.html">cloud-<wbr>microsoft</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/cloud_rasa.html">cloud-<wbr>rasa</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/dialog.html">dialog</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/intent.html">intent</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/listen.html">listen</a>
@@ -2742,10 +2716,13 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/speak.speakoptioninterface.html" class="tsd-kind-icon">Speak<wbr>Option<wbr>Interface</a>
+						<a href="../interfaces/speak.ispeakoption.html" class="tsd-kind-icon">ISpeak<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/speak.speakserviceinterface.html" class="tsd-kind-icon">Speak<wbr>Service<wbr>Interface</a>
+						<a href="../interfaces/speak.ispeakservice.html" class="tsd-kind-icon">ISpeak<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/speak.speakserviceoptioninterface.html" class="tsd-kind-icon">Speak<wbr>Service<wbr>Option<wbr>Interface</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-module">
 						<a href="../modules/speak.html#speakserviceconfig" class="tsd-kind-icon">Speak<wbr>Service<wbr>Config</a>

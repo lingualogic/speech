@@ -7,7 +7,7 @@
  */
 
 
-export interface MessageInterface {
+export interface IMessage {
     // Typ der Nachricht
     type: string;
     // Name der sendenden Komponente

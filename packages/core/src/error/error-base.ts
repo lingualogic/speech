@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Grundlegende Fehlerbehandlung
  *
- * Letzte Aenderung: 24.08.2018
+ * Letzte Aenderung: 02.06.2021
  * Status: gruen
  *
  * @module core/error
@@ -15,11 +15,17 @@ import { SPEECH_ERROR_OUTPUT } from '../const/speech-api-const';
 import { SpeechErrorFunc } from '../interface/speech-function.type';
 
 
+// error
+
+import { IErrorBase } from './error-base.interface';
+export { IErrorBase };
+
+
 /** @export
  * Basisklasse fuer die Fehlerbehandlung in allen anderen Klassen
  */
 
-export class ErrorBase {
+export class ErrorBase implements IErrorBase {
 
     /**
      * statischer Klassenname fuer die Ausgabe des Fehlers
@@ -142,7 +148,7 @@ export class ErrorBase {
 
 
     /**
-     * Exceptionausgabe, ist nicht im PluginInterface vorhanden,
+     * Exceptionausgabe, ist nicht in IPlugin vorhanden,
      * da es nur intern verwendet wird. Versendet einen ErrorEvent
      *
      * @param {string} aFuncName - Name der Funktion, in der der Fehler auftrat
@@ -175,10 +181,6 @@ export class ErrorBase {
 
     isErrorOutput(): boolean {
         return this.mErrorOutputFlag;
-    }
-
-    setErrorOutputFlag( aErrorOutputFlag: boolean ): void {
-        this.mErrorOutputFlag = aErrorOutputFlag;
     }
 
     

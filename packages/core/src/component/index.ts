@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * Globale Export-Datei fuer Component
  *
- * Version: 1.1
- * Datum:   14.10.2020
+ * Version: 2.0
+ * Datum:   28.06.2021
  *
  * Definiert das gesamte Component-API:
  *
@@ -17,5 +17,5 @@
 
 
 export { ComponentManager } from './component-manager';
-export { ComponentInterface, ComponentSendMessageFunc, ComponentHandleMessageFunc } from './component.interface';
+export { IComponent, ComponentSendMessageFunc, ComponentHandleMessageFunc } from './component.interface';
 export { Component } from './component';

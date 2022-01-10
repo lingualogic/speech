@@ -68,18 +68,30 @@ gulp.task('build-folder-deploy', function () {
 });
 
 
+gulp.task('build-folder-module', function () {
+    return gulp.src('*.*', {read: false})
+        .pipe(gulp.dest( `${distDir}/module`));
+});
+
+
 /** 
  * Erzeugt die Links
  */
 
-gulp.task('build-link', shell.task('lerna run link'));
+gulp.task('build-link', shell.task('npx lerna run link'));
+
+// TODO: fuer NPM 6.x
+// gulp.task('link-global', shell.task('lerna run linkGlobal'));
+
+// TODO: fuer NPM 7.x
+gulp.task('build-link-global', shell.task('npm --legacy-peer-deps link  @speech/audio @speech/base @speech/core @speech/file @speech/listen @speech/net @speech/service @speech/speak'));
 
 
 /** 
  * Erzeugt die Packages
  */
 
-gulp.task('build-packages', shell.task('lerna run build'));
+gulp.task('build-packages', shell.task('npx lerna run build'));
 
 
 
@@ -87,15 +99,21 @@ gulp.task('build-packages', shell.task('lerna run build'));
  * Erzeugt die Bundles
  */
 
-gulp.task('build-bundles', shell.task('lerna run bundle'));
+gulp.task('build-bundles', shell.task('npx lerna run bundle'));
 
+
+/** 
+ * Erzeugt die Package-Bundles fuer Module
+ */
+
+ gulp.task('build-module', shell.task('npx lerna run bundle:module'));
 
 
 /** 
  * Erzeugt die Packages
  */
 
-gulp.task('pack-packages', shell.task('lerna run pack'));
+gulp.task('pack-packages', shell.task('npx lerna run pack'));
 
 
 /**
@@ -107,9 +125,12 @@ gulp.task('build', function(callback) {
         'build-clean',
         'build-folder-dist',
         'build-folder-deploy',
+        'build-folder-module',
         'build-link',
+        'build-link-global',
         'build-packages',
         'build-bundles',
+        'build-module',
         'pack-packages',
         callback);
 });

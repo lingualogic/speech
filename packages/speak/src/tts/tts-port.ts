@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Hier wird der TTS-Portadapter implementiert.
  *
- * Letzte Aenderung: 25.10.2020
+ * Letzte Aenderung: 15.10.2021
  * Status: rot
  *
  * @module speak/tts
@@ -11,18 +11,13 @@
 
 // event
 
-import { EventDataInterface, PortInterface } from '@speech/core';
-
-
-// cloud
-
-import { CLOUD_TTS_ACTION, CloudManager } from '@speech/cloud';
+import { IEventData, IPort, PortManager, PORT_TTS_ACTION } from '@speech/core';
 
 
 // tts
 
 import { TTS_PORT_NAME } from './tts-const';
-import { TTSPlugin} from './tts-plugin';
+import { TTSPlugin } from './tts-plugin';
 
 
 /**
@@ -33,7 +28,7 @@ export class TTSPort extends TTSPlugin {
 
     // externes Port-Objekt
 
-    protected mPort: PortInterface = null;
+    protected mPort: IPort = null;
     protected mPortName = '';
     protected mCloudPortName = '';
 
@@ -138,7 +133,7 @@ export class TTSPort extends TTSPlugin {
      */
 
     protected _detectSynthesis(): boolean {
-        this.mPort = CloudManager.findPort( this.mCloudPortName );
+        this.mPort = PortManager.find( this.mCloudPortName );
         // console.log('TTSPort._detectSynthesis:', this.mCloudPortName, this.mPort);
         if ( !this.mPort ) {
             this.error( '_detectSynthesis', 'kein Port vorhanden' );
@@ -171,12 +166,12 @@ export class TTSPort extends TTSPlugin {
             this.error( '_initSynthesis', 'Port ist nicht geoeffnet' );
             return -1;
         }
-        this.mPort.addStartEvent( this.mPortName, (aEventData: EventDataInterface) => {
+        this.mPort.addStartEvent( this.mPortName, (aEventData: IEventData) => {
             // console.log('TTSPort._initSynthesis: startEvent = ', aEventData);
             this._onSynthesisStart();
             return 0;
         });
-        this.mPort.addStopEvent( this.mPortName, (aEventData: EventDataInterface) => {
+        this.mPort.addStopEvent( this.mPortName, (aEventData: IEventData) => {
             // console.log('TTSPort._initSynthesis: stopEvent = ', aEventData);
             this._onSynthesisEnd();
             return 0;
@@ -204,7 +199,7 @@ export class TTSPort extends TTSPlugin {
 
     protected _isSynthesis(): boolean {
         if ( this.mPort ) {
-            return this.mPort.isAction( CLOUD_TTS_ACTION );
+            return this.mPort.isAction( PORT_TTS_ACTION );
         }
         return false;
     }
@@ -234,7 +229,7 @@ export class TTSPort extends TTSPlugin {
     protected _startSynthesis( aText: string ): number {
         if ( this.mPort ) {
             // console.log('TTSPort._startSynthesis:', aText, this._getTTSLanguage(), this.getVoice());
-            return this.mPort.start( this.mPortName, CLOUD_TTS_ACTION, { text: aText, language: this._getTTSLanguage(), voice: this.getVoice()});
+            return this.mPort.start( this.mPortName, PORT_TTS_ACTION, { text: aText, language: this._getTTSLanguage(), voice: this.getVoice()});
         }
         return -1;
     }
@@ -250,7 +245,7 @@ export class TTSPort extends TTSPlugin {
     protected _stopSynthesis(): number {
         if ( this.mPort ) {
             // console.log('TTSPort._stopSynthesis:', this._getTTSLanguage(), this.getVoice());
-            return this.mPort.stop( this.mPortName, CLOUD_TTS_ACTION );
+            return this.mPort.stop( this.mPortName, PORT_TTS_ACTION );
         }
         return -1;
     }
@@ -263,7 +258,7 @@ export class TTSPort extends TTSPlugin {
     protected _isSynthesisRunning(): boolean {
         // console.log('TTSPort._isSynthesisRunning');
         if ( this.mPort ) {
-            return this.mPort.isRunning( this.mPortName, CLOUD_TTS_ACTION );
+            return this.mPort.isRunning( this.mPortName, PORT_TTS_ACTION );
         }
         return false;
     }

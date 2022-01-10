@@ -1,9 +1,26 @@
 # Speech Release Notizen
 
 
-## 0.6.0.0001 Alpha (13.04.2021)
+## 0.6.1.0002 Alpha (08.01.2022)
+
+* **Speech:** Komplette Überarbeitung aller Komponenten (Break Changes zur Version 0.5.x)
+* **Listen:** Web-Version von Listen eingebaut
+* **Speak:** Web-Version von Speak eingebaut
+* Break-Changes sind vorhanden
+
+
+## 0.6.0.0001 Alpha Preview (13.04.2021)
 
 * **Speech:** Umstellung auf Speech Monorepo mit einzelnen Komponenten.
+
+
+## 0.5.23.0067 Release (10.07.2021)
+
+### Wartungs-Release
+
+beinhaltet:
+
+Aktualisierung aller NPM-Packages.
 
 
 ## 0.5.22.0066 Release (31.08.2020)

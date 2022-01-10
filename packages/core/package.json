@@ -1,11 +1,13 @@
 {
   "name": "@speech/core",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Core Library of Speech-Framework",
-  "author": "Lingualogic Team <stefan@lingualogic.de>",
+  "author": "Lingualogic Team",
   "homepage": "https://lingualogic.de",
   "license": "MIT",
+  "private": false,
   "main": "lib/index.js",
+  "module": "lib/speech-core-module.js",
   "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib",
@@ -13,21 +15,24 @@
   },
   "files": [
     "lib/index.js",
+    "lib/speech-core-module.js",
     "lib/**/*.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "git://lingualogic/web/monorepo",
+    "url": "https://github.com/lingualogic/speech",
     "directory": "packages/core"
   },
   "scripts": {
     "tsc": "tsc",
     "build": "npm run compile",
-    "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
+    "clean": "gulp clean",
     "compile": "tsc -b tsconfig.build.json",
-    "bundle": "rollup -c ./rollup.config.js && cp speech-core.js ./lib/index.js && cp speech-core.js ./../../dist/deploy",
-    "pack": "npm pack && cp speech-core-0.6.0.tgz ./../../dist",
-    "link": "npm link && cd ../.. && npm link @speech/core",
+    "bundle": "npx rollup -c ./rollup.config.js && cp speech-core.js ./lib/index.js && cp speech-core.js ./../../dist/deploy",
+    "bundle:module": "cp speech-core-module.js ./lib && cp speech-core-module.js ./../../dist/module",
+    "pack": "npm pack && cp speech-core-0.6.1.tgz ./../../dist",
+    "link": "npm link",
+    "linkGlobal": "cd ../.. && npm link @speech/core --legacy-peer-deps",
     "test": "echo \"Error: run tests from root\" && exit 1"
   }
 }

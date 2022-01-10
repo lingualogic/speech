@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Plugin-Interface fuer alle Plugin Komponenten
  *
- * Letzte Aenderung: 14.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/plugin
@@ -18,10 +18,10 @@ import { OnSpeechInitFunc, OnSpeechErrorFunc } from '../interface/speech-functio
  * Definiert die Schnittstelle fuer ein Plugin
  *
  * @export
- * @interface PluginInterface
+ * @interface IPlugin
  */
 
-export interface PluginInterface {
+export interface IPlugin {
 
 
     // Events

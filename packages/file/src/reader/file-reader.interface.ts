@@ -1,8 +1,8 @@
 /** @packageDocumentation
  * FileReader Schnittstelle
  *
- * Version: 1.0
- * Datum:   06.10.2020
+ * Version: 2.0
+ * Datum:   28.06.2021
  *
  * @module file/reader
  * @author SB
@@ -11,7 +11,7 @@
 
 // core
 
-import { PluginInterface } from '@speech/core';
+import { IPlugin } from '@speech/core';
 
 
 // Funktionen
@@ -23,13 +23,30 @@ export type FileReaderReadFunc = (aFileUrl: string) => number;
 export type OnFileReaderReadFunc = (aFileData: string) => number;
 
 
-export interface FileReaderInterface extends PluginInterface {
+export interface IFileReader extends IPlugin {
 
     // Lese-Funktion
 
     onRead: OnFileReaderReadFunc;
     // @deprecated
     onLoadDialogFile: OnFileReaderReadFunc;
+
+
+    /**
+     * pruefen, ob die Initialisierung abgeschlossen ist
+     * 
+     * @return null oder Promise
+     */
+
+    initWait(): Promise<any>;
+
+    
+    /**
+     * Laufzeit-Typ abfragen: node oder browser
+     */
+
+    getRuntimeType(): string;
+
 
     getReadFunc(): FileReaderReadFunc;
     read(aFileUrl: string): number;

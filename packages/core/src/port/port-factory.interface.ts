@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * PortFactory-Interface fuer die Erzeugung von Port-Komponenten
  *
- * Letzte Aenderung: 16.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: rot
  *
  * @module core/port
@@ -11,12 +11,12 @@
 
 // factory
 
-import { FactoryInterface } from './../factory/factory.interface';
+import { IFactory } from './../factory/factory.interface';
 
 
 // port
 
-import { PortInterface } from './port.interface';
+import { IPort } from './port.interface';
 
 
 
@@ -24,10 +24,10 @@ import { PortInterface } from './port.interface';
  * Erzeugt einen neuen Port
  *
  * @export
- * @interface PortFactoryInterface
+ * @interface IPortFactory
  */
 
-export interface PortFactoryInterface extends FactoryInterface {
+export interface IPortFactory extends IFactory {
 
 
     /**
@@ -40,5 +40,5 @@ export interface PortFactoryInterface extends FactoryInterface {
      * @return Port Instanz oder null
      */
 
-    create( aPortName?: string, aPortClass?: string, aRegisterFlag?: boolean ): PortInterface;
+    create( aPortName?: string, aPortClass?: string, aRegisterFlag?: boolean ): IPort;
 }

@@ -5,7 +5,7 @@
  * SpeechMain muss vorher aufgerufen worden sein, um den ListenBuilder
  * zu erzeugen.
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module listen
@@ -22,30 +22,30 @@ import { Base } from '@speech/base';
 
 import { LISTEN_TYPE_NAME, LISTEN_ASYNC_EVENT } from './listen-const';
 import { OnListenResultFunc, OnListenNoMatchFunc, OnListenStartFunc, OnListenStopFunc } from './listen-function.type';
-import { ListenOptionInterface } from './listen-option.interface';
-import { ListenComponentInterface } from './component/listen-component.interface';
-import { ListenInterface } from './listen.interface';
+import { IListenOption } from './listen-option.interface';
+import { IListenComponent } from './component/listen-component.interface';
+import { IListen } from './listen.interface';
 
 
 /** @export
  * Listen Klasse als API-Wrapper fuer die ListenComponent
  */
 
-export class Listen extends Base implements ListenInterface {
+export class Listen extends Base implements IListen {
 
 
     // ListenComponentBuilder
 
-    private mListenComponent: ListenComponentInterface;
+    private mListenComponent: IListenComponent;
 
 
     /**
      * Konstruktor fuer ereignisbasierte Initialisierung des Listen
      */
 
-    constructor( aOption?: ListenOptionInterface ) {
+    constructor( aOption?: IListenOption ) {
         super( aOption );
-        this.mListenComponent = this.mComponent as ListenComponentInterface;
+        this.mListenComponent = this.mComponent as IListenComponent;
     }
 
 

@@ -1,10 +1,10 @@
 /** @packageDocumentation
  * Oeffentliche ListenService Schnittstelle, fuer alle ListenService-APIs.
  *
- * API-Version: 1.0
- * Datum:       24.10.2020
+ * API-Version: 2.0
+ * Datum:       28.06.2021
  *
- * Letzte Aenderung: 24.10.2020
+ * Letzte Aenderung: 28.06.2021
  * Status: gruen
  *
  * @module listen
@@ -14,7 +14,7 @@
 
 // service
 
-import { ServiceInterface, EventEmitter } from '@speech/service';
+import { IService, EventEmitter } from '@speech/service';
 
 
 // Global API
@@ -24,7 +24,7 @@ import { ServiceInterface, EventEmitter } from '@speech/service';
  * ListenService Schnittstelle
  */
 
-export interface ListenServiceInterface extends ServiceInterface {
+export interface IListenService extends IService {
 
 
     // Service-Eigenschaften
