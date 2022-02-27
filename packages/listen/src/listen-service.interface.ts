@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum:       28.06.2021
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module listen
@@ -14,7 +14,7 @@
 
 // service
 
-import { IService, EventEmitter } from '@speech/service';
+import { IService, EventEmitter } from '@lingualogic-speech/service';
 
 
 // Global API

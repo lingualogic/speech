@@ -2,7 +2,7 @@
  * Globale Fabrik zur Erzeugung einer ListenComponent
  * ListenComponent wird als Singleton verwaltet
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module listen/component
@@ -12,7 +12,7 @@
 
 // core
 
-import { PluginFactory } from '@speech/core';
+import { PluginFactory } from '@lingualogic-speech/core';
 
 
 // listen

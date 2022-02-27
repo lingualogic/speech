@@ -12,11 +12,6 @@
  */
 
 
-// base 
-
-import { IBaseOption } from '@speech/base';
-
-
 // service
 
 import { EventEmitter } from './event-emitter';

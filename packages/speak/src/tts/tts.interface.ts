@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * TTS Schnittstelle
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module speak/tts
@@ -11,7 +11,7 @@
 
 // plugin
 
-import { IPlugin } from '@speech/core';
+import { IPlugin } from '@lingualogic-speech/core';
 
 
 // Funktionen

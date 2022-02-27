@@ -5,7 +5,7 @@
  * SpeechMain muss vorher aufgerufen worden sein, um den ListenBuilder
  * zu erzeugen.
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module listen
@@ -15,7 +15,7 @@
 
 // base
 
-import { Base } from '@speech/base';
+import { Base } from '@lingualogic-speech/base';
 
 
 // listen

@@ -4,7 +4,7 @@
  * API-Version: 1.0
  * Datum: 08.10.2018
  *
- * Letzte Aenderung: 01.06.2020
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module listen
@@ -14,7 +14,7 @@
 
 // global
 
-import { SPEECH_VERSION_NUMBER, SPEECH_VERSION_BUILD, SPEECH_VERSION_TYPE, SPEECH_VERSION_DATE } from '@speech/core';
+import { SPEECH_VERSION_NUMBER, SPEECH_VERSION_BUILD, SPEECH_VERSION_TYPE, SPEECH_VERSION_DATE } from '@lingualogic-speech/core';
 
 
 // Versions-Konstanten

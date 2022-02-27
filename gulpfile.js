@@ -84,7 +84,7 @@ gulp.task('build-link', shell.task('npx lerna run link'));
 // gulp.task('link-global', shell.task('lerna run linkGlobal'));
 
 // TODO: fuer NPM 7.x
-gulp.task('build-link-global', shell.task('npm --legacy-peer-deps link  @speech/audio @speech/base @speech/core @speech/file @speech/listen @speech/net @speech/service @speech/speak'));
+gulp.task('build-link-global', shell.task('npm --legacy-peer-deps link  @lingualogic-speech/audio @lingualogic-speech/base @lingualogic-speech/cloud @lingualogic-speech/core @lingualogic-speech/dialog @lingualogic-speech/file @lingualogic-speech/listen @lingualogic-speech/net @lingualogic-speech/service @lingualogic-speech/speak'));
 
 
 /** 

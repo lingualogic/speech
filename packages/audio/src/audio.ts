@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Dialog API Wrapper fuer AudioComponent (erst mal AudioPlayer)
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module audio
@@ -11,7 +11,7 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc, FactoryManager, PluginManager } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc, FactoryManager, PluginManager } from '@lingualogic-speech/core';
 
 
 // Audio

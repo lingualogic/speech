@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente dient als Fabrik zur Erzeugung der NetConnect-Klasse und -Instanz fuer Browser oder NodeJS
  *
- * Letzte Aenderung: 07.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module net/connect
@@ -11,7 +11,7 @@
 
 // core
 
-import { Factory } from '@speech/core';
+import { Factory } from '@lingualogic-speech/core';
 
 
 // net

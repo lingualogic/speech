@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html  lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <!-- Required meta tags -->
+    <meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <!--  STYLES DEPS -->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <!-- CORDOVA JS -->
+    <title>Speak-APP-JS</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h2>SpeakApp-JS Version <span id="versionName">0.6.2</span></h2>
+        </div>
+        <div class="row justify-content-md-center">
+            <label>Sprachausgabe</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="speakText" value="Dies ist ein Testtext" placeholder="Dies ist ein Testtext" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+                 <div class="input-group-append" id="button-addon4">
+                    <button class="btn btn-outline-secondary" type="button" id="startClick">Start</button>
+                    <button class="btn btn-outline-secondary" type="button" id="stopClick">Stop</button>
+                </div>
+            </div>            
+        </div>
+        <div class="row justify-content-md-center">
+            <label>Fehlermeldung</label>
+            <input class="form-control" type="text" id="errorText" readonly>
+        </div>
+    </div>
+
+    <!-- Speech Dateien -->
+    <script type="text/javascript" src="node_modules/@lingualogic-speech/core/lib/index.js"></script>
+    <script type="text/javascript" src="node_modules/@lingualogic-speech/file/lib/index.js"></script>
+    <script type="text/javascript" src="node_modules/@lingualogic-speech/net/lib/index.js"></script>
+    <script type="text/javascript" src="node_modules/@lingualogic-speech/audio/lib/index.js"></script>
+    <script type="text/javascript" src="node_modules/@lingualogic-speech/base/lib/index.js"></script>
+    <script type="text/javascript" src="node_modules/@lingualogic-speech/service/lib/index.js"></script>
+    <script type="text/javascript" src="node_modules/@lingualogic-speech/speak/lib/index.js"></script>
+    <!-- eigene Dateien -->
+    <script type="text/javascript" src="js/speak-app.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente dient als Fabrik zur Erzeugung der SpeechSynthesis-Klassen und -Instanzen fuer Html5
  *
- * Letzte Aenderung: 07.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module speak/common
@@ -11,7 +11,7 @@
 
 // core
 
-import { Factory } from '@speech/core';
+import { Factory } from '@lingualogic-speech/core';
 
 
 // Konstanten

@@ -4,11 +4,9 @@ Das Speech Monorepo ist eine Typescript Browser-Bibliothek zur Integration von S
 
 Daneben git es einzeln verwendbare Dienste:
 
-* **Speak** für die Sprachausgabe (Html5 SpeechSynthesis, Amazon-TTS, Google-TTS, Microsoft-TTS )
-* **Listen** für die Spracherennung (Html5 SpeechRecognition, Google-ASR, Microsoft-ASR)
-* **Intent** für das Sprachverstehen (Google-NLU, Rasa-NLU) (noch nicht in dieser Version verfügbar)
-* **Action** für die Aktionserzeugung (noch nicht in dieser Version verfügbar)
-* **Dialog** für die Ausführung von Dialogskripten (noch nicht in dieser Version verfügbar)
+* **Speak** für die Sprachausgabe (Html5 SpeechSynthesis)
+* **Listen** für die Spracherennung (Html5 SpeechRecognition)
+* **Dialog** für die Ausführung von Dialogskripten
 
 In Speech kann für die Sprachausgabe (TTS), die Spracheingabe (ASR) und das Sprachverstehen (NLU) auch ein Cloud-Dienst verwendet werden. Dazu wird ein eigener Account des Cloud-Dienstes benötigt. Es gibt den Amazon Cloud-Dienst für die Sprachausgabe (TTS), den Microsoft Cloud-Dienst für die Sprachausgabe (TTS) und die Speacheingabe (ASR), sowie den Google Cloud-Dienst für Sprachausgabe(TTS), Spracheingabe( ASR) und Sprachverstehen (NLU). Hinzugekommen ist der Rasa-Server als selbst zu betreibenden Cloud-Dienst für das Sprachverstehen (NLU). Für die Google Cloud-Dienste wird zusätzlich der Speech-Tokenserver benötigt.
 
@@ -17,9 +15,9 @@ Cloud-Dienste sind in dieser Version noch nicht verfügbar.
 
 ## Letzte Version
 
-* 0.6.1.0002 Alpha vom 08.01.2022 [Release Notizen](./CHANGELOG.md)
+* 0.6.2.0002 Alpha vom 27.02.2022 [Release Notizen](./CHANGELOG.md)
 
-Diese Version beinhaltet nur Listen und Speak, in späteren 0.6.x Versionen kommen Intent, Action, Dialog und Bot hinzu. Auch die Cloud-Dienste werden erst in späteren Versionen hinzugefügt. 
+Diese Version beinhaltet Listen, Speak und Dialog, in späteren 0.6.x Versionen kommen Intent, Action und Bot hinzu. Auch die Cloud-Dienste werden erst in späteren Versionen hinzugefügt.
 
 
 ## Voraussetzungen
@@ -41,7 +39,7 @@ Grundsätzlich ist Speech in Chrome, Firefox, Opera, Safari und Edge nutzbar, al
 NodeJS muss installiert sein.
 
 * NodeJS >= 14.x und <= 16.x
-* NPM >=6.x      
+* NPM >=6.x
 
 Als weitere Plattformen können Android und iOS mit Cordova verwendet werden:
 
@@ -65,32 +63,40 @@ anschließend werden alle NPM-Pakete für Speech im dist Ordner erzeugt:
 
     $ npm run build
 
+Tritt beim Build ein Fehler auf, muss der @lingualogic-speech Ordner im globalen node_modules noch erzeugt werden (Pfad unter MacOS, unter Linux und Windows kann der Pfad abweichen):
+
+    $ cd /usr/local/lib/node_modules
+    $ sudo mkdir @lingualogic-speech
+    $ sudo chmod 777 @lingualogic-speech
+
+Damit sollte der Build dann funktionieren.
+    
 
 ### Speech NPM-Pakete installieren
 
 Die im dist Ordner erzeugten Speech npm-Pakete können in den eigenen Web-Projektordner kopiert werden.
 Die Installation der Speech npm-Pakete erfolgt im eigenen Web-Projektordner mit folgendem Befehl:
 
-    $ npm install speech-<componente>-0.6.x.tgz
+    $ npm install lingualogic-speech-<componente>-0.6.x.tgz
 
 Danach können die installierten NPM-Pakete in Web-Projekt mit Javascript oder Typescript verwendet werden. Es sind keine weiteren Bibliotheken einzubinden.
 
 Alternativ können die Speech NPM-Pakete auch über das offizielle globale NPM-Repository installiert werden:
 
-    $ npm install @speech/<Komponentenname>
+    $ npm install @lingualogic-speech/<Komponentenname>
 
 
 ## Deinstallation
 
 Die Speech NPM-Pakete können mit folgendem Befehl wieder deinstalliert werden:
 
-    $ npm uninstall @speech/<Komponentenname>
+    $ npm uninstall @lingualogic-speech/<Komponentenname>
 
 
 ## Break Changes
 
 * Änderung der Interface-Namen von <Class>Interface auf I<Class>. Die Dateinamen bleiben auf <file>.interface.ts.
-* Änderung der Importe von import { X } from 'speech-framework' nach import { X } from '@speech/<component>'.
+* Änderung der Importe von import { X } from 'speech-framework' nach import { X } from '@lingualogic-speech/<component>'.
 * Services sind jetzt nicht mehr Angular-spezifisch, sondern generell verwendbar. Der ServiceManager muss jetzt auch in Angular eingebaut werden.
 * Die Frameworks speech-angular, speech-react und speech-vue entfallen ersatzlos, speech kann jetzt mit jedem GUI-Framework kombiniert werden.
 

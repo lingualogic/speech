@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente liest eine Datei in den Browser als String
  *
- * Letzte Aenderung: 12.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module file/reader
@@ -11,12 +11,12 @@
 
 // core
 
-import { FactoryManager, Plugin } from '@speech/core';
+import { FactoryManager, Plugin } from '@lingualogic-speech/core';
 
 
 // net
 
-import { XMLHTTPREQUEST_TEXT_RESPONSETYPE } from '@speech/net';
+import { XMLHTTPREQUEST_TEXT_RESPONSETYPE } from '@lingualogic-speech/net';
 
 
 // file

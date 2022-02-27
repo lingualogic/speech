@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Hier wird die ASRPort als Adapter fuer CloudPort implementiert.
  *
- * Letzte Aenderung: 15.10.2021
+ * Letzte Aenderung: 16.02.2022
  * Status: rot
  *
  * @module listen/asr
@@ -11,7 +11,7 @@
 
 // core
 
-import { IEventData, IPort, PortManager, PORT_ASR_ACTION } from '@speech/core';
+import { IEventData, IPort, PortManager, PORT_ASR_ACTION } from '@lingualogic-speech/core';
 
 
 // asr
@@ -185,6 +185,16 @@ export class ASRPort extends ASRPlugin {
         this.mPort.addStopEvent( this.mPortName, (aEventData: IEventData) => {
             // console.log('ASRPort._initRecognition: stopEvent = ', aEventData);
             this._onRecognitionEnd();
+            return 0;
+        });
+        this.mPort.addStartAudioEvent( this.mPortName, (aEventData: IEventData) => {
+            // console.log('ASRPort._initRecognition: startAudioEvent = ', aEventData);
+            this._onRecognitionAudioStart();
+            return 0;
+        });
+        this.mPort.addStopAudioEvent( this.mPortName, (aEventData: IEventData) => {
+            // console.log('ASRPort._initRecognition: stopAudioEvent = ', aEventData);
+            this._onRecognitionAudioEnd();
             return 0;
         });
         this.mPort.addResultEvent( this.mPortName, (aEventData: IEventData) => {

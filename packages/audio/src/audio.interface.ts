@@ -2,7 +2,7 @@
  * Public Audio Schnittstelle
  *
  * API-Version: 2.0
- * Datum:       28.06.2021
+ * Datum:       09.02.2022
  *
  * @module audio
  * @author SB
@@ -11,7 +11,7 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc } from '@lingualogic-speech/core';
 
 
 // audio

@@ -1,0 +1,19 @@
+{
+    "name": "speech-speakapp-js",
+    "version": "0.6.2",
+    "productName": "SpeechSpeakAppJS",
+    "description": "Speech SpeakApp Javascript",
+    "author": "LinguaLogic Team",
+    "license": "MIT",
+    "private": true,
+    "main": "index.html",
+    "scripts": {
+        "start": "http-server -o -c-1"
+    },
+    "dependencies": {
+        "@lingualogic-speech/speak": "^0.6.2"
+    },
+    "devDependencies": {
+        "http-server": "^14.1.0"
+    }
+}

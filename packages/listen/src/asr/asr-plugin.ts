@@ -1,7 +1,7 @@
 /** @packageDocumentation
  *  ASRPlugin definiert die Basisklasse aller ASRs
  *
- * Letzte Aenderung: 31.10.2021
+ * Letzte Aenderung: 16.02.2022
  * Status: gelb
  *
  * @module listen/asr
@@ -11,7 +11,7 @@
 
 // core
 
-import { Plugin } from '@speech/core';
+import { Plugin } from '@lingualogic-speech/core';
 
 
 // asr
@@ -526,7 +526,7 @@ export class ASRPlugin extends Plugin implements IASR {
      */
 
     protected _onListenAudioStart(): number {
-        // console.log('ASRPlugin._onListenAudioStart');
+        // console.log('ASRPlugin._onListenAudioStart:', this.mOnListenAudioStartFunc);
         try {
             if ( typeof this.mOnListenAudioStartFunc === 'function' ) {
                 return this.mOnListenAudioStartFunc();
@@ -547,7 +547,7 @@ export class ASRPlugin extends Plugin implements IASR {
      */
 
     protected _onListenAudioStop(): number {
-        // console.log('ASRPlugin._onListenAudioStop');
+        // console.log('ASRPlugin._onListenAudioStop:', this.mOnListenAudioStopFunc);
         try {
             if ( typeof this.mOnListenAudioStopFunc === 'function' ) {
                 return this.mOnListenAudioStopFunc();
@@ -728,6 +728,7 @@ export class ASRPlugin extends Plugin implements IASR {
      */
 
     set onListenAudioStart( aOnListenAudioStartFunction: OnASRListenStartFunc ) {
+        // console.log('ASRPlugin.onListenAudioStart:', aOnListenAudioStartFunction);
         this.mOnListenAudioStartFunc = aOnListenAudioStartFunction;
     }
 
@@ -739,6 +740,7 @@ export class ASRPlugin extends Plugin implements IASR {
      */
 
     set onListenAudioStop( aOnListenAudioStopFunction: OnASRListenStopFunc ) {
+        // console.log('ASRPlugin.onListenAudioStop:', aOnListenAudioStopFunction);
         this.mOnListenAudioStopFunc = aOnListenAudioStopFunction;
     }
 
@@ -1451,6 +1453,7 @@ export class ASRPlugin extends Plugin implements IASR {
         // pruefen auf aktive Komponente
 
         if ( !this.isActive()) {
+            // console.log('ASRPlugin.startListen: ASR ist nicht aktiv');
             // kein Fehler
             if ( this.isErrorOutput()) {
                 console.log('ASRPlugin.startListen: ASR ist nicht aktiv');
@@ -1459,6 +1462,7 @@ export class ASRPlugin extends Plugin implements IASR {
         }
 
         if ( this.isListenRunning()) {
+            // console.log('ASRPlugin.startListen: Spracheingabe laeuft bereits');
             this.error( 'startListen', 'Spracheingabe laeuft bereits' );
             return -1;
         }
@@ -1471,9 +1475,11 @@ export class ASRPlugin extends Plugin implements IASR {
 
         try {
             if ( this._startRecognition() !== 0 ) {
+                // console.log('ASRPlugin.startListen: startRecognition -1');
                 return -1;
             }
         } catch ( aException ) {
+            // console.log('ASRPlugin.startListen: Exception ', aException);
             this.exception( 'startListen', aException );
             return -1;
         }

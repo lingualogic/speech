@@ -5,7 +5,7 @@ Die Speech-Core Komponente definiert die Basisklassen für alle Komponenten.
 
 ## Letzte Version
 
-* 0.6.1.0002 alpha vom 08.01.2022
+* 0.6.2.0003 alpha vom 30.01.2022
 
 
 ## Installation

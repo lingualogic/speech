@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * FileBrowserReader ohne Abhaengigkeiten zu anderen Komponenten
  *
- * Letzte Aenderung: 12.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module file/common
@@ -11,12 +11,12 @@
 
 // core
 
-import { FactoryManager } from '@speech/core';
+import { FactoryManager } from '@lingualogic-speech/core';
 
 
 // net
 
-import { XMLHttpRequestFactory, XMLHTTPREQUEST_FACTORY_NAME, XMLHTTPREQUEST_TEXT_RESPONSETYPE } from '@speech/net';
+import { XMLHttpRequestFactory, XMLHTTPREQUEST_FACTORY_NAME, XMLHTTPREQUEST_TEXT_RESPONSETYPE } from '@lingualogic-speech/net';
 
 
 // common

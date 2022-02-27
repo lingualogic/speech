@@ -5,14 +5,14 @@
     "baseUrl": "./",
     "outDir": "./build/",
     "paths": {
-      "@speech/audio": ["packages/audio/src"],
-      "@speech/base": ["packages/base/src"],
-      "@speech/core": ["packages/core/src"],
-      "@speech/file": ["packages/file/src"],
-      "@speech/listen": ["packages/listen/src"],
-      "@speech/net": ["packages/net/src"],
-      "@speech/service": ["packages/service/src"],
-      "@speech/speak": ["packages/speak/src"]
+      "@lingualogic-speech/audio": ["packages/audio/src"],
+      "@lingualogic-speech/base": ["packages/base/src"],
+      "@lingualogic-speech/core": ["packages/core/src"],
+      "@lingualogic-speech/file": ["packages/file/src"],
+      "@lingualogic-speech/listen": ["packages/listen/src"],
+      "@lingualogic-speech/net": ["packages/net/src"],
+      "@lingualogic-speech/service": ["packages/service/src"],
+      "@lingualogic-speech/speak": ["packages/speak/src"]
     }
   },
 

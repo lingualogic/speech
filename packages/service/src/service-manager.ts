@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * ServiceManager for manage all Services
  *
- * Last Change: 19.10.2020
+ * Last Change: 19.01.2022
  * Status: red
  *
  * @module service
@@ -13,6 +13,7 @@
 
 import {
     SERVICE_ACTION_NAME,
+    SERVICE_DIALOG_NAME,
     SERVICE_BOT_NAME,
     SERVICE_INTENT_NAME,
     SERVICE_LISTEN_NAME,
@@ -161,6 +162,45 @@ export class ServiceManager {
         }
     }
 
+
+    /**
+     * write Dialog Options to config
+     *
+     * @param aServiceOption - to set options
+     */
+
+     private static _setDialogConfig( aServiceOption: any, aServiceClass: any ): number {
+        // console.log('ServiceManager.setDialogConfig: option = ', aServiceOption);
+        try {
+            const dialogConfig = aServiceClass.getConfig();
+            if ( typeof aServiceOption.activeFlag === 'boolean' ) {
+                dialogConfig.activeFlag = aServiceOption.activeFlag;
+            }
+            if ( typeof aServiceOption.dialogName === 'string' ) {
+                dialogConfig.dialogName = aServiceOption.dialogName;
+            }
+            if ( typeof aServiceOption.dialogRootState === 'string' ) {
+                dialogConfig.dialogRootState = aServiceOption.dialogRootState;
+            }
+            if ( typeof aServiceOption.dialogLoadFlag === 'boolean' ) {
+                dialogConfig.dialogLoadFlag = aServiceOption.dialogLoadFlag;
+            }
+            if ( typeof aServiceOption.dialogFilePath === 'string' ) {
+                dialogConfig.dialogFilePath = aServiceOption.dialogFilePath;
+            }
+            if ( typeof aServiceOption.dialogFileName === 'string' ) {
+                dialogConfig.dialogFileName = aServiceOption.dialogFileName;
+            }
+            if ( typeof aServiceOption.errorOutputFlag === 'boolean' ) {
+                dialogConfig.errorOutputFlag = aServiceOption.errorOutputFlag;
+            }
+            // console.log('ServiceManager.setDialogConfig: config = ', dialogConfig);
+            return 0;
+        } catch ( aException ) {
+            return -1;
+        }
+    }
+
     /**
      * write Bot Options to config
      *
@@ -227,6 +267,9 @@ export class ServiceManager {
                     break;
                 case SERVICE_ACTION_NAME:
                     ServiceManager._setActionConfig( aServiceOption, aServiceClass );
+                    break;
+                case SERVICE_DIALOG_NAME:
+                    ServiceManager._setDialogConfig( aServiceOption, aServiceClass );
                     break;
                 case SERVICE_BOT_NAME:
                     ServiceManager._setBotConfig( aServiceOption, aServiceClass );

@@ -10,7 +10,7 @@
  *      TTSGoogle    - Google-Service TTS (kann nur mit Speech-Server verwendet werden)
  *      TTSMicrosoft - Microsoft-Service TTS (sollte nur mit Speech-Server verwendet werden)
  *
- * Letzte Aenderung: 15.10.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module speak/tts
@@ -20,7 +20,7 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc, PluginGroup } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc, PluginGroup } from '@lingualogic-speech/core';
 
 
 // tts

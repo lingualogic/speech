@@ -2,7 +2,7 @@
  * Speak API fuer SpeakComponent, einmalige Initialisierung, alle anderen Initialisierungen
  * laufen auf der gleichen SpeakComponent.
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module speak
@@ -12,7 +12,7 @@
 
 // base
 
-import { Base } from '@speech/base';
+import { Base } from '@lingualogic-speech/base';
 
 
 // speak

@@ -2,7 +2,7 @@
  * Speak Komponente, dient zur Sprachausgabe von Texten oder Audiodateien
  * ueber ein TTS-Plugin oder ein AudioPlayer-Plugin.
  *
- * Letzte Aenderung: 21.12.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module speak/component
@@ -12,17 +12,17 @@
 
 // core
 
-import { SPEECH_SPEAKAUDIOUNLOCK_EVENT, EventFunctionList, EventFunc } from '@speech/core';
+import { SPEECH_SPEAKAUDIOUNLOCK_EVENT, EventFunctionList, EventFunc } from '@lingualogic-speech/core';
 
 
 // base
 
-import { BaseComponent } from '@speech/base';
+import { BaseComponent } from '@lingualogic-speech/base';
 
 
 // audio
 
-import { AUDIOPLAYER_PLUGIN_NAME, AUDIO_DEFAULT_FORMAT, IAudioPlayer } from '@speech/audio';
+import { AUDIOPLAYER_PLUGIN_NAME, AUDIO_DEFAULT_FORMAT, IAudioPlayer } from '@lingualogic-speech/audio';
 
 
 // tts

@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Hier wird der TTS-Portadapter implementiert.
  *
- * Letzte Aenderung: 15.10.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module speak/tts
@@ -11,7 +11,7 @@
 
 // event
 
-import { IEventData, IPort, PortManager, PORT_TTS_ACTION } from '@speech/core';
+import { IEventData, IPort, PortManager, PORT_TTS_ACTION } from '@lingualogic-speech/core';
 
 
 // tts

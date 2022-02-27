@@ -3,7 +3,7 @@
  *
  * Zur Zeit wird nur PCM-Codec unterstuetzt.
  *
- * Letzte Aenderung: 13.11.2021
+ * Letzte Aenderung: 16.02.2022
  * Status: rot
  *
  * @module audio/base
@@ -13,7 +13,7 @@
 
 // core
 
-import { ErrorBase } from '@speech/core';
+import { ErrorBase } from '@lingualogic-speech/core';
 
 
 // audio
@@ -68,6 +68,7 @@ export class AudioBrowserRecorder extends ErrorBase {
 
     private mOnVolumeFunc: (volume: any) => void = null;
     private mOnEndedFunc: (aBuffer: ArrayBuffer) => void = null;
+
     private mOnMicrophoneStartFunc: () => void = null;
     private mOnMicrophoneStopFunc: () => void = null;
 

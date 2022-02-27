@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum:       28.06.2021
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module service
@@ -14,7 +14,7 @@
 
 // base
 
-import { IBase, IBaseOption } from '@speech/base';
+import { IBase, IBaseOption } from '@lingualogic-speech/base';
 
 
 // service

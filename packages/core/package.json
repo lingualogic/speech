@@ -1,11 +1,10 @@
 {
-  "name": "@speech/core",
-  "version": "0.6.1",
+  "name": "@lingualogic-speech/core",
+  "version": "0.6.2",
   "description": "Core Library of Speech-Framework",
   "author": "Lingualogic Team",
   "homepage": "https://lingualogic.de",
   "license": "MIT",
-  "private": false,
   "main": "lib/index.js",
   "module": "lib/speech-core-module.js",
   "types": "lib/index.d.ts",
@@ -30,9 +29,9 @@
     "compile": "tsc -b tsconfig.build.json",
     "bundle": "npx rollup -c ./rollup.config.js && cp speech-core.js ./lib/index.js && cp speech-core.js ./../../dist/deploy",
     "bundle:module": "cp speech-core-module.js ./lib && cp speech-core-module.js ./../../dist/module",
-    "pack": "npm pack && cp speech-core-0.6.1.tgz ./../../dist",
+    "pack": "npm pack && cp lingualogic-speech-core-0.6.2.tgz ./../../dist",
     "link": "npm link",
-    "linkGlobal": "cd ../.. && npm link @speech/core --legacy-peer-deps",
+    "linkGlobal": "cd ../.. && npm link @ll-peech/core --legacy-peer-deps",
     "test": "echo \"Error: run tests from root\" && exit 1"
   }
 }

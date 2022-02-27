@@ -2,7 +2,7 @@
  * Hier wird die HTML5-Sprachausgabe implementiert. Ist Speech-Synthesis nicht vorhanden, wird
  * die Komponente in Active Off versetzt.
  *
- * Letzte Aenderung: 21.12.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module speak/tts
@@ -12,7 +12,7 @@
 
 // core
 
-import { FactoryManager } from '@speech/core';
+import { FactoryManager } from '@lingualogic-speech/core';
 
 
 // speak

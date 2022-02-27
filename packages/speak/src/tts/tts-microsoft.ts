@@ -2,7 +2,7 @@
  * Hier wird die Microsoft-Sprachausgabe implementiert. Ist MicrosoftPort nicht vorhanden, wird
  * die Komponente auf deaktiviert versetzt.
  *
- * Letzte Aenderung: 15.10.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module speak/tts
@@ -12,7 +12,7 @@
 
 // core
 
-import { CLOUD_MICROSOFT_PORT } from '@speech/core';
+import { CLOUD_MICROSOFT_PORT } from '@lingualogic-speech/core';
 
 
 // tts

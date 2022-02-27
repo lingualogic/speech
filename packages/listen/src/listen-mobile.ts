@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Listen API fuer Listen-Cordova Komponente (Wrapper)
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module listen
@@ -21,12 +21,12 @@ import {
     SPEECH_LISTENNOMATCH_EVENT,
     EventFunctionList, 
     EventFunc
-} from '@speech/core';
+} from '@lingualogic-speech/core';
 
 
 // base
 
-import { BaseMobile } from '@speech/base';
+import { BaseMobile } from '@lingualogic-speech/base';
 
 
 // listen

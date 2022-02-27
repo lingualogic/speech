@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente dient zum Aufbau und zur Verwaltung eines HTML5-WebWorkers als SpeechServer im Browser
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module net
@@ -11,7 +11,7 @@
 
 // global
 
-import { SPEECH_WEBWORKER_FILE, SPEECH_WEBWORKER_PATH, SPEECH_WEBWORKER_TYPE, FactoryManager, MESSAGE_COMPONENT_TYPE, IMessage } from '@speech/core';
+import { SPEECH_WEBWORKER_FILE, SPEECH_WEBWORKER_PATH, SPEECH_WEBWORKER_TYPE, FactoryManager, MESSAGE_COMPONENT_TYPE, IMessage } from '@lingualogic-speech/core';
 
 
 // common

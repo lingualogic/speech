@@ -20,6 +20,8 @@ Folgende Speech Services gibt es aktuell:
 
 * **[SpeakService](./speak/SpeakService.md):** erlaubt die Sprachausgabe eines kurzen Textes
 
+* **[DialogService](./dialog/DialogService.md):** erlaubt das abspielen von Dialog-Skripten
+
 
 Folgende Basis Services gibt es:
 

@@ -2,7 +2,7 @@
  * Globale Fabrik zur Erzeugung eines FileReader Plugins
  *
  * Version: 2.0
- * Datum:   12.07.2021
+ * Datum:   09.02.2022
  *
  * @module file/reader
  * @author SB
@@ -11,7 +11,7 @@
 
 // core
 
-import { PluginFactory } from '@speech/core';
+import { PluginFactory } from '@lingualogic-speech/core';
 
 
 // file

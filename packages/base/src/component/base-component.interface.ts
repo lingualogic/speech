@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * BaseComponent Schnittstelle
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module base/component
@@ -11,7 +11,7 @@
 
 // core
 
-import { IComponent } from '@speech/core';
+import { IComponent } from '@lingualogic-speech/core';
 
 
 // base

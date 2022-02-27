@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum:       28.06.2021
  *
- * Letzte Aenderung: 21.12.2021
+ * Letzte Aenderung: 15.02.2022
  * Status: gelb
  *
  * @module listen
@@ -14,7 +14,7 @@
 
 // service
 
-import { ServiceManager, Service, EventEmitter } from '@speech/service';
+import { ServiceManager, Service, EventEmitter } from '@lingualogic-speech/service';
 
 
 // listen
@@ -225,12 +225,13 @@ export class ListenBaseService extends Service implements IListenService {
         }
 
         this.mListen.addListenResultEvent( aServiceName, (aResult: string) => {
-            this.mListenResultEvent.emit(aResult);
+            // console.log('ListenService: listenResult = ', aResult);
+            this.mListenResultEvent.emit( aResult );
             return 0;
         });
 
         this.mListen.addListenInterimResultEvent( aServiceName, (aResult: string) => {
-            this.mListenInterimResultEvent.emit(aResult);
+            this.mListenInterimResultEvent.emit( aResult );
             return 0;
         });
 
@@ -250,11 +251,13 @@ export class ListenBaseService extends Service implements IListenService {
         });
 
         this.mListen.addListenAudioStartEvent( aServiceName, () => {
+            // console.log('ListenService._addAllEvent: addListenAudioStartEvent');
             this.mListenAudioStartEvent.emit();
             return 0;
         });
 
         this.mListen.addListenAudioStopEvent( aServiceName, () => {
+            // console.log('ListenService._addAllEvent: addListenAudioStopEvent');
             this.mListenAudioStopEvent.emit();
             return 0;
         });

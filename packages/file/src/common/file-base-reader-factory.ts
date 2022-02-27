@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente dient als Fabrik zur Erzeugung der FileBaseReader-Klasse und -Instanz fuer Browser und NodeJS
  *
- * Letzte Aenderung: 12.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module file/common
@@ -11,7 +11,7 @@
 
 // core
 
-import { Factory } from '@speech/core';
+import { Factory } from '@lingualogic-speech/core';
 
 
 // file

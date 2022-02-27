@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * FileBaseReader ohne Abhaengigkeiten zu anderen Komponenten
  *
- * Letzte Aenderung: 12.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module file/common
@@ -11,7 +11,7 @@
 
 // core
 
-import { ErrorBase } from '@speech/core';
+import { ErrorBase } from '@lingualogic-speech/core';
 
 
 // common

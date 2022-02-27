@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum:       28.06.2021
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module audio/player
@@ -14,7 +14,7 @@
 
 // core
 
-import { PluginFactory } from '@speech/core';
+import { PluginFactory } from '@lingualogic-speech/core';
 
 
 // audio

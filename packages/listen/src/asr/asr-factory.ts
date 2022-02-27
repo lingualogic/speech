@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung einer ASR
  *
- * Letzte Aenderung: 31.10.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module listen/asr
@@ -11,7 +11,7 @@
 
 // core
 
-import { PluginFactory } from '@speech/core';
+import { PluginFactory } from '@lingualogic-speech/core';
 
 
 // asr

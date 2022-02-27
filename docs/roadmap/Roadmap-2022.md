@@ -6,24 +6,31 @@ Die Roadmap zeigt die Reihenfolge der Veröffentlichung von Speech Versionen und
 ## Geplante Versionen
 
 
-### Februar: Version 0.6.2 (Alpha)
+### März: Version 0.6.3 (Alpha)
 
 geplant:
 
-* erste Version der neuen CloudPort Bibliothek
-* CloudGoogle
 * IntentService
-
+* CloudRasa
 
 
 ## Veröffentlichte Versionen
+
+
+### Februar: Version 0.6.2 (Alpha)
+
+beinhaltet:
+
+* DialogService
+* erste Version der neuen Cloud Bibliothek
+* erste Version mit ladbaren NPM-Packages
+* Umbenennung von @speech Präfix nach @lingualogic-speech Präfix
 
 
 ### Januar: Version 0.6.1 (Alpha)
 
 beinhaltet:
 
-* erste Version mit ladbaren NPM-Packages
 * SpeakService
 * ListenService
 * Break Changes (Interface-Benennung geaendert von Interface-Suffix auf I-Prefix)

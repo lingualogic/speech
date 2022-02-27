@@ -1,6 +1,14 @@
 # Speech Release Notizen
 
 
+## 0.6.2.0003 Alpha (27.02.2022)
+
+* **Dialog:** Web-Version von Dialog eingebaut
+* Umstellung auf @lingualogic-speech als neuen Praefix im Code für das Monorepo
+* Anpassung von ASR-Html5 an Android 11
+* Break-Changes sind vorhanden
+
+
 ## 0.6.1.0002 Alpha (08.01.2022)
 
 * **Speech:** Komplette Überarbeitung aller Komponenten (Break Changes zur Version 0.5.x)

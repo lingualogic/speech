@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum: 13.10.2021
  *
- * Letzte Aenderung: 13.10.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module listen
@@ -14,7 +14,7 @@
 
 // base
 
-import { IBaseOption } from '@speech/base';
+import { IBaseOption } from '@lingualogic-speech/base';
 
 
 // asr

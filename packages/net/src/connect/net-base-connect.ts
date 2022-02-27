@@ -3,7 +3,7 @@
  * Bei NodeJS wird immer eine bestehende Internet-Verbindung vorausgesetzt.
  * Hybrid aus Plugin und Component ohne Erben von Plugin oder Component
  *
- * Letzte Aenderung: 07.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module net/connect
@@ -13,7 +13,7 @@
 
 // core
 
-import { ErrorBase, EventFunctionList, EventFunc } from '@speech/core';
+import { ErrorBase, EventFunctionList, EventFunc } from '@lingualogic-speech/core';
 
 
 // net

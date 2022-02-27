@@ -2,7 +2,7 @@
  * FileReader Schnittstelle
  *
  * Version: 2.0
- * Datum:   28.06.2021
+ * Datum:   09.02.2022
  *
  * @module file/reader
  * @author SB
@@ -11,7 +11,7 @@
 
 // core
 
-import { IPlugin } from '@speech/core';
+import { IPlugin } from '@lingualogic-speech/core';
 
 
 // Funktionen

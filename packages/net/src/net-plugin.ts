@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Die Net-Plugin Komponente ist die Basiskomponente fuer Net-Plugins
  *
- * Letzte Aenderung: 02.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module net
@@ -11,7 +11,7 @@
 
 // core
 
-import { IMessage, ComponentHandleMessageFunc, Plugin } from '@speech/core';
+import { IMessage, ComponentHandleMessageFunc, Plugin } from '@lingualogic-speech/core';
 
 
 // net

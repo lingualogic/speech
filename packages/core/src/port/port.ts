@@ -2,7 +2,7 @@
  * Port Basiskomponente, von der alle Ports abgeleitet sind.
  * Ports sind Verbindungskomponenten zu externen Cloud-Diensten.
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 16.02.2022
  * Status: rot
  *
  * @module core/port
@@ -36,6 +36,8 @@ import {
     PORT_CLOSE_EVENT,
     PORT_START_EVENT,
     PORT_STOP_EVENT,
+    PORT_STARTAUDIO_EVENT,
+    PORT_STOPAUDIO_EVENT,
     PORT_RESULT_EVENT,
     PORT_ERROR_EVENT
 } from './port-event-const';
@@ -62,6 +64,8 @@ export class Port extends ErrorBase implements IPort {
     private mCloseEvent = new EventFunctionList( PORT_CLOSE_EVENT );
     private mStartEvent = new EventFunctionList( PORT_START_EVENT );
     private mStopEvent = new EventFunctionList( PORT_STOP_EVENT );
+    private mStartAudioEvent = new EventFunctionList( PORT_STARTAUDIO_EVENT );
+    private mStopAudioEvent = new EventFunctionList( PORT_STOPAUDIO_EVENT );
     private mResultEvent = new EventFunctionList( PORT_RESULT_EVENT );
     private mErrorEvent = new EventFunctionList( PORT_ERROR_EVENT );
 
@@ -94,6 +98,8 @@ export class Port extends ErrorBase implements IPort {
         this.mCloseEvent.setComponentName( aPortName );
         this.mStartEvent.setComponentName( aPortName );
         this.mStopEvent.setComponentName( aPortName );
+        this.mStartAudioEvent.setComponentName( aPortName );
+        this.mStopAudioEvent.setComponentName( aPortName );
         this.mResultEvent.setComponentName( aPortName );
         this.mErrorEvent.setComponentName( aPortName );
         // verbinden der Event-Fehlerfunktionen mit dem Port
@@ -102,6 +108,8 @@ export class Port extends ErrorBase implements IPort {
         this.mCloseEvent.setErrorOutputFunc(this._getErrorOutputFunc());
         this.mStartEvent.setErrorOutputFunc(this._getErrorOutputFunc());
         this.mStopEvent.setErrorOutputFunc(this._getErrorOutputFunc());
+        this.mStartAudioEvent.setErrorOutputFunc(this._getErrorOutputFunc());
+        this.mStopAudioEvent.setErrorOutputFunc(this._getErrorOutputFunc());
         this.mResultEvent.setErrorOutputFunc(this._getErrorOutputFunc());
         this.mErrorEvent.setErrorOutputFunc(this._getErrorOutputFunc());
     }
@@ -210,6 +218,8 @@ export class Port extends ErrorBase implements IPort {
         this.mCloseEvent.clear();
         this.mStartEvent.clear();
         this.mStopEvent.clear();
+        this.mStartAudioEvent.clear();
+        this.mStopAudioEvent.clear();
         this.mResultEvent.clear();
         this.mErrorEvent.clear();
         super.setErrorOutputDefault();
@@ -296,6 +306,8 @@ export class Port extends ErrorBase implements IPort {
         this.mCloseEvent.setErrorOutput( aErrorOutputFlag );
         this.mStartEvent.setErrorOutput( aErrorOutputFlag );
         this.mStopEvent.setErrorOutput( aErrorOutputFlag );
+        this.mStartAudioEvent.setErrorOutput( aErrorOutputFlag );
+        this.mStopAudioEvent.setErrorOutput( aErrorOutputFlag );
         this.mResultEvent.setErrorOutput( aErrorOutputFlag );
         this.mErrorEvent.setErrorOutput( aErrorOutputFlag );
     }
@@ -423,6 +435,61 @@ export class Port extends ErrorBase implements IPort {
     }
 
 
+
+    /**
+     * Ereignisfunktion fuer StartAudio aufrufen
+     *
+     * @private
+     * @param {string} aDest - Ziel der Operation
+     * @param {string} aType - Typ der Operation
+     *
+     * @return {number} errorCode(0,-1)
+     */
+
+     protected _onStartAudio( aDest = '', aType = '' ): number {
+        // console.log('Port._onStartAudio:', aDest, aType);
+        const eventData: IEventData = {
+            event: PORT_STARTAUDIO_EVENT,
+            type: aType,
+            source: this.getName(),
+            dest: aDest,
+            result: 0,
+            data: null
+        };
+        if ( aDest ) {
+            return this.mStartAudioEvent.dispatchListener( aDest, eventData );
+        }
+        return this.mStartAudioEvent.dispatch( eventData );
+    }
+
+
+    /**
+     * Ereignisfunktion fuer StopAudio aufrufen
+     *
+     * @private
+     * @param {string} aDest - Ziel der Operation
+     * @param {string} aType - Typ der Operation
+     *
+     * @return {number} errorCode(0,-1)
+     */
+
+    protected _onStopAudio( aDest = '', aType = '' ): number {
+        // console.log('Port._onStopAudio:', aDest, aType);
+        const eventData: IEventData = {
+            event: PORT_STOPAUDIO_EVENT,
+            type: aType,
+            source: this.getName(),
+            dest: aDest,
+            result: 0,
+            data: null
+        };
+        if ( aDest ) {
+            return this.mStopAudioEvent.dispatchListener( aDest, eventData );
+        }
+        return this.mStopAudioEvent.dispatch( eventData );
+    }
+
+
     /**
      * Ereignisfunktion fuer Result aufrufen
      *
@@ -509,6 +576,16 @@ export class Port extends ErrorBase implements IPort {
     }
 
 
+    addStartAudioEvent( aPluginName: string, aEventFunc: PortEventFunc ): number {
+        return this.mStartAudioEvent.addListener( aPluginName, aEventFunc );
+    }
+
+
+    addStopAudioEvent( aPluginName: string, aEventFunc: PortEventFunc ): number {
+        return this.mStopAudioEvent.addListener( aPluginName, aEventFunc );
+    }
+
+
     addResultEvent( aPluginName: string, aEventFunc: PortEventFunc ): number {
         return this.mResultEvent.addListener( aPluginName, aEventFunc );
     }
@@ -544,6 +621,16 @@ export class Port extends ErrorBase implements IPort {
     }
 
 
+    removeStartAudioEvent( aPluginName: string ): number {
+        return this.mStartAudioEvent.removeListener( aPluginName );
+    }
+
+
+    removeStopAudioEvent( aPluginName: string ): number {
+        return this.mStopAudioEvent.removeListener( aPluginName );
+    }
+
+
     removeResultEvent( aPluginName: string ): number {
         return this.mResultEvent.removeListener( aPluginName );
     }
@@ -559,6 +646,8 @@ export class Port extends ErrorBase implements IPort {
         this.removeCloseEvent( aPluginName );
         this.removeStartEvent( aPluginName );
         this.removeStopEvent( aPluginName );
+        this.removeStartAudioEvent( aPluginName );
+        this.removeStopAudioEvent( aPluginName );
         this.removeResultEvent( aPluginName );
         this.removeErrorEvent( aPluginName );
         return 0;

@@ -3,7 +3,7 @@
  * Funktioniert zur Zeit nur in Chrome. Ist Speech-Recognition nicht vorhanden, wird
  * die Komponente in Active Off versetzt.
  *
- * Letzte Aenderung: 21.12.2021
+ * Letzte Aenderung: 15.02.2022
  * Status: gelb
  *
  * @module listen/asr
@@ -21,7 +21,7 @@
 
 // core
 
-import { FactoryManager } from '@speech/core';
+import { FactoryManager } from '@lingualogic-speech/core';
 
 
 // listen
@@ -323,28 +323,43 @@ export class ASRHtml5 extends ASRPlugin {
             // Recognition-Ereignisfunktionen eintragen
 
             this.mRecognition.onstart = () => {
-                // console.log('ASRHtml5.onstart');
+                console.log('ASRHtml5.onstart');
                 this._clearBreakTimeout();
                 this._onRecognitionStart();
             };
-            this.mRecognition.onend = () => this._onRecognitionEnd();
+            this.mRecognition.onend = () => {
+                console.log('ASRHtml5.onend');
+                this._onRecognitionEnd();
+            }
             this.mRecognition.onaudiostart = () => this._onRecognitionAudioStart();
             this.mRecognition.onaudioend = () => this._onRecognitionAudioEnd();
-            this.mRecognition.onsoundstart = () => this._onRecognitionSoundStart();
-            this.mRecognition.msoundend = () => this._onRecognitionSoundEnd();
+            this.mRecognition.onsoundstart = () => {
+                console.log('ASRHtml5.onsoundstart');
+                this._onRecognitionSoundStart();
+            }
+            this.mRecognition.msoundend = () => {
+                console.log('ASRHtml5.onsoundstop');
+                this._onRecognitionSoundEnd();
+            }
             this.mRecognition.onspeechstart = () => {
-                // console.log('ASRHtml5.onspeechstart');
+                console.log('ASRHtml5.onspeechstart');
                 this._clearBreakTimeout();
                 this._onRecognitionSpeechStart();
             };
-            this.mRecognition.onspeechend = () => this._onRecognitionSpeechEnd();
+            this.mRecognition.onspeechend = () => {
+                console.log('ASRHtml5.onspeechstop');
+                this._onRecognitionSpeechEnd();
+            }
             this.mRecognition.onresult = (aEvent: any) => {
-                // console.log('ASRHtml5.onresult:', aEvent);
+                console.log('ASRHtml5.onresult:', aEvent);
                 this._onRecognitionResult( aEvent );
             };
-            this.mRecognition.onnomatch = (aEvent: any) => this._onRecognitionNoMatch( aEvent );
+            this.mRecognition.onnomatch = (aEvent: any) => {
+                console.log('ASRHtml5.onnomatch');
+                this._onRecognitionNoMatch( aEvent );
+            }
             this.mRecognition.onerror = (aEvent: any) => {
-                // console.log('ASRHtml5.onerror:', aEvent);
+                console.log('ASRHtml5.onerror:', aEvent);
                 this._clearBreakTimeout();
                 this._onRecognitionError( aEvent );
             };
@@ -441,6 +456,7 @@ export class ASRHtml5 extends ASRPlugin {
             // console.log('ASRHtml5._getRecognitionResult:', resultText);
             return resultText;
         } catch ( aException ) {
+            console.log('ASRHtml5._getRecognitionResult: Exception', aException);
             this.exception( '_getRecognitionResult', aException );
             return '';
         }
@@ -464,10 +480,11 @@ export class ASRHtml5 extends ASRPlugin {
             return true;
         }
 
+        /* TODO: muss fuer Dictat ueberarbeitet werden
         try {
             const pos = aEvent.results.length - 1;
             // wenn isFinal nicht exisitert wird finales Result angenommen
-            // console.log('ASRHtml5._isRecognitionFinalResult:', pos, aEvent.results[ pos ].isFinal);
+            console.log('ASRHtml5._isRecognitionFinalResult:', pos, aEvent.results[ pos ].isFinal);
             if ( typeof aEvent.results[ pos ].isFinal !== 'boolean' ) {
                 return true;
             }
@@ -476,6 +493,11 @@ export class ASRHtml5 extends ASRPlugin {
             this.exception( '_getRecognitionFinalResult', aException );
             return false;
         }
+        */
+
+        // TODO: es wird angenommen, dass das Ergebnis immer final ist
+
+        return true;
     }
 
 

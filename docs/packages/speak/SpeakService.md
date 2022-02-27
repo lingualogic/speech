@@ -29,15 +29,15 @@ Der SpeakService definiert die öffentliche Schnittstelle von Speech für die Sp
 
 Um den SpeakService importieren zu können, muss in der jeweiligen Komponente folgende Zeile eingefügt werden:
 
-	import { SpeakService } from '@speech/speak';
+	import { SpeakService } from '@lingualogic-speech/speak';
 	
 Dazu müssen die Speech NPM-Pakete in der gleichen Version vorher ins eigene WebApp-Projekt kopiert und installiert worden sein.
 
-	$ npm install speech-*-<version>.tgz
+	$ npm install lingualogic-speech-*-<version>.tgz
 	 
 Alternativ kann man Speech aus dem globalen NPM-Repository installieren.
 
-	$ npm install @speech/*	 
+	$ npm install @lingualogic-speech/*	 
 
 
 ## Konfiguration
@@ -75,7 +75,7 @@ Angular Beispiel-Komponente für die Integration von Sprache:
 
 	// SpeakService 
 		
-	import { SpeakService, SPEAK_DE_LANGUAGE, SPEAK_EN_LANGUAGE } from '@speech/speak';
+	import { SpeakService, SPEAK_DE_LANGUAGE, SPEAK_EN_LANGUAGE } from '@lingualogic-speech/speak';
 
 	
 	@Component({
@@ -145,7 +145,7 @@ Angular Beispiel-Komponente für die Integration von Sprache:
 
 	// SpeakService 
 		
-	import { SpeakService, SPEAK_DE_LANGUAGE, SPEAK_EN_LANGUAGE } from '@speech/speak';
+	import { SpeakService, SPEAK_DE_LANGUAGE, SPEAK_EN_LANGUAGE } from '@lingualogic-speech/speak';
 
 	
 	@Component({

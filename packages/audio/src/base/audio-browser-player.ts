@@ -3,7 +3,7 @@
  *
  * Zur Zeit wird nur PCM-Codec unterstuetzt.
  *
- * Letzte Aenderung: 07.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module audio/base
@@ -13,7 +13,7 @@
 
 // core
 
-import { ErrorBase } from '@speech/core';
+import { ErrorBase } from '@lingualogic-speech/core';
 
 
 // audio

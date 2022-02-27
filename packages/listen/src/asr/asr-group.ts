@@ -9,7 +9,7 @@
  *      ASRGoogle    - Google-Service ASR (nur mit Speech-Server)
  *      ASRMicrosoft - Google-Service ASR (nur mit Speech-Server)
  *
- * Letzte Aenderung: 21.12.2021
+ * Letzte Aenderung: 16.02.2022
  * Status: rot
  *
  * @module listen/asr
@@ -19,7 +19,7 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc, PluginGroup, PluginList } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc, PluginGroup, PluginList } from '@lingualogic-speech/core';
 
 
 // asr
@@ -542,6 +542,7 @@ export class ASRGroup extends PluginGroup implements IASR {
      */
 
     set onListenAudioStart( aOnListenAudioStartFunc: OnASRListenStartFunc ) {
+        // console.log('ASRGroup.onListenAudioStart:', aOnListenAudioStartFunc);
         this.mOnListenAudioStartFunc = aOnListenAudioStartFunc;
         let asr = this.firstPlugin() as IASR;
         while ( asr ) {
@@ -558,6 +559,7 @@ export class ASRGroup extends PluginGroup implements IASR {
      */
 
     set onListenAudioStop( aOnListenAudioStopFunc: OnASRListenStopFunc ) {
+        // console.log('ASRGroup.onListenAudioStop:', aOnListenAudioStopFunc);
         this.mOnListenAudioStopFunc = aOnListenAudioStopFunc;
         let asr = this.firstPlugin() as IASR;
         while ( asr ) {
@@ -695,21 +697,23 @@ export class ASRGroup extends PluginGroup implements IASR {
                     console.log('ASRGroup.insertASR: ASR eingefuegt ', aASRName, aASRClass);
                 }
                 // console.log('ASRGroup._insertASR: resultFunc = ', this.mOnListenResultFunc);
+                // console.log('ASRGroup._insertASR: listenAudioStartFunc = ', this.mOnListenAudioStartFunc);
+                // console.log('ASRGroup._insertASR: listenAudioStopFunc = ', this.mOnListenAudioStopFunc);
                 // Funktionen verbinden
                 asrPlugin.onInit = this.mOnInitFunc;
                 asrPlugin.onListenStart = this.mOnListenStartFunc;
                 asrPlugin.onListenStop = this.mOnListenStopFunc;
-                asrPlugin.onListenRecognitionStart = this.onListenRecognitionStart;
-                asrPlugin.onListenRecognitionStop = this.onListenRecognitionStop;
-                asrPlugin.onListenAudioStart = this.onListenAudioStart;
-                asrPlugin.onListenAudioStop = this.onListenAudioStop;
-                asrPlugin.onListenSoundStart = this.onListenSoundStart;
-                asrPlugin.onListenSoundStop = this.onListenSoundStop;
-                asrPlugin.onListenSpeechStart = this.onListenSpeechStart;
-                asrPlugin.onListenSpeechStop = this.onListenSpeechStop;
+                asrPlugin.onListenRecognitionStart = this.mOnListenRecognitionStartFunc;
+                asrPlugin.onListenRecognitionStop = this.mOnListenRecognitionStopFunc;
+                asrPlugin.onListenAudioStart = this.mOnListenAudioStartFunc;
+                asrPlugin.onListenAudioStop = this.mOnListenAudioStopFunc;
+                asrPlugin.onListenSoundStart = this.mOnListenSoundStartFunc;
+                asrPlugin.onListenSoundStop = this.mOnListenSoundStopFunc;
+                asrPlugin.onListenSpeechStart = this.mOnListenSpeechStartFunc;
+                asrPlugin.onListenSpeechStop = this.mOnListenSpeechStopFunc;
                 asrPlugin.onListenResult = this.mOnListenResultFunc;
-                asrPlugin.onListenInterimResult = this.onListenInterimResult;
-                asrPlugin.onListenNoMatch = this.onListenNoMatch;
+                asrPlugin.onListenInterimResult = this.mOnListenInterimResultFunc;
+                asrPlugin.onListenNoMatch = this.mOnListenNoMatchFunc;
                 asrPlugin.onError = this.mOnErrorFunc;
                 // ASR eintragen
                 let result = this.mASRList.insert( aASRName, asrPlugin );

@@ -4,7 +4,7 @@
  * Version: 2.0
  * Datum:   31.10.2021
  *
- * Letzte Aenderung: 31.10.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module listen/asr
@@ -14,7 +14,7 @@
 
 // core
 
-import { IPlugin } from '@speech/core';
+import { IPlugin } from '@lingualogic-speech/core';
 
 
 // asr

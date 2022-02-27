@@ -2,7 +2,7 @@
  * Diese Komponente dient zum Aufbau und zur Verwaltung einer WebSocket-Verbindung fuer Browser/NodeJS
  * mit dem SpeechServer.
  *
- * Letzte Aenderung: 24.10.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module net
@@ -12,7 +12,7 @@
 
 // core
 
-import { IErrorBase } from '@speech/core';
+import { IErrorBase } from '@lingualogic-speech/core';
 
 
 /**

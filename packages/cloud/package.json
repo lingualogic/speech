@@ -1,0 +1,45 @@
+{
+  "name": "@lingualogic-speech/cloud",
+  "version": "0.6.2",
+  "description": "Common Library for Speech-Framework",
+  "author": "LinguaLogic Team",
+  "homepage": "https://lingualogic.de",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "lib/speech-cloud-module.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/speech-cloud-module.js",
+    "lib/**/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lingualogic/speech",
+    "directory": "packages/cloud"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "npm run compile",
+    "clean": "gulp clean",
+    "compile": "tsc -b tsconfig.build.json",
+    "bundle": "npx rollup -c ./rollup.config.js && cp speech-cloud.js ./lib/index.js && cp speech-cloud.js ./../../dist/deploy",
+    "bundle:module": "cp speech-cloud-module.js ./lib && cp speech-cloud-module.js ./../../dist/module",
+    "pack": "npm pack && cp lingualogic-speech-cloud-0.6.2.tgz ./../../dist",
+    "link": "npm link",
+    "linkGlobal": "cd ../.. && npm link @lingualogic-speech/cloud --legacy-peer-deps",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "peerDependencies": {
+    "@lingualogic-speech/core": "0.6.2",
+    "@lingualogic-speech/net": "0.6.2",
+    "@lingualogic-speech/file": "0.6.2",
+    "@lingualogic-speech/audio": "0.6.2"
+  }
+}

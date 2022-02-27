@@ -35,15 +35,15 @@ Der Modus bestimmt, ob Listen im Command-Modus oder im Diktier-Modus verwendet w
 
 Um den ListenService importieren zu können, muss in der jeweiligen Komponente folgende Zeile eingefügt werden:
 
-	import { ListenService } from '@speech/listen';
+	import { ListenService } from '@lingualogic-speech/listen';
 	
 Dazu müssen die Speech NPM-Paket in der gleichen Version vorher ins eigene WebApp-Projekt kopiert und installiert worden sein.
 
-	$ npm install speech-*-<version>.tgz
+	$ npm install lingualogic-speech-*-<version>.tgz
 	 
 Alternativ kann man Speech aus dem globalen NPM-Repository installieren.
 
-	$ npm install @speech/*
+	$ npm install @lingualogic-speech/*
 	
 	
 ## Konfiguration
@@ -75,7 +75,7 @@ Angular Beispiel-Komponente für die Integration von Sprache:
 
 	// ListenService 
 		
-	import { ListenService, LISTEN_DE_LANGUAGE, LISTEN_EN_ALANGUAGE } from '@speech/listen';
+	import { ListenService, LISTEN_DE_LANGUAGE, LISTEN_EN_LANGUAGE } from '@lingualogic-speech/listen';
 
 	
 	@Component({

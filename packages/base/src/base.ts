@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Base API Wrapper fuer alle Komponenten.
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module base
@@ -11,7 +11,7 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc, ISession, IBuilderConfig, BuilderManager } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc, ISession, IBuilderConfig, BuilderManager } from '@lingualogic-speech/core';
 
 
 // base

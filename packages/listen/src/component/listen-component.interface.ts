@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * ListenComponent Interface
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module listen/component
@@ -11,7 +11,7 @@
 
 // base
 
-import { IBaseComponent } from '@speech/base';
+import { IBaseComponent } from '@lingualogic-speech/base';
 
 
 // asr

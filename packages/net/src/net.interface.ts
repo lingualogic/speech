@@ -2,7 +2,7 @@
  * Net Schnittstelle
  *
  * Version: 2.0
- * Datum:   28.06.2021
+ * Datum:   09.02.2022
  *
  * @module net
  * @author SB
@@ -10,7 +10,7 @@
 
 // core
 
-import { OnSpeechErrorFunc, IPlugin, SendMessageFunc, HandleMessageFunc, IMessage } from '@speech/core';
+import { OnSpeechErrorFunc, IPlugin, SendMessageFunc, HandleMessageFunc, IMessage } from '@lingualogic-speech/core';
 
 
 // net

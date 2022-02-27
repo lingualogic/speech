@@ -12,8 +12,8 @@ Ein Service wird im ServiceManager so erzeugt:
 
     // speech
 
-    import { ServiceManager, SERVICE_SPEAK_NAME } from '@speech/service';
-    import { SpeakService } from '@speech/speak';
+    import { ServiceManager, SERVICE_SPEAK_NAME } from '@lingualogic-speech/service';
+    import { SpeakService } from '@lingualogic-speech/speak';
 
     // ...
 

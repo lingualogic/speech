@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * ListenComponentBuilder fuer lokale ListenComponent
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module listen/component
@@ -11,7 +11,7 @@
 
 // core
 
-import { Builder, IBuilderConfig } from '@speech/core';
+import { Builder, IBuilderConfig } from '@lingualogic-speech/core';
 
 
 // asr

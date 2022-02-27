@@ -2,7 +2,7 @@
  * Diese Komponente dient als Fabrik zur Erzeugung der XMLHttpRequest-Klasse und -Instanz
  * Sie wird nur im Browser verwendet.
  *
- * Letzte Aenderung: 05.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module net/common
@@ -12,7 +12,7 @@
 
 // core
 
-import { Factory } from '@speech/core';
+import { Factory } from '@lingualogic-speech/core';
 
 
 // Konstanten

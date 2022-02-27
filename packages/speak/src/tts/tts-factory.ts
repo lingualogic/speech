@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Globale Fabrik zur Erzeugung einer TTS Version
  *
- * Letzte Aenderung: 15.10.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module speak/tts
@@ -11,7 +11,7 @@
 
 // plugin
 
-import { PluginFactory } from '@speech/core';
+import { PluginFactory } from '@lingualogic-speech/core';
 
 
 // tts

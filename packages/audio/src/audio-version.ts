@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Audio Version und Build Konstanten
  *
- * Letzte Aenderung: 01.06.2020
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module audio
@@ -11,7 +11,7 @@
 
 // core
 
-import { SPEECH_VERSION_NUMBER, SPEECH_VERSION_BUILD, SPEECH_VERSION_TYPE, SPEECH_VERSION_DATE } from '@speech/core';
+import { SPEECH_VERSION_NUMBER, SPEECH_VERSION_BUILD, SPEECH_VERSION_TYPE, SPEECH_VERSION_DATE } from '@lingualogic-speech/core';
 
 
 // Versions-Konstanten

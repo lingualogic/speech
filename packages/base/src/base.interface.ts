@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum:       28.06.2021
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module base
@@ -14,7 +14,7 @@
 
 // core
 
-import { OnSpeechInitFunc, OnSpeechErrorFunc, ISession } from '@speech/core';
+import { OnSpeechInitFunc, OnSpeechErrorFunc, ISession } from '@lingualogic-speech/core';
 
 
 // base

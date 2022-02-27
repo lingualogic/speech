@@ -2,7 +2,7 @@
  * Diese Komponente dient zum Aufbau und zur Verwaltung einer WebSocket-Verbindung
  * mit dem SpeechServer.
  *
- * Letzte Aenderung: 04.07.2021
+ * Letzte Aenderung: 23.02.2022
  * Status: rot
  *
  * @module net/websocket
@@ -12,7 +12,7 @@
 
 // core
 
-import { ErrorBase, FactoryManager } from '@speech/core';
+import { ErrorBase, FactoryManager } from '@lingualogic-speech/core';
 
 
 // net
@@ -158,7 +158,7 @@ export class NetBaseWebSocket extends ErrorBase implements INetBaseWebSocket {
 
         // pruefen auf staendigen Verbindungsaufbau
 
-        if ( aOption && aOption.connectInfiniteFlag ) {
+        if ( aOption && typeof aOption.connectInfiniteFlag === 'boolean' && aOption.connectInfiniteFlag ) {
             this.mConnectInfiniteFlag = true;
             if ( this.isErrorOutput()) {
                 console.log('NetBaseWebSocket.init: ConnectInfinite eingeschaltet');
@@ -353,17 +353,22 @@ export class NetBaseWebSocket extends ErrorBase implements INetBaseWebSocket {
      */
 
     sendMessage( aMessage: any ): number {
-        // console.log('NetBaseWebSocket.sendMessage: start', aMessage);
-        if ( !this.isOpen()) {
-            this.error( 'sendMessage', 'WebSocket ist nicht geoeffnet' );
-            return -1;
-        }
+        // console.log('NetBaseWebSocket.sendMessage: start', aMessage, this.mWebSocket);
         if ( !this.mWebSocket ) {
             // TODO: kann zu einer Endlosschleife fuehren, wenn der Fehler ueber sendMessage versendet werden soll !
             this.error( 'sendMessage', 'keine WebSocket vorhanden' );
             return -1;
         }
+        if ( !this.isOpen()) {
+            this.error( 'sendMessage', 'WebSocket ist nicht geoeffnet' );
+            return -1;
+        }
+        if ( !this.isConnect()) {
+            this.error( 'sendMessage', 'WebSocket ist nicht verbunden' );
+            return -1;
+        }
         try {
+            // console.log('NetBaseWebSocket.sendMessage: sending ', aMessage);
             this.mWebSocket.send( JSON.stringify( aMessage ));
             return 0;
         } catch (aException) {
@@ -382,6 +387,7 @@ export class NetBaseWebSocket extends ErrorBase implements INetBaseWebSocket {
      */
 
     sendStream( aStream: ArrayBuffer ): number {
+        // TODO: muss noch wie sendMessage umgebaut werden
         // console.log('NetBaseWebSocket.sendStream: start');
         if ( !this.isOpen()) {
             this.error( 'sendStream', 'WebSocket ist nicht geoeffnet' );
@@ -463,6 +469,11 @@ export class NetBaseWebSocket extends ErrorBase implements INetBaseWebSocket {
     set onError( aOnErrorFunc: OnNetErrorFunc ) {
         // console.log('NetBaseWebSocket.onError:', aOnErrorFunc);
         this.mOnErrorFunc = aOnErrorFunc;
+    }
+
+
+    get onError() {
+        return this.mOnErrorFunc;
     }
 
 
@@ -598,7 +609,11 @@ export class NetBaseWebSocket extends ErrorBase implements INetBaseWebSocket {
      */
 
     protected _webSocketClose( aEvent: any ): number {
-        // console.log('NetBaseWebSocket._webSocketClose:', aEvent);
+        // console.log('NetBaseWebSocket._webSocketClose:', this.mWebSocketOpenFlag, aEvent);
+        // TODO: Fehlerbehandlung, wenn Close nicht vom Client ausgeloest wird
+        if ( this.mWebSocketOpenFlag ) {
+            this._onError( new Error( 'WebSocket wurde nicht vom Client geschlossen' ));
+        }
         this.mWebSocketOpenFlag = false;
         this.mWebSocket = null;
         this._setInfiniteConnect();

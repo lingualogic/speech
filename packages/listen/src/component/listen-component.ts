@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * ListenComponent zur Verwaltung von ASR-Plugins. Sie erbt von der BaseComponent.
  *
- * Letzte Aenderung: 21.12.2021
+ * Letzte Aenderung: 16.02.2022
  * Status: gruen
  *
  * @module listen/component
@@ -25,12 +25,12 @@ import {
     SPEECH_LISTENSPEECHSTOP_EVENT,
     EventFunctionList,
     EventFunc
-} from '@speech/core';
+} from '@lingualogic-speech/core';
 
 
 // base
 
-import { BaseComponent } from '@speech/base';
+import { BaseComponent } from '@lingualogic-speech/base';
 
 
 // asr
@@ -202,7 +202,7 @@ export class ListenComponent extends BaseComponent implements IListenComponent {
 
         if ( aOption && aOption.asrList ) {
             // Schleife fuer alle ASRs in der Listen-ASEListe
-            // console.log('Listen._initAllPlugin:', aOption.asrList);
+            // console.log('ListenComponent._initAllPlugin:', aOption.asrList);
             for ( const asrOption of aOption.asrList ) {
                 if ( asrOption.asrName && asrOption.asrClass ) {
                     if ( this.mASRPlugin.insertASR( asrOption.asrName, asrOption.asrClass, asrOption) !== 0 ) {
@@ -479,7 +479,7 @@ export class ListenComponent extends BaseComponent implements IListenComponent {
      */
 
     protected _onListenAudioStart(): number {
-        // console.log('SpeechListen: onListenAudioStart');
+        // console.log('Listen: onListenAudioStart');
         return this.mListenAudioStartEvent.dispatch();
     }
 
@@ -1130,16 +1130,18 @@ export class ListenComponent extends BaseComponent implements IListenComponent {
      */
 
     start(): number {
-        // console.log('ListenComponent.start');
+        // console.log('ListenComponent.start: ASR = ', this.getASR());
 
         // fehlende ASR wird zuerst abgefrage, um Fehler zu erzeugen
 
         if ( !this.isASR()) {
+            // console.log('ListenComponent.start: keine ASR vorhanden');
             this.error( 'start', 'keine ASR vorhanden' );
             return -1;
         }
 
         if ( !this.isActive()) {
+            // console.log('ListenComponent.start: Komponente ist nicht aktiv');
             if ( this.isErrorOutput()) {
                 console.log('ListenComponent.start: Komponente ist nicht aktiv');
             }
@@ -1147,6 +1149,7 @@ export class ListenComponent extends BaseComponent implements IListenComponent {
         }
 
         // interne ASR verwenden
+        // console.log('ListenComponent.start: ASRPlugin.startListen');
         return this.mASRPlugin.startListen();
     }
 

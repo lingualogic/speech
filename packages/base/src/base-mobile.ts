@@ -1,7 +1,7 @@
 /**
  * Base API Wrapper fuer alle Cordova-Komponenten.
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module base
@@ -23,7 +23,7 @@ import {
     ErrorBase,
     EventFunctionList, 
     EventFunc
-} from '@speech/core';
+} from '@lingualogic-speech/core';
 
 
 // base

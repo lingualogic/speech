@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente dient als Manager der einzigen AudioContext-Instanz im gesamten Framework
  *
- * Letzte Aenderung: 07.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module audio/common
@@ -11,7 +11,7 @@
 
 // core
 
-import { SpeechErrorFunc, ErrorBase, FactoryManager } from '@speech/core';
+import { SpeechErrorFunc, ErrorBase, FactoryManager } from '@lingualogic-speech/core';
 
 
 // common

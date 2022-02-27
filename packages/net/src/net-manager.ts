@@ -1,7 +1,7 @@
 /**
  * NetManager zur Verwaltung der richtigen Implementierung von Plugins fuer Browser oder NodeJS
  * 
- * Letzte Aenderung: 31.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module net/browser
@@ -11,7 +11,7 @@
 
 // core
 
-import { FactoryManager } from '@speech/core';
+import { FactoryManager } from '@lingualogic-speech/core';
 
 
 // net

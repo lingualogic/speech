@@ -2,7 +2,7 @@
  * Port Schnittstelle fuer die Verbindung mit externen Diensten.
  * Ports sind Vermittler zwischen den externen Diensten und den internen Plugins.
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 16.02.2022
  * Status: rot
  *
  * @module core/port
@@ -164,6 +164,8 @@ export interface IPort {
     addCloseEvent( aPluginName: string, aCloseEventFunc: PortEventFunc ): number;
     addStartEvent( aPluginName: string, aStartEventFunc: PortEventFunc ): number;
     addStopEvent( aPluginName: string, aStopEventFunc: PortEventFunc ): number;
+    addStartAudioEvent( aPluginName: string, aStartEventFunc: PortEventFunc ): number;
+    addStopAudioEvent( aPluginName: string, aStopEventFunc: PortEventFunc ): number;
     addResultEvent( aPluginName: string, aResultEventFunc: PortEventFunc ): number;
     addErrorEvent( aPluginName: string, aErrorEventFunc: EventFunc ): number;
 
@@ -181,6 +183,8 @@ export interface IPort {
     removeCloseEvent( aPluginName: string ): number;
     removeStartEvent( aPluginName: string ): number;
     removeStopEvent( aPluginName: string ): number;
+    removeStartAudioEvent( aPluginName: string ): number;
+    removeStopAudioEvent( aPluginName: string ): number;
     removeResultEvent( aPluginName: string ): number;
     removeErrorEvent( aPluginName: string ): number;
 

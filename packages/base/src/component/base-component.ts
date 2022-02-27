@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Base Komponente als abstrakte Basiskomponente aller Komponenten
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module base/component
@@ -22,7 +22,7 @@ import {
     EventFunc,
     Component,
     ISession
-} from '@speech/core';
+} from '@lingualogic-speech/core';
 
 
 // base

@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Fabrik zur Erzeugung einer SpeakComponent
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module speak/component
@@ -11,7 +11,7 @@
 
 // core
 
-import { PluginFactory } from '@speech/core';
+import { PluginFactory } from '@lingualogic-speech/core';
 
 
 // speak

@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum: 28.06.2021
  *
- * Letzte Aenderung: 21.12.2021
+ * Letzte Aenderung: 209.02.2022
  * Status: rot
  *
  * @module speak
@@ -14,7 +14,7 @@
 
 // service
 
-import { ServiceManager, Service, EventEmitter } from '@speech/service';
+import { ServiceManager, Service, EventEmitter } from '@lingualogic-speech/service';
 
 
 // speak

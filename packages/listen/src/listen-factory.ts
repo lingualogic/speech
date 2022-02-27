@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum: 28.06.2021
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module listen
@@ -14,7 +14,7 @@
 
 // core
 
-import { SystemManager } from '@speech/core';
+import { SystemManager } from '@lingualogic-speech/core';
 
 
 // listen

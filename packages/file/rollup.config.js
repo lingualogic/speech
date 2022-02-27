@@ -54,8 +54,8 @@ let typescriptOverride = { compilerOptions: { declaration: false } };
 export default {
     input: './src/index.ts',
     external: [ 
-        '@speech/core',
-        '@speech/net'
+        '@lingualogic-speech/core',
+        '@lingualogic-speech/net'
     ],
     output: [
         {
@@ -64,8 +64,8 @@ export default {
             name: 'speechFile',
             sourcemap: false,
             globals: {
-                "@speech/core": "speechCore",
-                "@speech/net": "speechNet"
+                "@lingualogic-speech/core": "speechCore",
+                "@lingualogic-speech/net": "speechNet"
             }
 
         },
@@ -75,8 +75,8 @@ export default {
             name: 'speechFile',
             sourcemap: false,
             globals: {
-                "@speech/core": "speechCore",
-                "@speech/net": "speechNet"
+                "@lingualogic-speech/core": "speechCore",
+                "@lingualogic-speech/net": "speechNet"
             }
 
         },

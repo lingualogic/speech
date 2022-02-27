@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente laed eine Audiodatei und stellt die Audiodaten zur Verfuegung
  *
- * Letzte Aenderung: 12.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module audio/common
@@ -11,17 +11,17 @@
 
 // core
 
-import { FactoryManager } from '@speech/core';
+import { FactoryManager } from '@lingualogic-speech/core';
 
 
 // net
 
-import { XMLHTTPREQUEST_ARRAYBUFFER_RESPONSETYPE } from '@speech/net';
+import { XMLHTTPREQUEST_ARRAYBUFFER_RESPONSETYPE } from '@lingualogic-speech/net';
 
 
 // file
 
-import { FileBrowserReader, OnFileBaseReaderReadFunc } from '@speech/file';
+import { FileBrowserReader, OnFileBaseReaderReadFunc } from '@lingualogic-speech/file';
 
 
 // audio

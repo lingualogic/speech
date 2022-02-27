@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * SpeakComponentBuilder erzeugt die lokale Speak-Komponente
  *
- * Letzte Aenderung: 28.06.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: gelb
  *
  * @module speak/component
@@ -11,12 +11,12 @@
 
 // core
 
-import { Builder, IBuilderConfig } from '@speech/core';
+import { Builder, IBuilderConfig } from '@lingualogic-speech/core';
 
 
 // audio
 
-import { AUDIOPLAYER_FACTORY_NAME, AUDIOPLAYER_PLUGIN_NAME, AudioPlayerFactory, IAudioPlayer } from '@speech/audio';
+import { AUDIOPLAYER_FACTORY_NAME, AUDIOPLAYER_PLUGIN_NAME, AudioPlayerFactory, IAudioPlayer } from '@lingualogic-speech/audio';
 
 
 // tts

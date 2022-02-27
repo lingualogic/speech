@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * Diese Komponente spielt die Audio-Dateien ab
  *
- * Letzte Aenderung: 08.01.2022
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module audio/player
@@ -13,12 +13,12 @@
 
 // core
 
-import { FactoryManager, Plugin } from '@speech/core';
+import { FactoryManager, Plugin } from '@lingualogic-speech/core';
 
 
 // net
 
-import { XMLHTTPREQUEST_FACTORY_NAME, XMLHttpRequestFactory } from '@speech/net';
+import { XMLHTTPREQUEST_FACTORY_NAME, XMLHttpRequestFactory } from '@lingualogic-speech/net';
 
 
 // audio

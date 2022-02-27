@@ -4,7 +4,7 @@
  * API-Version: 2.0
  * Datum:       12.07.2021
  *
- * Letzte Aenderung: 12.07.2021
+ * Letzte Aenderung: 09.02.2022
  * Status: rot
  *
  * @module audio/common
@@ -14,7 +14,7 @@
 
 // file
 
-import { IFileBaseReader } from '@speech/file';
+import { IFileBaseReader } from '@lingualogic-speech/file';
 
 
 // Audioformat-Konstanten

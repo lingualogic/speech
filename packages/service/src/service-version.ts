@@ -1,7 +1,7 @@
 /** @packageDocumentation
  * service Version und Build Konstanten
  *
- * Letzte Aenderung: 15.10.2020
+ * Letzte Aenderung: 09.02.2022
  * Status: gruen
  *
  * @module service
@@ -11,7 +11,7 @@
 
 // global
 
-import { SPEECH_VERSION_NUMBER, SPEECH_VERSION_BUILD, SPEECH_VERSION_TYPE, SPEECH_VERSION_DATE } from '@speech/core';
+import { SPEECH_VERSION_NUMBER, SPEECH_VERSION_BUILD, SPEECH_VERSION_TYPE, SPEECH_VERSION_DATE } from '@lingualogic-speech/core';
 
 
 // Versions-Konstanten

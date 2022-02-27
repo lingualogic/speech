@@ -1,6 +1,6 @@
 {
-  "name": "@speech/speak",
-  "version": "0.6.1",
+  "name": "@lingualogic-speech/speak",
+  "version": "0.6.2",
   "description": "Speak Component for Speech-Framework",
   "author": "LinguaLogic Team",
   "homepage": "https://lingualogic.de",
@@ -31,15 +31,15 @@
     "compile": "tsc -b tsconfig.build.json",
     "bundle": "npx rollup -c ./rollup.config.js && cp speech-speak.js ./lib/index.js && cp speech-speak.js ./../../dist/deploy",
     "bundle:module": "cp speech-speak-module.js ./lib && cp speech-speak-module.js ./../../dist/module",
-    "pack": "npm pack && cp speech-speak-0.6.1.tgz ./../../dist",
+    "pack": "npm pack && cp lingualogic-speech-speak-0.6.2.tgz ./../../dist",
     "link": "npm link",
-    "linkGlobal": "cd ../.. && npm link @speech/speak --legacy-peer-deps",
+    "linkGlobal": "cd ../.. && npm link @lingualogic-speech/speak --legacy-peer-deps",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "peerDependencies": {
-    "@speech/core": "0.6.1",
-    "@speech/audio": "0.6.1",
-    "@speech/base": "0.6.1",
-    "@speech/service": "0.6.1"
+    "@lingualogic-speech/core": "0.6.2",
+    "@lingualogic-speech/audio": "0.6.2",
+    "@lingualogic-speech/base": "0.6.2",
+    "@lingualogic-speech/service": "0.6.2"
   }
 }

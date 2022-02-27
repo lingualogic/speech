@@ -38,15 +38,15 @@ Die Objektereignisse geben EventEmitter zurück, diese sollten mit subscribe auf
 
 Um einen Service importieren zu können, muss in der jeweiligen Komponente folgende Zeile eingefügt werden:
 
-	import { SpeakService } from '@speech/speak';
+	import { SpeakService } from '@lingualogic-speech/speak';
 	
 Dazu müssen die Speech NPM-Pakete in der gleichen Version vorher ins eigene WebApp-Projekt kopiert und installiert worden sein.
 
-	$ npm install --save speech-*-<version>.tgz
+	$ npm install --save lingualogic-speech-*-<version>.tgz
 
 Alternativ können die Speech NPM-Pakete auch aus dem NPM-Repository geladen werden:
 
-	$ npm install @speech/*
+	$ npm install @lingualogic-speech/*
 	 
 
 ## Konfiguration
@@ -79,7 +79,7 @@ Auszug aus der Angular-Datei: src/app/app.module.ts:
 	
 	// SpeakService von Speech
 	
-	import { SpeakService } from '@speech/speak';
+	import { SpeakService } from '@lingualogic-speech/speak';
 	
 	
 	@NgModule({
@@ -128,13 +128,14 @@ Die init()-Funktion kann man dann zu einem beliebig späteren Zeitpunkt z.B. in 
 
 Auszug aus der Angular-Datei: src/app/app.component.ts:
 
-	// Angular
+	// angular
 	
 	import { Component, OnInit } from '@angular/core';
 	
-	// Speech Service
+	// speech
 	
-	import { SpeakService } from '@speech/speak';
+	import { ServiceManager, SERVICE_SPEAK_NAME } from '@lingualogic-speech/service';
+	import { ISpeakService, SpeakService } from '@lingualogic-speech/speak';
 	
 	// App-Komponente
 	
@@ -143,21 +144,20 @@ Auszug aus der Angular-Datei: src/app/app.component.ts:
 		templateUrl: './app.component.html',
 		styleUrls: ['./app.component.css']
 	})
-	export class AppComponent implements OnInit {
+	export class AppComponent {
 	
 	  title = 'Speech-Angular-App';
+	  private service: ISpeakService = null;
 	
-	  constructor( private service: SpeakService ) {}
-	
-		ngOnInit(): void {
-			// Hier wird der SpeakService manuell mit optionalen Parametern initialisiert
-	  		service.init({ errorOutputFlag: true });
-	  	}
+	  constructor() {
+		  // Speak-Service mit optionalen Parametern erzeugen
+		  this.service = ServiceManager.get( SERVICE_SPEAK_NAME, SpeakService, { errorOutputFlag: true });
+	  }
 	
 	}
 
 
-## Service ein/ausschalten 
+## Service ein/ausschalten
 
 Jeder Speech-Angular Service kann aktiviert und deaktiviert werden. Zu Beginn ist er defaultmäßig immer aktiviert, es sei denn, man hat in der Konfiguration das activeFlag auf false gesetzt, oder die zugrunde liegende Funktionalität des Speech-Frameworks steht nicht zur Verfügung. Für das Setzen auf aktiv ein/aus kann man die Funtionen service.setActiveOn() und service.setActiveOff() benutzen, oder man setzt die Eigenschaft service.active auf true oder false. Ist der Service aktiv, werden alle Funktionen des Service ausgeführt, ist der Service deaktiviert, werden global keine seiner Funktionen ausgeführt. Prüfen kann man den Aktivzustand über service.isActive()-Funktion oder man liest die Eigenschaft service.active aus. 
 
@@ -219,13 +219,14 @@ Jeder Speech Service wird mit service.start() ausgeführt und mit service.stop()
 
 Beispiel-Komponente für die Integration eines Speech Services in Angular:
 
-	// Angular
+	// angular
 	
 	import { Component, OnInit, OnDestroy } from '@angular/core';
 
-	// Speech Service
+	// speech
 		
-	import { SpeakService } from '@speech/speak';
+	import { ServiceManager, SPEECH_SPEAK_SERVICE } from '@lingualogic-speech/service';
+	import { ISpeakService, SpeakService } from '@lingualogic-speech/speak';
 
 	
 	@Component({
@@ -236,8 +237,11 @@ Beispiel-Komponente für die Integration eines Speech Services in Angular:
 	export class SpeakComponent implements OnInit, OnDestroy {
 	
 		errorEvent = null;
+		private service: ISpeakService = null;
 	
-		constructor( private service: SpeakService ) {}
+		constructor() {
+			this.service = ServiceManager.get( SERVICE_SPEAK_NAME, SpeakService );
+		}
 		
 		// Fehlerereignis eintragen
 				
