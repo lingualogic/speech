@@ -5,6 +5,7 @@
   "author": "LinguaLogic Team",
   "homepage": "https://lingualogic.de",
   "license": "MIT",
+  "private": false,
   "main": "lib/index.js",
   "module": "lib/speech-dialog-module.js",
   "types": "lib/index.d.ts",

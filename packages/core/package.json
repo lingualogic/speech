@@ -5,6 +5,7 @@
   "author": "Lingualogic Team",
   "homepage": "https://lingualogic.de",
   "license": "MIT",
+  "private": false,
   "main": "lib/index.js",
   "module": "lib/speech-core-module.js",
   "types": "lib/index.d.ts",
@@ -21,6 +22,9 @@
     "type": "git",
     "url": "https://github.com/lingualogic/speech",
     "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "tsc": "tsc",
